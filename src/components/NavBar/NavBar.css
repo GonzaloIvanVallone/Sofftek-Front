@@ -1,0 +1,37 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+}
+  
+.nav-left, .nav-right {
+  display: flex;
+}
+  
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+  
+.nav-item {
+  margin-right: 20px;
+}
+  
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+  
+.dropdown-menu li {
+  padding: 10px;
+}
+  
+.nav-item:hover .dropdown-menu {
+  display: block;
+}
