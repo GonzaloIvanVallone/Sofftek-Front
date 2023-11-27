@@ -1,13 +1,16 @@
 import React from 'react';
-import ProductCard from '../ProductCard/ProductCard';
+import ListadoProductos from '../ProductCard/ListProducts';
+import NavBar from '../NavBar/NavBar';
 
 
-export default function Home(){
-
-    return(
-        <div>
-            <ProductCard/>
-        </div>
-
-    )
-}
+const Home = ({ productList }) => {
+    return (
+      <div>
+        {/* ... Otro contenido de Home ... */}
+        <NavBar/>
+        <ListadoProductos productList={productList} />
+      </div>
+    );
+  };
+  
+  export default Home;
