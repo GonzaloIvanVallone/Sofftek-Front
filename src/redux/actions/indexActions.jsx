@@ -4,7 +4,7 @@ const category_route = 'http://localhost:8080/api/v1/category';
 export function getAllProducts() {
     return async function (dispatch) {
         try{
-            var json = await axios.get(``);
+            var json = await axios.get("http://localhost:8080/api/v1/product/list");
             return dispatch({
             type: "GET_ALL_PRODUCTS",
             payload: json.data,

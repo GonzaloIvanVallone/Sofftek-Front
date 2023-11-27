@@ -2,15 +2,16 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import './ProductDetail.css'
 import NavBar from '../NavBar/NavBar';
+import { useDispatch, useSelector } from 'react-redux';
 
-const ProductDetail = ({ productList }) => {
+const ProductDetail = () => {
   const { id } = useParams();
-  const product1 = productList.find(product => product.idProduct === parseInt(id, 10));
+  const allProducts = useSelector((state) => state.allProducts);
+  const product1 = allProducts.find(product => product.idProduct === parseInt(id, 10));
 
   console.log(product1);
   return (
     <div>
-      <NavBar/>
       <div className='container-facher'>
       
       <div className='container-img'>
