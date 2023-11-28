@@ -9,6 +9,7 @@ export default function NavBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const allCategories = useSelector((state) => state.allCategories)
+  
 
   function handleFilterType(e){
     e.preventDefault();

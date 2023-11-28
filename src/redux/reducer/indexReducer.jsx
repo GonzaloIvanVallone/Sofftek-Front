@@ -12,7 +12,7 @@ const rootReducer = (state = initialState, action) => {
             allProducts: action.payload,
         };
         case "FILTER_BY_CATEGORIES": 
-            const filteredByCategory = state.allProducts.filter(e=>e.category === action.payload)
+            const filteredByCategory = state.allProducts.filter(e=>e.typeCategory.category === action.payload)
             return {...state, filteredProducts: filteredByCategory}
         case "GET_ALL_CATEGORIES": return {
             ...state,
