@@ -5,9 +5,10 @@ import { Link } from "react-router-dom";
 
 
 export default function ProductCard({product}) {
+
   return (
     <div>
-      <div>
+      <div key={product.idProduct}>
           <Card style={{ width: '18rem', border:'solid', borderRadius: '15px 50px'}}>
           <Card.Img variant="top" src={product.productImg} style={{width: '150px', height:'150px'}} />
           <Card.Body>

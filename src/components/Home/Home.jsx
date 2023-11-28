@@ -1,31 +1,30 @@
 import React from 'react';
-import ListadoProductos from '../ProductCard/ListProducts';
 import NavBar from '../NavBar/NavBar';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProductCard from '../ProductCard/ProductCard';
 
 
 const Home = () => {
-    const allProducts = useSelector((state) => state.allProducts);
+  const filteredProducts = useSelector((state) => state.filteredProducts);
 
-    console.log(allProducts);
-    return (
-      <div>
-        <NavBar/>
-        <div className='container'>
-          {
-            allProducts?.map((e)=>{
-            return(
-                <Link  to={`/product/${e.idProduct}`}>
-                    <ProductCard product={e} key={e.idProduct}/>
-                </Link>
-                )
-              })
-          }
-        </div>
+    
+  return (
+    <div>
+      <NavBar/>
+      <div className='container'>
+        {
+          filteredProducts?.map((e)=>{
+          return(
+            <Link  to={`/product/${e.idProduct}`} key={e.idProduct}>
+              <ProductCard product={e} />
+            </Link>
+            )
+          })
+        }
       </div>
-    );
-  };
+    </div>
+  );
+};
   
-  export default Home;
+export default Home;
