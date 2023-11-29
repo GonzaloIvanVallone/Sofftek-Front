@@ -1,12 +1,5 @@
 import React from "react";
 
-
-export default function SearchBar() {
-
-
-  return (
-    <div>
-      searchbar
-    </div>
-  )
-}
+export const SearchBar = () => {
+  return <div>searchbar</div>;
+};
