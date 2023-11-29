@@ -5,25 +5,20 @@ import { filterByCategories, getAllCategories } from "../../redux/actions/indexA
 import { useNavigate } from 'react-router-dom';
 
 
-export default function NavBar() {
+export const NavBar = () =>{
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const allCategories = useSelector((state) => state.allCategories)
   
 
-  function handleFilterType(e){
+  const handleFilterType = (e) =>{
     e.preventDefault();
     dispatch(filterByCategories(e.target.value));
   }
 
-  function handleLogin(){
-    navigate('/login')
+  const handleLogin = () => navigate('/login')
 
-  }
-
-  function handleRegister(){
-    navigate('/register')
-  }
+  const handleRegister = () => navigate('/register')
   useEffect(()=>{
     dispatch(getAllCategories());  
   }, [dispatch])
