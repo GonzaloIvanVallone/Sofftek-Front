@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getAllProducts } from "./redux/actions/indexActions";
 import { useDispatch } from "react-redux";
+import { ForgotPassword} from "./components/ForgotPassword/ForgotPassword"
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ function App() {
           <Route exact path={"/register"} element={<Register />} />
           <Route exact path={"/login"} element={<Login />} />
           <Route path="/product/:id" element={<ProductDetail />} />
+          <Route exact path={"/password"} element={<ForgotPassword />} />
         </Routes>
       </div>
     </BrowserRouter>
