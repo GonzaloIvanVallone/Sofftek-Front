@@ -12,7 +12,7 @@ export const ProductCard = ({idProduct,productImg,productName,productPrice}) => 
           <Card.Img variant="top" src={productImg} style={{width: '150px', height:'150px'}} />
           <Card.Body>
             <Card.Title>{productName}</Card.Title>
-            <Card.Text>{productPrice}</Card.Text>
+            <Card.Text>${productPrice}</Card.Text>
             <Card.Text>
               Some quick example text to build on the card title and make up the
               bulk of the card's content.
