@@ -1,22 +1,20 @@
-import { Form, Button } from 'react-bootstrap';
-import '../Login/Login.scss'
+import { Form, Button } from "react-bootstrap";
+import "../Login/Login.scss";
 
-export default function Register() {
-
-
+export const Register = () => {
+  fun;
   return (
     <div className="card p-5 mt-5">
       <div className="card-titlr">
         <h3>Registro de Usuario</h3>
       </div>
-      
+
       <div>
         <div>
           <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Nombre</Form.Label>
               <Form.Control type="text" placeholder="" required />
-
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -46,5 +44,5 @@ export default function Register() {
         <div></div>
       </div>
     </div>
-  )
-}
+  );
+};

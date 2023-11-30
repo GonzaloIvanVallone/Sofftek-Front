@@ -1,7 +1,7 @@
-import './App.css';
-import Home from './components/Home/Home';
-import Register from './components/Register/Register';
-import Login from './components/Login/Login'
+import "./App.css";
+import Home from "./components/Home/Home";
+import { Register } from "./components/Register/Register";
+import { Login } from "./components/Login/Login";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProductDetail from './components/ProductDetail/ProductDetail';
 import { useEffect } from 'react';
@@ -9,18 +9,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {getAllProducts} from "./redux/actions/indexActions";
 import { useDispatch } from 'react-redux';
 import Carrito from './components/Cart/Cart';
-
+import { ForgotPassword} from "./components/ForgotPassword/ForgotPassword"
 
 function App() {
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllProducts());
   }, []);
-  
+
   return (
-    <BrowserRouter> 
+    <BrowserRouter>
       <div className="App">
         <Routes> 
         <Route
@@ -32,10 +31,11 @@ function App() {
           <Route exact path={'/login'} element={<Login/>}/>
           <Route path="/product/:id" element={<ProductDetail/>} />
           <Route path="/cart" element={<Carrito/>}></Route>
+          <Route exact path={"/password"} element={<ForgotPassword />} />
         </Routes>
       </div>
     </BrowserRouter>
-  )
+  );
 }
 
 export default App;
