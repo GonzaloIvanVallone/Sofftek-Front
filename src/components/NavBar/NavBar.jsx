@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './Navbar.css';
 import { filterByCategories, getAllCategories } from "../../redux/actions/indexActions";
 import { useNavigate } from 'react-router-dom';
-
+import CartWidget from '../CartWidget/CartWidget';
 
 export default function NavBar() {
   const dispatch = useDispatch();
@@ -48,6 +48,7 @@ export default function NavBar() {
         <button onClick={handleLogin}>Login</button>
         <button onClick={handleRegister}>Register</button>
       </div>
+        <CartWidget/>
     </nav>
   );
 }

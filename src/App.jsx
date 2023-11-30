@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {getAllProducts} from "./redux/actions/indexActions";
 import { useDispatch } from 'react-redux';
+import Carrito from './components/Cart/Cart';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route exact path={'/register'} element={<Register/>}/>
           <Route exact path={'/login'} element={<Login/>}/>
           <Route path="/product/:id" element={<ProductDetail/>} />
+          <Route path="/cart" element={<Carrito/>}></Route>
         </Routes>
       </div>
     </BrowserRouter>
