@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './Navbar.css';
+import './Navbar.scss';
 import { filterByCategories, getAllCategories } from "../../redux/actions/indexActions";
 import { useNavigate } from 'react-router-dom';
 
@@ -40,8 +40,8 @@ export const NavBar = () =>{
         </ul>
       </div>
       <div className="nav-right">
-        <button onClick={handleLogin}>Login</button>
-        <button onClick={handleRegister}>Register</button>
+        <button className='btn' onClick={handleLogin}>Login</button>
+        <button className='btn' onClick={handleRegister}>Register</button>
       </div>
     </nav>
   );

@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getProductsByName } from "../../redux/actions/indexActions";
+import {Button, Form, Row, Col} from 'react-bootstrap'
+import './SearchBar.scss'
 
 
 export const SearchBar = () =>{
@@ -26,9 +28,10 @@ export const SearchBar = () =>{
   }
 
   return (
-    <div className="SearchBar"> 
-      <input  type="search" placeholder="Recipe to search..." onChange={(e) => handleChange(e)}></input>
-      <button type='submit'  value={name} onClick={(e) => handleSubmit(e)}>Search</button><br />
+    <div className="searchBar">
+      
+      <input  type="search" placeholder=" Recipe to search..." onChange={(e) => handleChange(e)}></input>
+      <button  className="btn" type='submit'  value={name} onClick={(e) => handleSubmit(e)}>Search</button><br />
     </div>
   )
 }

@@ -24,13 +24,16 @@ const ProductDetail = () => {
           <h3>{product1.productName}</h3>
           <p>{product1.productPrice}</p>
           <p>{product1.productStock}</p>
-          <p>
+          <p className="text-start">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate
             vitae reprehenderit reiciendis cumque. Odio blanditiis cumque
             voluptatem earum dicta, iste sit itaque libero magni veritatis ex
             culpa commodi totam quidem.
           </p>
         </div>
+      </div>
+      <div>
+        <button className="btn btn-success">Comprar</button>
       </div>
     </div>
   );
