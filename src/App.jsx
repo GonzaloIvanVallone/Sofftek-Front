@@ -9,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { getAllProducts } from "./redux/actions/indexActions";
 import { useDispatch } from "react-redux";
 import { ForgotPassword} from "./components/ForgotPassword/ForgotPassword"
+import { NewPassword} from "./components/ForgotPassword/NewPassword"
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +27,8 @@ function App() {
           <Route exact path={"/login"} element={<Login />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route exact path={"/password"} element={<ForgotPassword />} />
+          <Route exact path={"/password/new"} element={<NewPassword/>}/>{/*test only*/}
+          <Route exact path={"/password/new/:token"} element={<NewPassword/>}/>
         </Routes>
       </div>
     </BrowserRouter>
