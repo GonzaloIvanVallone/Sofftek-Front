@@ -5,7 +5,7 @@ const Cart = () => {
         
         <div>
             <div>
-                <Navbar/> 
+                
             </div>
           
             <h1>Hola soy el carrito</h1>
