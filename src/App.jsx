@@ -10,6 +10,7 @@ import {getAllProducts} from "./redux/actions/indexActions";
 import { useDispatch } from 'react-redux';
 import Carrito from './components/Cart/Cart';
 import { ForgotPassword} from "./components/ForgotPassword/ForgotPassword"
+import { NewPassword} from "./components/ForgotPassword/NewPassword"
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,8 @@ function App() {
           <Route path="/product/:id" element={<ProductDetail/>} />
           <Route path="/cart" element={<Carrito/>}></Route>
           <Route exact path={"/password"} element={<ForgotPassword />} />
+          <Route exact path={"/password/new"} element={<NewPassword/>}/>{/*test only*/}
+          <Route exact path={"/password/new/:token"} element={<NewPassword/>}/>
         </Routes>
       </div>
     </BrowserRouter>
