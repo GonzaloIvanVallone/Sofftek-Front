@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './Navbar.css';
+import './Navbar.scss';
 import { filterByCategories, getAllCategories } from "../../redux/actions/indexActions";
 import { useNavigate } from 'react-router-dom';
 import CartWidget from '../CartWidget/CartWidget';
 
-export const NavBar = () =>{
+export const NavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const allCategories = useSelector((state) => state.allCategories)
-  
 
-  const handleFilterType = (e) =>{
+
+  const handleFilterType = (e) => {
     e.preventDefault();
     dispatch(filterByCategories(e.target.value));
   }
@@ -19,8 +19,8 @@ export const NavBar = () =>{
   const handleLogin = () => navigate('/login')
 
   const handleRegister = () => navigate('/register')
-  useEffect(()=>{
-    dispatch(getAllCategories());  
+  useEffect(() => {
+    dispatch(getAllCategories());
   }, [dispatch])
 
   return (
@@ -39,11 +39,15 @@ export const NavBar = () =>{
           </li>
         </ul>
       </div>
-      <div className="nav-right">
-        <button onClick={handleLogin}>Login</button>
-        <button onClick={handleRegister}>Register</button>
+      <div className="nav-right d-flex">
+        <div className=''>
+          <CartWidget />
+        </div>
+        <div className=''>
+          <button className='btn' onClick={handleLogin}>Login</button>
+          <button className='btn' onClick={handleRegister}>Register</button>
+        </div>
       </div>
-        <CartWidget/>
     </nav>
   );
 }

@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import Home from "./components/Home/Home";
 import { Register } from "./components/Register/Register";
 import { Login } from "./components/Login/Login";
@@ -21,7 +21,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="App">
+
+      <div className="App container-fluid">
         <Routes> 
         <Route
             exact

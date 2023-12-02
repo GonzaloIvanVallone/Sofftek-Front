@@ -1,0 +1,24 @@
+@import "../../assets/variables.scss";
+
+.searchBar {
+  input {
+    border: 4px $color1 solid;
+    border-radius: 8px;
+    width: 33.33%;
+    height: 56px;
+    margin: 12px;
+  }
+  button {
+    font-size: 28px;
+    .btn{
+        font-size: 28px;
+        height: 48px;
+        line-height: 48px;
+        vertical-align: middle;
+    }
+    &:hover {
+      background-color: $color1;
+      color: $color2;
+    }
+  }
+}

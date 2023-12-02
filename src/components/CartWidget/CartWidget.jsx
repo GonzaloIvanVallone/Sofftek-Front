@@ -1,21 +1,26 @@
 import React from 'react';
-import './CartWidget.css';
+import { Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import './CartWidget.scss';
 import { useNavigate } from 'react-router-dom';
 
-const CartWidget = () =>{
+const CartWidget = () => {
 
     const navigate = useNavigate();
 
-    function handleCart(){
+    function handleCart() {
         navigate('/cart')
     }
-    
-    return(
+
+    return (
         <div>
-            <button onClick={handleCart}>
-                <img src="https://www.seekpng.com/png/detail/901-9012555_tienda-tallas-grandes-blue-shopping-cart-icon-amazon.png" className="cartImg" />
-            </button>
-            
+            <Button className='button'
+                onClick={handleCart}>
+                <FontAwesomeIcon icon={faShoppingCart} />
+                &nbsp;Carrito
+            </Button>
+
         </div>
     );
 }
