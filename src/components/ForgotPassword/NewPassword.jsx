@@ -5,19 +5,19 @@ import {resetPassword} from '../../redux/actions/indexActions';
 export const NewPassword = () => {
   const dispatch = useDispatch();
   const [resetData, setResetData] = useState({
-    token: '',
-    newPassword: ''
+    resetToken: '',
+    password: ''
   });
   let data = window.location.toString().split("/");
-  let token = data[5];
+  let resetToken = data[5];
 
   useEffect(() => {
-    setResetData(prevData => ({ ...prevData, token }));
-  }, [token]);
+    setResetData(prevData => ({ ...prevData, resetToken }));
+  }, [resetToken]);
 
   const handlePasswordChange = (e) => {
-    const newPassword = e.target.value;
-    setResetData(prevData => ({ ...prevData, newPassword }));
+    const password = e.target.value;
+    setResetData(prevData => ({ ...prevData, password }));
   };
 
   const handleSubmit = (e) => {
@@ -32,11 +32,11 @@ export const NewPassword = () => {
       <h2>Reset Password</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="newPassword">New Password:</label>
+          <label htmlFor="password">New Password:</label>
           <input
             type="password"
-            id="newPassword"
-            value={resetData.newPassword}
+            id="password"
+            value={resetData.password}
             onChange={handlePasswordChange}
             required
           />
