@@ -1,6 +1,8 @@
+
 import React from 'react';
 
 import './NavBar.scss';
+
 import { useNavigate } from 'react-router-dom';
 import CartWidget from '../CartWidget/CartWidget';
 import logo from '../../assets/hardtv2.png';
