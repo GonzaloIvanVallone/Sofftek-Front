@@ -1,12 +1,13 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "./ProductDetail.css";
 import { useDispatch, useSelector } from "react-redux";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const allProducts = useSelector((state) => state.allProducts);
-  const product1 = allProducts.find(
+  const product = allProducts.find(
     (product) => product.idProduct === parseInt(id, 10)
   );
 
@@ -16,14 +17,14 @@ const ProductDetail = () => {
         <div className="container-img">
           <img
             className="img"
-            src={product1.productImg}
+            src={product.productImg}
             alt="imagen del producto"
           />
         </div>
         <div className="container-card-info">
-          <h3>{product1.productName}</h3>
-          <p>{product1.productPrice}</p>
-          <p>{product1.productStock}</p>
+          <h3>{product.productName}</h3>
+          <p>{product.productPrice}</p>
+          <p>{product.productStock}</p>
           <p className="text-start">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate
             vitae reprehenderit reiciendis cumque. Odio blanditiis cumque
