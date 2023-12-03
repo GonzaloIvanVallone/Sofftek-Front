@@ -3,27 +3,29 @@ import { useDispatch } from "react-redux";
 import {resetPassword} from '../../redux/actions/indexActions';
 
 export const NewPassword = () => {
-    const dispatch = useDispatch();
-    const [resetData, setResetData] = useState({
-        token: '',
-        newPassword: ''
-    });
-    let data = window.location.toString().split("/");
-    console.log(data)
-    //let token = data[5];
+  const dispatch = useDispatch();
+  const [resetData, setResetData] = useState({
+    token: '',
+    newPassword: ''
+  });
+  let data = window.location.toString().split("/");
+  let token = data[5];
 
-    useEffect(() => {
-    }, []); 
+  useEffect(() => {
+    setResetData(prevData => ({ ...prevData, token }));
+  }, [token]);
 
-    const handlePasswordChange = (e) => {
-        const newPassword = e.target.value;
-        setResetData(prevData => ({ ...prevData, newPassword }));
-    };
+  const handlePasswordChange = (e) => {
+    const newPassword = e.target.value;
+    setResetData(prevData => ({ ...prevData, newPassword }));
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        dispatch(resetPassword(resetData));
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(resetPassword(resetData));
+    let inputs = document.querySelectorAll("input");
+    inputs.forEach((input) => (input.value = ""));
+  };
 
   return (
     <div>

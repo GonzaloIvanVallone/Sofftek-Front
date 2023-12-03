@@ -2,6 +2,7 @@ import axios from "axios";
 const category_route = 'http://localhost:8080/api/v1/category';
 const product_route = 'http://localhost:8080/api/v1/product';
 const auth_route = 'http://localhost:8080/api/v1/auth';
+const user_route = 'http://localhost:8080/api/v1/admin/user'
 
 export const getAllProducts=()=> async  (dispatch)=> {
     try{
@@ -51,7 +52,6 @@ export const getProductsByName=(name) =>async (dispatch)=>{
 export const sendEmail=(email) =>async(dispatch)=>{
     try{
         let response = await axios.get(`${auth_route}/email/${email}`);
-        console.log(response.data)
         return dispatch({
             type: "",
             payload: response.data
@@ -64,7 +64,6 @@ export const sendEmail=(email) =>async(dispatch)=>{
 export const resetPassword=(payload)=>async(dispatch)=>{
     try{
         let response = await axios.put(`${auth_route}/newpassword`, payload)
-        console.log(response.data)
         return dispatch({
             type: "",
             payload: response.data

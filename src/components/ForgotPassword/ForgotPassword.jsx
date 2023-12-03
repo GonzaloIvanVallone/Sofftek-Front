@@ -15,6 +15,8 @@ export const ForgotPassword=()=> {
         e.preventDefault();
         if(emailData){
         dispatch(sendEmail(emailData));
+        let inputs = document.querySelectorAll("input");
+        inputs.forEach((input) => (input.value = ""));
         setEmailData('');
         }else{
             console.log("error")
