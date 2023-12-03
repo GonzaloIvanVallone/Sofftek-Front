@@ -9,8 +9,10 @@ export const Register = () => {
   const [email, setUseremail] = useState('')
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const status = true;
+  const roles = 1;
   const navigate = useNavigate();
-  const endpoint = '';
+  const endpoint = 'http://localhost:8080/api/v1/auth/register';
 
 
   const handleRegister = async (e) => {
@@ -23,12 +25,15 @@ export const Register = () => {
     }
 
     // Lógica de registro 
-    console.log(`Registrando: Usuario - ${username}, Contraseña - ${password}`);
+    console.log(`Registrando: Usuario - ${username}, 
+    Email - ${email}, Contraseña - ${password}rol:${roles}`);
     // Objeto con los datos a enviar al backend
     const data = {
       username: username,
       email: email,
-      password: password
+      password: password,
+      roles,
+      status
     };
 
     try {
@@ -57,6 +62,7 @@ export const Register = () => {
 
     // Reiniciar los campos después del registro
     setUsername('');
+    setUseremail('')
     setPassword('');
     setConfirmPassword('');
   };
@@ -85,6 +91,7 @@ export const Register = () => {
                   onChange={(e) => setUsername(e.target.value)}
                   requerid
                   minLength={6}
+                  maxLength={20}
                 />
               </Form.Group>
 
@@ -92,8 +99,8 @@ export const Register = () => {
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
-                  placeholder="Ingresa tu correo ekectrónico"
                   value={email}
+                  maxLength={30}
                   required
                   onChange={(e) => setUseremail(e.target.value)}
 
@@ -103,9 +110,10 @@ export const Register = () => {
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   type="password"
-                  placeholder="Ingresa tu contraseña"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  minLength={8}
+                  maxLength={20}
                 />
               </Form.Group>
 
@@ -113,9 +121,10 @@ export const Register = () => {
                 <Form.Label>Confirm Password</Form.Label>
                 <Form.Control
                   type="password"
-                  placeholder="Confirma tu contraseña"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
+                  minLength={8}
+                  maxLength={20}
                 />
               </Form.Group>
 

@@ -12,7 +12,7 @@ export const Login = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const endpoint = '';
+  const endpoint = '/api/v1/auth/login';
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -28,11 +28,11 @@ export const Login = () => {
       });
 
       if (response.ok) {
-        console.log('Inicio de sesión exitoso');
+        console.log('OK');
         navigate('/');
       } else {
         // Manejar errores si el inicio de sesión falla
-        alert('Error de Inicio');
+        alert('Login invalid');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -48,7 +48,7 @@ export const Login = () => {
     <div className="card p-5 mt-5">
       <Container className="card-title d-flex">
         <Row>
-        <h3>Iniciar Sesión</h3>
+          <h3>Login</h3>
         </Row>
       </Container>
       <Container className='no-flex'>
@@ -59,23 +59,29 @@ export const Login = () => {
           <Col className='column col-12 col-xl-6 m-3'>
             <Form onSubmit={handleLogin}>
               <Form.Group className="mb-3 " controlId="formBasicEmail">
-                <Form.Label>Usuario</Form.Label>
+                <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
                   placeholder="ingrese su usuario"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   required />
+                <Form.Control.Feedback type="invalid">
+                  Please enter a valid email.
+                </Form.Control.Feedback>
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Contraseña</Form.Label>
+                <Form.Label>Password</Form.Label>
                 <Form.Control
                   type="password"
                   placeholder="Ingrese contraseña"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required />
+                <Form.Control.Feedback type="invalid">
+                  Password is invalid.
+                </Form.Control.Feedback>
               </Form.Group>
               <Button variant="primary" type="submit">
                 Iniciar Sesión

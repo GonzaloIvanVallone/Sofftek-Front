@@ -3,24 +3,22 @@
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  &:hover{
-    transform: scale(1.05);}
-  
-}
-
-  .img-fluid {
-    max-width: 100%; 
-    max-height: 100%; 
-    display: block; 
-    margin: auto;
-   
-
-  .title {
-    font-size:24px;
-    
+  &:hover {
+    transform: scale(1.05);
   }
 
-  .price{
+  .img-fluid {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    margin: auto;
+
+  }
+  .title {
     font-size: 24px;
+  }
+  
+  .price {
+    font-size: 30px;
   }
 }
