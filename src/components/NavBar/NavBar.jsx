@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import './Navbar.css';
+import './NavBar.css';
 import { filterByCategories, getAllCategories } from "../../redux/actions/indexActions";
 import { useNavigate } from 'react-router-dom';
 
