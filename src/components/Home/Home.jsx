@@ -1,10 +1,19 @@
 import React from 'react';
-import { NavBar } from '../NavBar/NavBar';
-import { useSelector } from 'react-redux';
-import { Link, useNavigate } from "react-router-dom";
-import { ProductCard } from '../ProductCard/ProductCard';
+
+
+
+
 import { Button } from 'react-bootstrap';
-import { SearchBar } from '../SearchBar/SearchBar';
+
+
+import {NavBar} from '../NavBar/NavBar';
+import { useSelector } from 'react-redux';
+import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import {ProductCard} from '../ProductCard/ProductCard';
+import {SearchBar} from '../SearchBar/SearchBar';
+import { Pagination } from '../Pagination/Pagination';
+
 import './Home.scss';
 import CategoryFilter from '../CategoryFilter/CategoryFilter';
 
@@ -19,21 +28,40 @@ const Home = () => {
   };
 
 
+ 
+  const pageSize = 6;
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const indexLastProduct = currentPage * pageSize;
+  const indexFirstProduct = indexLastProduct - pageSize;
+  const currentProducts = filteredProducts.slice(indexFirstProduct, indexLastProduct);
+  const totalPages = Math.ceil(filteredProducts.length / pageSize);
+
+  const handlePagination = (newPage) => {
+    setCurrentPage(newPage);
+  };
+    
   return (
     <div className='container-fluid mb-2'>
-      <NavBar />
-      <SearchBar />
+      <NavBar/>
+      <SearchBar/>
       <CategoryFilter />
+      <div className='divPagination'>
+        <Pagination pageSize={pageSize} totalProducts={filteredProducts.length} page={currentPage} pagination={handlePagination} />
+      </div>
       <div className='container'>
         {
-          filteredProducts?.map((e) => {
-            return (
-              <Button
+          currentProducts?.map((e)=>{
+          return(
+            <Button
                 key={e.idProduct}
                 onClick={() => handleBuyClick(e.idProduct, e)}
               >
                 <ProductCard idproduct={e.idProduct} productImg={e.productImg} productName={e.productName} productPrice={e.productPrice} />
               </Button>
+            
+
             )
           })
         }
