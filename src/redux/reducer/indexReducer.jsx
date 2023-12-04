@@ -29,7 +29,7 @@ const rootReducer = (state = initialState, action) => {
             };
         case "GET_PRODUCTS_BY_NAME": return{
             ...state,
-            filteredProducts: action.payload
+            allProducts: action.payload
         }
         default: return state;
     }
