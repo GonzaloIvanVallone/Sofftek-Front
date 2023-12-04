@@ -11,7 +11,7 @@ export const ProductCard = ({idProduct,productImg,productName,productPrice}) => 
     <div>
       <div >
           <Card className="center"
-          style={{ width: '21rem',height: '35rem', border:'solid', borderRadius: '15px 50px'}}>
+          style={{ width: '18rem',height: '30rem', border:'solid', borderRadius: '15px 50px'}}>
           <Card.Img 
           className="img-fluid w-75 text-center"
           variant="top" 

@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import './NavBar.scss';
-import { filterByCategories, getAllCategories } from "../../redux/actions/indexActions";
 import { useNavigate } from 'react-router-dom';
 import CartWidget from '../CartWidget/CartWidget';
+import logo from '../../assets/hardtv2.png';
 
 export const NavBar = ({ onFilter }) => {
   const dispatch = useDispatch();
@@ -17,30 +16,24 @@ export const NavBar = ({ onFilter }) => {
     onFilter();
   }
 
+
   const handleLogin = () => navigate('/login')
 
   const handleRegister = () => navigate('/register')
-  useEffect(() => {
-    dispatch(getAllCategories());
-  }, [dispatch])
+  
 
   return (
     <nav className="navbar">
       <div className="nav-left">
-        <ul className="nav-list">
-          <li className="nav-item dropdown">
-            Categories
-            <select onChange={(e) => handleFilterType(e)}>
-              {allCategories?.map((f, index) => (
-                <option key={index} value={f.category}>
-                  {f.category}
-                </option>
-              ))}
-            </select>
-          </li>
-        </ul>
+      <img
+          src={logo}
+          width="100"
+          height="100"
+          className="d-inline-block align-top"
+          alt="Logo"
+        />
       </div>
-      <div className="nav-right d-flex">
+      <div className="nav-right d-flex ">
         <div className=''>
           <CartWidget />
         </div>
