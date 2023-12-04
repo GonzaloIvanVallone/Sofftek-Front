@@ -4,10 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import CartWidget from '../CartWidget/CartWidget';
 import logo from '../../assets/hardtv2.png';
 
-export const NavBar = () => {
-  
+export const NavBar = ({ onFilter }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+  const allCategories = useSelector((state) => state.allCategories)
+
+
+  const handleFilterType = (e) => {
+    e.preventDefault();
+    dispatch(filterByCategories(e.target.value));
+    onFilter();
+  }
+
 
   const handleLogin = () => navigate('/login')
 
