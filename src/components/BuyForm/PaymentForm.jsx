@@ -4,6 +4,7 @@ import Accordion from "react-bootstrap/Accordion";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./PaymentForm.scss";
+import { MyDatePicker } from "./MyDatePicker";
 
 const Buyform = () => {
   // Accede al producto desde la ubicación
@@ -31,7 +32,7 @@ const Buyform = () => {
   };
 
   return (
-    <div className="conteiner">
+    <div className="container-payment">
       <p>Bienvenido a la facturacion</p>
       <Accordion>
         <Accordion.Item eventKey="0">
@@ -53,7 +54,7 @@ const Buyform = () => {
           <div className="form-row">
             <div className="form-group">
               <p className="input-title">Provincia:</p>
-              <InputGroup className="mb-3">
+              <InputGroup className="input mb-3">
                 <Form.Control
                   type="text"
                   placeholder="Provincia"
@@ -68,7 +69,7 @@ const Buyform = () => {
 
             <div className="form-group">
               <p className="input-title">Localidad:</p>
-              <InputGroup className="mb-3">
+              <InputGroup className="input mb-3">
                 <Form.Control
                   type="text"
                   placeholder="localidad"
@@ -84,26 +85,32 @@ const Buyform = () => {
           <div className="form-row">
             <div className="from-group">
               <p className="input-title">Calle:</p>
-              <label>
-                <input
+              <InputGroup className="input mb-3">
+                <Form.Control
                   type="text"
+                  placeholder="calle"
+                  aria-label="calle"
+                  aria-describedby="basic-addon1"
                   name="calle"
                   value={formData.calle}
                   onChange={handleChange}
                 />
-              </label>
+              </InputGroup>
             </div>
 
             <div className="from-group">
               <p className="input-title">Número de Calle:</p>
-              <label>
-                <input
+              <InputGroup className="input mb-3">
+                <Form.Control
                   type="text"
+                  placeholder="numeroCalle"
+                  aria-label="numeroCalle"
+                  aria-describedby="basic-addon1"
                   name="numeroCalle"
                   value={formData.numeroCalle}
                   onChange={handleChange}
                 />
-              </label>
+              </InputGroup>
             </div>
           </div>
           <div>
@@ -140,6 +147,8 @@ const Buyform = () => {
               </label>
             </div>
           )}
+
+          <MyDatePicker />
 
           <button type="submit">Enviar</button>
         </div>

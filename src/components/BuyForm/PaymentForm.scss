@@ -10,9 +10,29 @@
 
 .form-row {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
+
+.from-group {
+}
+
 .input-title {
   margin-bottom: 0px;
   text-align: start;
+}
+
+.input {
+  width: 350px;
+}
+
+.accordion {
+  width: 60%;
+}
+
+.container-payment {
+  display: flex;
+  gap: 20px;
+  margin-top: 24px;
+  flex-direction: column;
+  align-items: center;
 }
