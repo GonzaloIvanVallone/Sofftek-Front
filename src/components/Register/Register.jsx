@@ -9,7 +9,6 @@ export const Register = () => {
   const [email, setUseremail] = useState('')
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const status = true;
   const roles = 1;
   const navigate = useNavigate();
   const endpoint = 'http://localhost:8080/api/v1/auth/register';
@@ -17,7 +16,6 @@ export const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-
     // Verificar si las contraseñas coinciden
     if (password !== confirmPassword) {
       alert("Las contraseñas no coinciden");
@@ -29,11 +27,11 @@ export const Register = () => {
     Email - ${email}, Contraseña - ${password}rol:${roles}`);
     // Objeto con los datos a enviar al backend
     const data = {
-      username: username,
+      id : null,
+      userName: username,
       email: email,
-      password: password,
-      roles,
-      status
+      password: password, 
+      roles:[1]
     };
 
     try {
@@ -54,6 +52,7 @@ export const Register = () => {
       } else {
         // Si el registro falla
         console.error('Error al registrar usuario');
+        console.log(data);
       }
     } catch (error) {
       console.error('Error:', error);

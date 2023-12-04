@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { Form, Button, Image, Container, Row, Col } from 'react-bootstrap';
+import { Form, Button, Image, Container, Row, Col,Alert } from 'react-bootstrap';
+import {Link} from 'react-router-dom'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './Login.scss'
@@ -9,22 +10,22 @@ import './Login.scss'
 
 
 export const Login = () => {
-
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const endpoint = '/api/v1/auth/login';
   const navigate = useNavigate();
 
+  /*const [userName, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const handleLogin = async (e) => {
+ 
+
     e.preventDefault();
 
     try {
-      const response = await fetch(endpoint, {
+      const response = await fetch(`http://localhost:8080/api/v1/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ userName, password }),
       });
 
       if (response.ok) {
@@ -33,10 +34,58 @@ export const Login = () => {
       } else {
         // Manejar errores si el inicio de sesión falla
         alert('Login invalid');
+        console.log(userName, password)
       }
     } catch (error) {
       console.error('Error:', error);
     }
+  };*/
+
+  const [credentials, setCredentials] = useState({ userName: '', password: '' });
+  const [error, setError] = useState('');
+  
+  const handleLogin = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/api/v1/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        // Guardar el token en el almacenamiento local (localStorage)
+        localStorage.setItem('token', data.token);
+        // Redirigir al usuario o realizar acciones adicionales
+        navigate('/');
+        console.log('Inicio de sesión exitoso');
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || 'Error al iniciar sesión');
+      }
+    } catch (error) {
+      setError('Ocurrió un error al procesar la solicitud.');
+      console.error('Error:', error);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials({ ...credentials, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Validar los campos aquí si es necesario
+    if (credentials.userName.trim() === '' || credentials.password.trim() === '') {
+      console.log(credentials.userName,credentials.password)
+      setError('Por favor, complete todos los campos.');
+      return;
+    }
+    // Si los campos están completos, intentar iniciar sesión
+    handleLogin();
   };
 
 
@@ -57,34 +106,34 @@ export const Login = () => {
             <Image src="hardtv2.png" alt="Descripción de la imagen" fluid width={400} />
           </Col>
           <Col className='column col-12 col-xl-6 m-3'>
-            <Form onSubmit={handleLogin}>
+          {error && <Alert variant="danger">{error}</Alert>}
+            <Form onSubmit={handleSubmit}>
               <Form.Group className="mb-3 " controlId="formBasicEmail">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
-                  placeholder="ingrese su usuario"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="email"
+                  name="userName"
+                  value={credentials.userName}
+                  onChange={handleChange}
                   required />
-                <Form.Control.Feedback type="invalid">
-                  Please enter a valid email.
-                </Form.Control.Feedback>
+                
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   type="password"
-                  placeholder="Ingrese contraseña"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="password"
+                  name="password"
+                  value={credentials.password}
+                  onChange={handleChange}
                   required />
-                <Form.Control.Feedback type="invalid">
-                  Password is invalid.
-                </Form.Control.Feedback>
+                
               </Form.Group>
+              <Link to ="/password" className='nav-link'><p></p>Forgot password</Link>
               <Button variant="primary" type="submit">
-                Iniciar Sesión
+                SignIn
               </Button>
             </Form>
           </Col>

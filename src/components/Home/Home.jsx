@@ -1,40 +1,39 @@
 import React from 'react';
-import {NavBar} from '../NavBar/NavBar';
+import { NavBar } from '../NavBar/NavBar';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import {ProductCard} from '../ProductCard/ProductCard';
-import {SearchBar} from '../SearchBar/SearchBar';
+import { Link, useNavigate } from "react-router-dom";
+import { ProductCard } from '../ProductCard/ProductCard';
+import { Button } from 'react-bootstrap';
+import { SearchBar } from '../SearchBar/SearchBar';
 import './Home.scss';
 import CategoryFilter from '../CategoryFilter/CategoryFilter';
 
 const Home = () => {
   const filteredProducts = useSelector((state) => state.filteredProducts);
-  
-  
-  const handleClick = (e) => {
-    if (e.shiftKey) {
-      window.open(`/product/${e.idProduct}`, '_blank');
-      e.preventDefault(); // Evita que el enlace se abra en la ventana actual
-    }
+  const navigate = useNavigate();
+
+
+  const handleBuyClick = (id, product) => {
+    // Utiliza navigate para navegar a la ruta '/product/:id' y pasar el producto como estado de ubicación
+    navigate("/product/" + id, { state: { product } });
   };
 
-    
+
   return (
     <div className='container-fluid mb-2'>
-      <NavBar/>
-      <SearchBar/>
-      <CategoryFilter/>
+      <NavBar />
+      <SearchBar />
+      <CategoryFilter />
       <div className='container'>
         {
-          filteredProducts?.map((e)=>{
-          return(
-            <Link className='link'  
-            onClick={handleClick(e.idProduct)}
-            to={`/product/${e.idProduct}`} 
-            key={e.idProduct}
-            >
-              <ProductCard idproduct={e.idProduct} productImg={e.productImg} productName={e.productName} productPrice={e.productPrice}  />
-            </Link>
+          filteredProducts?.map((e) => {
+            return (
+              <Button
+                key={e.idProduct}
+                onClick={() => handleBuyClick(e.idProduct, e)}
+              >
+                <ProductCard idproduct={e.idProduct} productImg={e.productImg} productName={e.productName} productPrice={e.productPrice} />
+              </Button>
             )
           })
         }
@@ -42,5 +41,5 @@ const Home = () => {
     </div>
   );
 };
-  
+
 export default Home;

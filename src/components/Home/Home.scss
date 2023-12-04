@@ -3,10 +3,26 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    gap: 20px;
+    gap: 10px;
     margin-top: 24px;
     
     .link{
         text-decoration: none;
+    }
+    Button{
+        .btn{
+            &:active{
+                background-color: transparent;
+            }
+        }
+        background-color: transparent;
+        border: none;
+        
+        &:hover{
+            background-color: transparent;
+            outline: none;
+        }
+        
+
     }
 }
