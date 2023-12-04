@@ -52,8 +52,6 @@ export const Register = () => {
         // Registro exitoso
           setShowSuccessAlert(true);
           setAlertMessage('Successfully Registered User!');
-          console.log('Successfully Registered User');
-          console.log(data.token);
           // Espera un momento antes de redirigir al usuario para dar tiempo a que el usuario vea la alerta
           setTimeout(() => {
             // Guardar el token en el almacenamiento local (localStorage)
@@ -63,8 +61,6 @@ export const Register = () => {
           }, 2000); // Espera 2 segundos (ajusta según sea necesario)
       } else {
         // Si el registro falla
-        console.error('Error registering user');
-        console.log(data);
         setShowErrorAlert(true);
         setAlertMessage('Error registering user. Please try again.');
       }

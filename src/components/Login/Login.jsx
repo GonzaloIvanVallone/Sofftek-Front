@@ -61,8 +61,6 @@ export const Login = () => {
         const data = await response.json();
           setShowSuccessAlert(true);
           setAlertMessage('Successful login!');
-          console.log('Successful login');
-          console.log(data.token);
 
           // Espera un momento antes de redirigir al usuario para dar tiempo a que el usuario vea la alerta
           setTimeout(() => {
@@ -91,7 +89,6 @@ export const Login = () => {
     e.preventDefault();
     // Validar los campos aquí si es necesario
     if (credentials.email.trim() === '' || credentials.password.trim() === '') {
-      console.log(credentials.userName,credentials.password)
       setShowErrorAlert(true);
         setAlertMessage('Please complete all fields.');
       return;
