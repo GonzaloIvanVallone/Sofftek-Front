@@ -41,7 +41,7 @@ export const Login = () => {
     }
   };*/
 
-  const [credentials, setCredentials] = useState({ userName: '', password: '' });
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   
   const handleLogin = async () => {
@@ -58,9 +58,11 @@ export const Login = () => {
         const data = await response.json();
         // Guardar el token en el almacenamiento local (localStorage)
         localStorage.setItem('token', data.token);
+
         // Redirigir al usuario o realizar acciones adicionales
         navigate('/');
         console.log('Inicio de sesión exitoso');
+        console.log(data.token)
       } else {
         const errorData = await response.json();
         setError(errorData.message || 'Error al iniciar sesión');
@@ -79,7 +81,7 @@ export const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Validar los campos aquí si es necesario
-    if (credentials.userName.trim() === '' || credentials.password.trim() === '') {
+    if (credentials.email.trim() === '' || credentials.password.trim() === '') {
       console.log(credentials.userName,credentials.password)
       setError('Por favor, complete todos los campos.');
       return;
@@ -113,8 +115,8 @@ export const Login = () => {
                 <Form.Control
                   type="email"
                   placeholder="email"
-                  name="userName"
-                  value={credentials.userName}
+                  name="email"
+                  value={credentials.email}
                   onChange={handleChange}
                   required />
                 
