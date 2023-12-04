@@ -5,7 +5,7 @@ import { filterByCategories, getAllCategories } from "../../redux/actions/indexA
 import { useNavigate } from 'react-router-dom';
 import CartWidget from '../CartWidget/CartWidget';
 
-export const NavBar = () => {
+export const NavBar = ({ onFilter }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const allCategories = useSelector((state) => state.allCategories)
@@ -14,6 +14,7 @@ export const NavBar = () => {
   const handleFilterType = (e) => {
     e.preventDefault();
     dispatch(filterByCategories(e.target.value));
+    onFilter();
   }
 
   const handleLogin = () => navigate('/login')

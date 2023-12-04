@@ -9,26 +9,28 @@ import { Pagination } from '../Pagination/Pagination';
 import './Home.scss';
 
 const Home = () => {
-  const filteredProducts = useSelector((state) => state.filteredProducts);
+  const allProducts = useSelector((state) => state.allProducts);
   const pageSize = 6;
-
   const [currentPage, setCurrentPage] = useState(1);
 
   const indexLastProduct = currentPage * pageSize;
   const indexFirstProduct = indexLastProduct - pageSize;
-  const currentProducts = filteredProducts.slice(indexFirstProduct, indexLastProduct);
-  const totalPages = Math.ceil(filteredProducts.length / pageSize);
+  const currentProducts = allProducts.slice(indexFirstProduct, indexLastProduct);
+  const totalPages = Math.ceil(allProducts.length / pageSize);
 
   const handlePagination = (newPage) => {
     setCurrentPage(newPage);
   };
+  const handleFilter = () => {
+    setCurrentPage(1); 
+  };
     
   return (
     <div className='container-fluid mb-2'>
-      <NavBar/>
+      <NavBar onFilter={handleFilter}/>
       <SearchBar/>
       <div className='divPagination'>
-        <Pagination pageSize={pageSize} totalProducts={filteredProducts.length} page={currentPage} pagination={handlePagination} />
+        <Pagination pageSize={pageSize} totalProducts={allProducts.length} page={currentPage} pagination={handlePagination} />
       </div>
       <div className='container'>
         {
