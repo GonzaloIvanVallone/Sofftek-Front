@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import Carrito from "./components/Cart/Cart";
 import { ForgotPassword } from "./components/ForgotPassword/ForgotPassword";
 import { NewPassword } from "./components/ForgotPassword/NewPassword";
-import BuyForm from "./components/BuyForm/BuyForm";
+import BuyForm from "./components/BuyForm/PaymentForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ function App() {
             path={"/password/new/:token"}
             element={<NewPassword />}
           />
-          <Route exact path="/product/payment" element={<BuyForm />} />
+          <Route path="/comprar" element={<BuyForm />} />
         </Routes>
       </div>
     </BrowserRouter>

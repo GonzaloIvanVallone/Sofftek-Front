@@ -1,0 +1,18 @@
+.informationProduct {
+  display: flex;
+  justify-content: space-around;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-around;
+}
+.input-title {
+  margin-bottom: 0px;
+  text-align: start;
+}

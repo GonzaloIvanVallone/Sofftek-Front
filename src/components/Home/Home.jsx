@@ -1,13 +1,19 @@
 import React from "react";
 import { NavBar } from "../NavBar/NavBar";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ProductCard } from "../ProductCard/ProductCard";
 import { SearchBar } from "../SearchBar/SearchBar";
 import "./Home.scss";
 
 const Home = () => {
   const filteredProducts = useSelector((state) => state.filteredProducts);
+  const navigate = useNavigate();
+
+  const handleBuyClick = (id, product) => {
+    // Utiliza navigate para navegar a la ruta '/product/:id' y pasar el producto como estado de ubicación
+    navigate("/product/" + id, { state: { product } });
+  };
 
   return (
     <div className="container-fluid mb-2">
@@ -16,13 +22,9 @@ const Home = () => {
       <div className="container">
         {filteredProducts?.map((e) => {
           return (
-            <Link
-              className="link"
-              to={{
-                pathname: `/product/${e.idProduct}`,
-                state: { product: e },
-              }}
-              key={e.idProduct}
+            <button
+              className="buttonCard btn btn-success"
+              onClick={() => handleBuyClick(e.idProduct, e)}
             >
               <ProductCard
                 idproduct={e.idProduct}
@@ -30,7 +32,7 @@ const Home = () => {
                 productName={e.productName}
                 productPrice={e.productPrice}
               />
-            </Link>
+            </button>
           );
         })}
       </div>

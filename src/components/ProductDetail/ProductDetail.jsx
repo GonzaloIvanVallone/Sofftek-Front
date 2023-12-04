@@ -1,15 +1,20 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import "./ProductDetail.css";
 import { useDispatch, useSelector } from "react-redux";
 
 const ProductDetail = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
-  const allProducts = useSelector((state) => state.allProducts);
-  const product = allProducts.find(
-    (product) => product.idProduct === parseInt(id, 10)
-  );
+
+  const location = useLocation();
+  const product = location.state && location.state.product;
+
+  const handleBuyClick = () => {
+    // Use useNavigate to navigate to the '/comprar' route
+    navigate("/comprar", { state: { product } });
+    console.log("holaaaaaa: " + navigate);
+  };
 
   return (
     <div>
@@ -34,7 +39,9 @@ const ProductDetail = () => {
         </div>
       </div>
       <div>
-        <button className="btn btn-success">Comprar</button>
+        <button className="btn btn-success" onClick={handleBuyClick}>
+          Comprar
+        </button>
       </div>
     </div>
   );
