@@ -72,3 +72,12 @@ export const resetPassword=(payload)=>async(dispatch)=>{
         console.log("error")
     }
 }
+
+export const logout=()=>async(dispatch)=>{
+    try{
+        let response = await axios.post(`${product_route}/logout`)
+        localStorage.removeItem("token")
+    }catch{
+        console.log("error")
+    }
+}
