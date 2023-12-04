@@ -3,8 +3,8 @@
     padding: 16px;
     border-bottom: 4px solid;
     border-radius: 8px;
-    margin: 8px 0;
-    height: 120px;
+    margin: 0;
+    height: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,10 +12,13 @@
     background-color: $color1;
     color: $color2;
     margin-bottom: 40px;
+    .nav-left{
+        margin-left: 24px
+    }
 
     .btn{
         margin: 4px;
-        font-size: 30px;
+        font-size: 20px;
         color: $color2;
         &:hover{
             cursor: pointer;
@@ -24,16 +27,7 @@
         }
 
     }
-    .nav-item{
-        list-style: none;
-        font-size: 30px;
-        margin: 8px 16px ;
-
-        select{
-            margin: 0 12px;
-            border-radius: 4px;
-        }
-    }
+    
 
 
   }

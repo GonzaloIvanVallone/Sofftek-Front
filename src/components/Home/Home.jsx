@@ -1,15 +1,34 @@
 import React from 'react';
+
+
+
+
+import { Button } from 'react-bootstrap';
+
+
 import {NavBar} from '../NavBar/NavBar';
-import { useSelector, useDispatch  } from 'react-redux';
-import { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import {ProductCard} from '../ProductCard/ProductCard';
 import {SearchBar} from '../SearchBar/SearchBar';
 import { Pagination } from '../Pagination/Pagination';
+
 import './Home.scss';
+import CategoryFilter from '../CategoryFilter/CategoryFilter';
 
 const Home = () => {
   const filteredProducts = useSelector((state) => state.filteredProducts);
+  const navigate = useNavigate();
+
+
+  const handleBuyClick = (id, product) => {
+    // Utiliza navigate para navegar a la ruta '/product/:id' y pasar el producto como estado de ubicación
+    navigate("/product/" + id, { state: { product } });
+  };
+
+
+ 
   const pageSize = 6;
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,6 +46,7 @@ const Home = () => {
     <div className='container-fluid mb-2'>
       <NavBar/>
       <SearchBar/>
+      <CategoryFilter />
       <div className='divPagination'>
         <Pagination pageSize={pageSize} totalProducts={filteredProducts.length} page={currentPage} pagination={handlePagination} />
       </div>
@@ -34,9 +54,14 @@ const Home = () => {
         {
           currentProducts?.map((e)=>{
           return(
-            <Link className='link' to={`/product/${e.idProduct}`} key={e.idProduct}>
-              <ProductCard idproduct={e.idProduct} productImg={e.productImg} productName={e.productName} productPrice={e.productPrice}  />
-            </Link>
+            <Button
+                key={e.idProduct}
+                onClick={() => handleBuyClick(e.idProduct, e)}
+              >
+                <ProductCard idproduct={e.idProduct} productImg={e.productImg} productName={e.productName} productPrice={e.productPrice} />
+              </Button>
+            
+
             )
           })
         }
@@ -44,5 +69,5 @@ const Home = () => {
     </div>
   );
 };
-  
+
 export default Home;
