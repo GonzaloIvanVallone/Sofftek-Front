@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { Form, Button, Container, Row, Col, Image } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col, Image,Alert } from 'react-bootstrap';
 import '../Login/Login.scss'
 
 export const Register = () => {
@@ -12,6 +12,9 @@ export const Register = () => {
   const roles = 1;
   const navigate = useNavigate();
   const endpoint = 'http://localhost:8080/api/v1/auth/register';
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
 
 
   const handleRegister = async (e) => {
@@ -19,6 +22,8 @@ export const Register = () => {
     // Verificar si las contraseñas coinciden
     if (password !== confirmPassword) {
       alert("Las contraseñas no coinciden");
+        setShowErrorAlert(true);
+        setAlertMessage('Las contraseñas no coinciden');
       return;
     }
 
@@ -45,17 +50,28 @@ export const Register = () => {
 
       if (response.ok) {
         // Registro exitoso
-        console.log('Usuario registrado exitosamente');
-        // Redireccion a home
-        navigate('/');
-
+          setShowSuccessAlert(true);
+          setAlertMessage('Successfully Registered User!');
+          console.log('Successfully Registered User');
+          console.log(data.token);
+          // Espera un momento antes de redirigir al usuario para dar tiempo a que el usuario vea la alerta
+          setTimeout(() => {
+            // Guardar el token en el almacenamiento local (localStorage)
+            localStorage.setItem('token', data.token);
+            // Redirigir al usuario o realizar acciones adicionales
+            navigate('/');
+          }, 2000); // Espera 2 segundos (ajusta según sea necesario)
       } else {
         // Si el registro falla
-        console.error('Error al registrar usuario');
+        console.error('Error registering user');
         console.log(data);
+        setShowErrorAlert(true);
+        setAlertMessage('Error registering user. Please try again.');
       }
     } catch (error) {
       console.error('Error:', error);
+      setShowErrorAlert(true);
+      setAlertMessage('Error registering user. Please try again.');
     }
 
 
@@ -70,6 +86,17 @@ export const Register = () => {
   return (
 
     <div className="card p-5 mt-5">
+      {showSuccessAlert && (
+        <Alert variant="success" onClose={() => setShowSuccessAlert(false)} dismissible>
+          <Alert.Heading>{alertMessage}</Alert.Heading>
+        </Alert>
+      )}
+
+      {showErrorAlert && (
+        <Alert variant="danger" onClose={() => setShowErrorAlert(false)} dismissible>
+          <Alert.Heading>{alertMessage}</Alert.Heading>
+        </Alert>
+      )}
       <div className="card-title">
         <h3>Registro de Usuario</h3>
       </div>

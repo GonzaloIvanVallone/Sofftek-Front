@@ -11,6 +11,9 @@ import './Login.scss'
 
 export const Login = () => {
   const navigate = useNavigate();
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
 
   /*const [userName, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -56,20 +59,26 @@ export const Login = () => {
 
       if (response.ok) {
         const data = await response.json();
-        // Guardar el token en el almacenamiento local (localStorage)
-        localStorage.setItem('token', data.token);
+          setShowSuccessAlert(true);
+          setAlertMessage('Successful login!');
+          console.log('Successful login');
+          console.log(data.token);
 
-        // Redirigir al usuario o realizar acciones adicionales
-        navigate('/');
-        console.log('Inicio de sesión exitoso');
-        console.log(data.token)
+          // Espera un momento antes de redirigir al usuario para dar tiempo a que el usuario vea la alerta
+          setTimeout(() => {
+            // Guardar el token en el almacenamiento local (localStorage)
+            localStorage.setItem('token', data.token);
+            // Redirigir al usuario o realizar acciones adicionales
+            navigate('/');
+          }, 2000); // Espera 2 segundos (ajusta según sea necesario)
       } else {
         const errorData = await response.json();
-        setError(errorData.message || 'Error al iniciar sesión');
+        setError(errorData.message || 'Failed to login');
       }
     } catch (error) {
-      setError('Ocurrió un error al procesar la solicitud.');
       console.error('Error:', error);
+        setShowErrorAlert(true);
+        setAlertMessage('Failed to login. Please try again.');
     }
   };
 
@@ -83,7 +92,8 @@ export const Login = () => {
     // Validar los campos aquí si es necesario
     if (credentials.email.trim() === '' || credentials.password.trim() === '') {
       console.log(credentials.userName,credentials.password)
-      setError('Por favor, complete todos los campos.');
+      setShowErrorAlert(true);
+        setAlertMessage('Please complete all fields.');
       return;
     }
     // Si los campos están completos, intentar iniciar sesión
@@ -91,12 +101,20 @@ export const Login = () => {
   };
 
 
-
-
-
   return (
 
     <div className="card p-5 mt-5">
+      {showSuccessAlert && (
+        <Alert variant="success" onClose={() => setShowSuccessAlert(false)} dismissible>
+          <Alert.Heading>{alertMessage}</Alert.Heading>
+        </Alert>
+      )}
+
+      {showErrorAlert && (
+        <Alert variant="danger" onClose={() => setShowErrorAlert(false)} dismissible>
+          <Alert.Heading>{alertMessage}</Alert.Heading>
+        </Alert>
+      )}
       <Container className="card-title d-flex">
         <Row>
           <h3>Login</h3>
