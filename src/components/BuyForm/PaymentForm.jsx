@@ -21,6 +21,7 @@ const Buyform = () => {
     numeroCalle: "",
     esDepartamento: false,
     numeroDepartamento: "",
+    numeroDePiso: "",
   });
 
   const handleChange = (e) => {
@@ -127,24 +128,34 @@ const Buyform = () => {
 
           {formData.esDepartamento && (
             <div>
-              <label>
-                Numero de piso:
-                <input
-                  type="text"
-                  name="numeroDepartamento"
-                  value={formData.numeroDepartamento}
-                  onChange={handleChange}
-                />
-              </label>
-              <label>
-                Número de Departamento:
-                <input
-                  type="text"
-                  name="numeroDepartamento"
-                  value={formData.numeroDepartamento}
-                  onChange={handleChange}
-                />
-              </label>
+              <div>
+                <p className="input-title">Numero de Piso</p>
+                <InputGroup className="input mb-3">
+                  <Form.Control
+                    type="text"
+                    placeholder="numeroDePiso"
+                    aria-label="numeroDePiso"
+                    aria-describedby="basic-addon1"
+                    name="numeroDePiso"
+                    value={formData.numeroDePiso}
+                    onChange={handleChange}
+                  />
+                </InputGroup>
+              </div>
+              <div>
+                <p className="input-title">Numero Departamento</p>
+                <InputGroup className="input mb-3">
+                  <Form.Control
+                    type="text"
+                    placeholder="numeroDepartamento"
+                    aria-label="numeroDepartamento"
+                    aria-describedby="basic-addon1"
+                    name="numeroDepartamento"
+                    value={formData.numeroDepartamento}
+                    onChange={handleChange}
+                  />
+                </InputGroup>
+              </div>
             </div>
           )}
 

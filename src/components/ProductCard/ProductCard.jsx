@@ -17,8 +17,8 @@ export const ProductCard = ({
         <Card
           className="center"
           style={{
-            width: "21rem",
-            height: "35rem",
+            width: "18rem",
+            height: "30rem",
             border: "solid",
             borderRadius: "15px 50px",
           }}

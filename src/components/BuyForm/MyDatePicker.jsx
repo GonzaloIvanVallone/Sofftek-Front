@@ -29,6 +29,8 @@ export const MyDatePicker = () => {
         selected={selectedDate}
         onChange={handleDateChange}
         dateFormat="dd/MM/yyyy" // Puedes ajustar el formato según tus necesidades
+        placeholderText="Haga clic y elija una fecha"
+        title="Haga clic y elija una fecha que sea mayor a la de hoy pero no superior a una semana."
       />
     </div>
   );

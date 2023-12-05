@@ -1,4 +1,5 @@
 const initialState = {
+    backupProducts:[],
     allProducts: [],
     filteredProducts: [],
     allCategories: [],
@@ -10,13 +11,14 @@ const rootReducer = (state = initialState, action) => {
             ...state,
             filteredProducts: action.payload,
             allProducts: action.payload,
+            backupProducts: action.payload
         };
         case "FILTER_BY_CATEGORIES": 
             if(action.payload == "all"){
-                return {...state, filteredProducts: state.allProducts}
+                return {...state, allProducts: state.backupProducts}
             }else{
-                const filteredByCategory = state.allProducts.filter(e=>e.typeCategory.category === action.payload)
-                return {...state, filteredProducts: filteredByCategory}
+                const filteredByCategory = state.backupProducts.filter(e=>e.typeCategory.category === action.payload)
+                return {...state, allProducts: filteredByCategory}
             }
         case "GET_ALL_CATEGORIES":   
             const updatedCategories = [...action.payload]; 
@@ -27,7 +29,7 @@ const rootReducer = (state = initialState, action) => {
             };
         case "GET_PRODUCTS_BY_NAME": return{
             ...state,
-            filteredProducts: action.payload
+            allProducts: action.payload
         }
         default: return state;
     }
