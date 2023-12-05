@@ -12,6 +12,7 @@ export const Pagination = ({ pageSize, totalProducts, page, pagination }) => {
             {pageNumber}
           </button>
         ))}
+        
       </div>
     );
   };
