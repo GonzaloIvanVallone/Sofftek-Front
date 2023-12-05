@@ -39,9 +39,9 @@ export const Home = () => {
 
   return (
     <div className="container-fluid mb-2">
-      <NavBar onFilter={handleFilter} />
+      <NavBar />
       <SearchBar />
-      <CategoryFilter />
+      <CategoryFilter onFilter={handleFilter}/>
       <div className="content">
         <div className="divPagination">
           <Pagination
