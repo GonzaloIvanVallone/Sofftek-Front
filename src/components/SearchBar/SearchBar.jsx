@@ -29,7 +29,6 @@ export const SearchBar = () =>{
 
   return (
     <div className="searchBar">
-      
       <input  type="search" placeholder=" Recipe to search..." onChange={(e) => handleChange(e)}></input>
       <button  className="btn" type='submit'  value={name} onClick={(e) => handleSubmit(e)}>Search</button><br />
     </div>

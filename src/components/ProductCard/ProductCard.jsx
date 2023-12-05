@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ProductCard.scss';
 
-
 export const ProductCard = ({idProduct,productImg,productName,productPrice}) => {
   return (
     <div>
@@ -19,7 +18,6 @@ export const ProductCard = ({idProduct,productImg,productName,productPrice}) => 
           style={{width: '250px', height:'250px'}} />
           <Card.Body>
             <Card.Title className="title">{productName}</Card.Title>
-            
             <Card.Text className="card-text">
               Some quick example text to build on the card title and make up the
               bulk of the Card's content.

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Button } from 'react-bootstrap';
 import {NavBar} from '../NavBar/NavBar';
 import { useSelector } from 'react-redux';
@@ -11,10 +10,9 @@ import { Pagination } from '../Pagination/Pagination';
 import './Home.scss';
 import CategoryFilter from '../CategoryFilter/CategoryFilter';
 
-const Home = () => {
+export const Home = () => {
   const allProducts = useSelector((state) => state.allProducts);
   const navigate = useNavigate();
-
 
   const handleBuyClick = (id, product) => {
     // Utiliza navigate para navegar a la ruta '/product/:id' y pasar el producto como estado de ubicación
@@ -54,8 +52,6 @@ const Home = () => {
               >
                 <ProductCard idproduct={e.idProduct} productImg={e.productImg} productName={e.productName} productPrice={e.productPrice} />
               </Button>
-            
-
             )
           })
         }
@@ -63,5 +59,3 @@ const Home = () => {
     </div>
   );
 };
-
-export default Home;
