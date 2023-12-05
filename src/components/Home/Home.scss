@@ -1,38 +1,67 @@
+.buttonCard {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #19875400;
+  --bs-btn-border-color: #19875400;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #15734700;
+  --bs-btn-hover-border-color: #146c4300;
+  --bs-btn-focus-shadow-rgb: 60, 153, 110;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #146c4300;
+  --bs-btn-active-border-color: #13653f00;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #19875400;
+  --bs-btn-disabled-border-color: #19875400;
+}
 
-.container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 10px;
-    margin-top: 24px;
-    
-    .link{
-        text-decoration: none;
-    }
-    Button{
-        .btn{
-            &:active{
-                background-color: transparent;
-            }
-        }
-        background-color: transparent;
-        border: none;
-        
-        &:hover{
-            background-color: transparent;
-            outline: none;
-        }
-        
+.container-fluid {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-    }
-    .divPagination {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-container {
+  flex: 1;
+  margin-bottom: 60px; /* Altura estimada del Footer */
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 10px;
+  margin-top: 24px;
+
+  .link {
+    text-decoration: none;
+  }
+  Button {
+    .btn {
+      &:active {
         background-color: transparent;
-        border-radius: 0.2rem;
-        cursor: pointer;
-        font-size: 1.1rem;
-      
       }
+    }
+    background-color: transparent;
+    border: none;
+
+    &:hover {
+      background-color: transparent;
+      outline: none;
+    }
+  }
+  .divPagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
 }
