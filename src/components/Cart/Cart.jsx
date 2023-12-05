@@ -1,9 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Cart = () => {
+export const Cart = () => {
+    const navigate = useNavigate();
+    const goHome = () => {
+        navigate('/');
+      };
     return(
-        
         <div>
+            <button onClick={goHome}>Go Back</button>
             <div>
                 
             </div>
@@ -12,5 +17,3 @@ const Cart = () => {
         </div>
     );
 } ;
-
-export default Cart;

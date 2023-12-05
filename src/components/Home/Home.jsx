@@ -6,12 +6,11 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ProductCard } from "../ProductCard/ProductCard";
 import { SearchBar } from "../SearchBar/SearchBar";
-
 import { Pagination } from "../Pagination/Pagination";
 import "./Home.scss";
-import CategoryFilter from "../CategoryFilter/CategoryFilter";
+import { CategoryFilter } from "../CategoryFilter/CategoryFilter";
 
-const Home = () => {
+export const Home = () => {
   const allProducts = useSelector((state) => state.allProducts);
   const navigate = useNavigate();
 
@@ -74,5 +73,3 @@ const Home = () => {
     </div>
   );
 };
-
-export default Home;

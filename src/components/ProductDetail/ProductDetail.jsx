@@ -1,13 +1,11 @@
 import React from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./ProductDetail.scss";
 import { Footer } from "../Footer/Footer";
 import { NavBar } from "../NavBar/NavBar";
 
-const ProductDetail = () => {
+export const ProductDetail = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
-
   const location = useLocation();
   const product = location.state && location.state.product;
 
@@ -45,14 +43,14 @@ const ProductDetail = () => {
           <button className="btn btn-success" onClick={handleBuyClick}>
             Comprar
           </button>
+          <button className="btn btn-success">Add to Cart</button>
         </div>
 
         <div className="footer-container">
           <Footer />
         </div>
       </div>
+      <div></div>
     </div>
   );
 };
-
-export default ProductDetail;

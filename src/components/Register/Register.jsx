@@ -20,18 +20,14 @@ export const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    // Verificar si las contraseñas coinciden
     if (password !== confirmPassword) {
       alert("Las contraseñas no coinciden");
         setShowErrorAlert(true);
         setAlertMessage('Las contraseñas no coinciden');
       return;
     }
-
-    // Lógica de registro 
-    console.log(`Registrando: Usuario - ${username}, 
-    Email - ${email}, Contraseña - ${password}rol:${roles}`);
-    // Objeto con los datos a enviar al backend
+    /*console.log(`Registrando: Usuario - ${username}, 
+    Email - ${email}, Contraseña - ${password}rol:${roles}`)*/
     const data = {
       id : null,
       userName: username,
@@ -50,121 +46,106 @@ export const Register = () => {
       });
 
       if (response.ok) {
-        // Registro exitoso
           dispatch({
             type: "LOGIN"
           })
           setShowSuccessAlert(true);
           setAlertMessage('Successfully Registered User!');
-          // Espera un momento antes de redirigir al usuario para dar tiempo a que el usuario vea la alerta
           setTimeout(() => {
-            // Guardar el token en el almacenamiento local (localStorage)
             localStorage.setItem('token', data.token);
-            // Redirigir al usuario o realizar acciones adicionales
             navigate('/');
-          }, 2000); // Espera 2 segundos (ajusta según sea necesario)
+          }, 2000);
       } else {
-        // Si el registro falla
         setShowErrorAlert(true);
         setAlertMessage('Error registering user. Please try again.');
       }
     } catch (error) {
-      console.error('Error:', error);
       setShowErrorAlert(true);
       setAlertMessage('Error registering user. Please try again.');
     }
-
-
-    // Reiniciar los campos después del registro
     setUsername('');
     setUseremail('')
     setPassword('');
     setConfirmPassword('');
   };
-
+  const goHome = () => {
+    navigate('/');
+  };
 
   return (
-
-    <div className="card p-5 mt-5">
-      {showSuccessAlert && (
-        <Alert variant="success" onClose={() => setShowSuccessAlert(false)} dismissible>
-          <Alert.Heading>{alertMessage}</Alert.Heading>
-        </Alert>
-      )}
-
-      {showErrorAlert && (
-        <Alert variant="danger" onClose={() => setShowErrorAlert(false)} dismissible>
-          <Alert.Heading>{alertMessage}</Alert.Heading>
-        </Alert>
-      )}
-      <div className="card-title">
-        <h3>Registro de Usuario</h3>
+    <div>
+      <button onClick={goHome}>Go Back</button>
+      <div className="card p-5 mt-5">
+        {showSuccessAlert && (
+          <Alert variant="success" onClose={() => setShowSuccessAlert(false)} dismissible>
+            <Alert.Heading>{alertMessage}</Alert.Heading>
+          </Alert>
+        )}
+        {showErrorAlert && (
+          <Alert variant="danger" onClose={() => setShowErrorAlert(false)} dismissible>
+            <Alert.Heading>{alertMessage}</Alert.Heading>
+          </Alert>
+        )}
+        <div className="card-title">
+          <h3>Registro de Usuario</h3>
+        </div>
+        <Container className='no-flex'>
+          <Row >
+            <Col className="">
+              <Image src="hardtv2.png" alt="Descripción de la imagen" fluid width={400} />
+            </Col>
+            <Col className='column col-12 col-xl-6'>
+              <Form onSubmit={handleRegister}>
+                <Form.Group controlId="formUsername">
+                  <Form.Label>User</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder=""
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    requerid
+                    minLength={6}
+                    maxLength={20}
+                  />
+                </Form.Group>
+                <Form.Group controlId="formUseremail">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    value={email}
+                    maxLength={30}
+                    required
+                    onChange={(e) => setUseremail(e.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group controlId="formPassword">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    minLength={8}
+                    maxLength={20}
+                  />
+                </Form.Group>
+                <Form.Group controlId="formConfirmPassword">
+                  <Form.Label>Confirm Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    minLength={8}
+                    maxLength={20}
+                  />
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                  Register
+                </Button>
+              </Form>
+            </Col>
+          </Row>
+        </Container>
       </div>
-
-      <Container className='no-flex'>
-        <Row >
-          <Col className="">
-            <Image src="hardtv2.png" alt="Descripción de la imagen" fluid width={400} />
-          </Col>
-          <Col className='column col-12 col-xl-6'>
-            <Form onSubmit={handleRegister}>
-              <Form.Group controlId="formUsername">
-                <Form.Label>User</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder=""
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  requerid
-                  minLength={6}
-                  maxLength={20}
-                />
-              </Form.Group>
-
-              <Form.Group controlId="formUseremail">
-                <Form.Label>Email</Form.Label>
-                <Form.Control
-                  type="email"
-                  value={email}
-                  maxLength={30}
-                  required
-                  onChange={(e) => setUseremail(e.target.value)}
-
-                />
-              </Form.Group>
-              <Form.Group controlId="formPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  minLength={8}
-                  maxLength={20}
-                />
-              </Form.Group>
-
-              <Form.Group controlId="formConfirmPassword">
-                <Form.Label>Confirm Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  minLength={8}
-                  maxLength={20}
-                />
-              </Form.Group>
-
-              <Button variant="primary" type="submit">
-                Register
-              </Button>
-
-            </Form>
-          </Col>
-        </Row>
-      </Container>
-
     </div>
-
-
   )
 }

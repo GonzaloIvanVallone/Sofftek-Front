@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./NavBar.scss";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import CartWidget from "../CartWidget/CartWidget";
+import { CartWidget } from "../CartWidget/CartWidget";
 import logo from "../../assets/hardtv2.png";
 import { logout } from "../../redux/actions/indexActions";
 
@@ -37,7 +37,6 @@ export const NavBar = () => {
             <button className="btn" onClick={handleLogout}>
               Logout
             </button>
-            {/* Additional authenticated user actions */}
           </div>
         ) : (
           <div className="">

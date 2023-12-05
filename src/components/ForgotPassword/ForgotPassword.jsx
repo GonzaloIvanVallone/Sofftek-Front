@@ -6,6 +6,9 @@ import { sendEmail } from "../../redux/actions/indexActions";
 export const ForgotPassword=()=> {
     const dispatch = useDispatch();
     const [emailData, setEmailData] = useState('');
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
 
     const handleOnChange = (e) => {
         setEmailData(e.target.value );
@@ -14,12 +17,15 @@ export const ForgotPassword=()=> {
     const handleSubmit = (e) => {
         e.preventDefault();
         if(emailData){
-        dispatch(sendEmail(emailData));
-        let inputs = document.querySelectorAll("input");
-        inputs.forEach((input) => (input.value = ""));
-        setEmailData('');
+            dispatch(sendEmail(emailData));
+            let inputs = document.querySelectorAll("input");
+            inputs.forEach((input) => (input.value = ""));
+            setEmailData('');
+            setShowSuccessAlert(true);
+            setAlertMessage('Email sent!');
         }else{
-            console.log("error")
+            setShowErrorAlert(true);
+            setAlertMessage('Missing data, please check');
         }
     }
 
