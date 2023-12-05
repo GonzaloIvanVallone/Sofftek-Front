@@ -1,9 +1,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import "./ProductDetail.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-const ProductDetail = () => {
+export const ProductDetail = () => {
   const { id } = useParams();
   const allProducts = useSelector((state) => state.allProducts);
   const product1 = allProducts.find(
@@ -33,10 +33,8 @@ const ProductDetail = () => {
         </div>
       </div>
       <div>
-        <button className="btn btn-success">Comprar</button>
+        <button className="btn btn-success">Add to Cart</button>
       </div>
     </div>
   );
 };
-
-export default ProductDetail;

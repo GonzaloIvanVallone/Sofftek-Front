@@ -84,3 +84,16 @@ export const logout=()=>async(dispatch)=>{
         console.log("error")
     }
 }
+
+export const login=(payload)=>async(dispatch)=>{
+    try{
+        let response = await axios.post(`${auth_route}/login`, payload, {headers: {'Content-Type': 'application/json',},})
+        console.log(response.data.token)
+        localStorage.setItem('token',response.data.token)
+        return dispatch({
+            type: "LOGIN"
+        })
+    }catch{
+        console.log("error")
+    }
+}
