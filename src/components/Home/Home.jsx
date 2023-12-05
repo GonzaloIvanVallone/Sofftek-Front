@@ -39,7 +39,7 @@ export const Home = () => {
 
   return (
     <div className="container-fluid mb-2">
-      <NavBar />
+      {/*<NavBar />*/}
       <SearchBar />
       <CategoryFilter onFilter={handleFilter}/>
       <div className="content">
@@ -69,7 +69,7 @@ export const Home = () => {
           })}
         </div>
       </div>
-      <Footer />
+      {/*<Footer />*/}
     </div>
   );
 };

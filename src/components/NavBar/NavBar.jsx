@@ -15,18 +15,23 @@ export const NavBar = () => {
   const handleRegister = () => navigate("/register");
   const handleLogout = () => dispatch(logout());
 
+  const goHome = () => {
+    navigate('/');
+  };
+
   useEffect(() => {}, [isLoggedIn]);
 
   return (
     <nav className="navbar">
-      <div className="nav-left">
+      <div className="nav-left d-flex">
+        <button className="btnLogo" onClick={goHome}>
         <img
           src={logo}
           width="100"
           height="100"
           className="d-inline-block align-top"
           alt="Logo"
-        />
+        /></button>
       </div>
       <div className="nav-right d-flex ">
         <div className="">

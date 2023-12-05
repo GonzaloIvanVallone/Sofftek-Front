@@ -15,8 +15,8 @@ export const ProductDetail = () => {
   };
 
   return (
-    <div className="container-product-deteil">
-      <NavBar />
+    <div className="container-product-deteil mt-1 mb-3">
+      {/*<NavBar />*/}
       <div className="container-facher">
         <div className="container-information">
           <div className="container-img">
@@ -28,8 +28,8 @@ export const ProductDetail = () => {
           </div>
           <div className="container-card-info">
             <h3>{product.productName}</h3>
-            <p>{product.productPrice}</p>
-            <p>{product.productStock}</p>
+            <p>$ {product.productPrice}</p>
+            <p>Stock: {product.productStock}</p>
             <p className="text-start">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
               Voluptate vitae reprehenderit reiciendis cumque. Odio blanditiis
@@ -39,12 +39,11 @@ export const ProductDetail = () => {
           </div>
         </div>
         <div className="button-payment">
-          <button className="btn btn-success" onClick={handleBuyClick}>
+          <button className="btn-detail btn btn-success" onClick={handleBuyClick}>
             Comprar
           </button>
-          <button className="btn btn-success">Add to Cart</button>
+          <button className="btn-detail btn btn-success">Add to Cart</button>
         </div>
-
         <div className="footer-container">
           <Footer />
         </div>

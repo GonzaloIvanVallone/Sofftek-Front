@@ -12,6 +12,8 @@ import { Cart } from "./components/Cart/Cart";
 import { ForgotPassword } from "./components/ForgotPassword/ForgotPassword";
 import { NewPassword } from "./components/ForgotPassword/NewPassword";
 import BuyForm from "./components/BuyForm/PaymentForm";
+import { NavBar } from "./components/NavBar/NavBar";
+import { Footer } from "./components/Footer/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +25,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App container-fluid">
+        <NavBar />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path={"/register"} element={<Register />} />
@@ -37,6 +40,7 @@ function App() {
           />
           <Route path="/comprar" element={<BuyForm />} />
         </Routes>
+        <Footer />
       </div>
     </BrowserRouter>
   );

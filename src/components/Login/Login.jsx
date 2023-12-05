@@ -86,8 +86,7 @@ export const Login = () => {
   return (
     <div>
 
-      <div className="card p-5 mt-5">
-      <ButttonGoHome />
+      <div className="card p-5 mt-1 mb-3">
         {showSuccessAlert && (
           <Alert variant="success" onClose={() => setShowSuccessAlert(false)} dismissible>
             <Alert.Heading>{alertMessage}</Alert.Heading>

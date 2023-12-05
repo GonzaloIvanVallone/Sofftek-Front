@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Form, Button, Container, Row, Col, Image,Alert } from 'react-bootstrap';
 import '../Login/Login.scss'
-import ButttonGoHome from "../ButtonGoHome/ButttonGoHome";
 
 export const Register = () => {
   const dispatch = useDispatch();
@@ -73,8 +72,7 @@ export const Register = () => {
 
   return (
     <div>
-      <div className="card p-5 mt-5">
-        <ButttonGoHome/>
+      <div className="card p-5 mt-1 mb-3">
         {showSuccessAlert && (
           <Alert variant="success" onClose={() => setShowSuccessAlert(false)} dismissible>
             <Alert.Heading>{alertMessage}</Alert.Heading>
@@ -86,7 +84,7 @@ export const Register = () => {
           </Alert>
         )}
         <div className="card-title">
-          <h3>Registro de Usuario</h3>
+          <h3>Register</h3>
         </div>
         <Container className='no-flex'>
           <Row >

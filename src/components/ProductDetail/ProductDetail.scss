@@ -1,4 +1,5 @@
-
+@import '../../assets/mixins.scss';
+@import '../../assets/variables.scss';
 .container-product-deteil {
   width: 100%;
   height: 100%;
@@ -36,10 +37,21 @@
 }
 
 .container-card-info {
+  display: block;
   margin: 16px;
-  font-size: large;
+  font-size: medium;
   width: 350px;
   height: 350px;
+}
+.btn-detail {
+  margin: 1vh;
+  background-color: $color1;
+  margin-top: 4px;
+  font-size: 20px;
+  border: none;
+  &:hover{
+    @include hoverButton;
+  }
 }
 
 .footer-container {
@@ -47,4 +59,5 @@
   bottom: 0;
   width: 98%;
 }
+
 
