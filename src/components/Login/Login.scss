@@ -42,11 +42,8 @@
       }
 
       .btn {
-        background-color: transparent;
-        margin-top: 12px;
-        color: azure;
-        font-size: 24px;
-        padding: 10px;
+        margin-top: 4px;
+        font-size: 20px;
         border: none;
         &:hover{
           @include hoverButton;

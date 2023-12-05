@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { Form, Button, Image, Container, Row, Col,Alert } from 'react-bootstrap';
-import {Link} from 'react-router-dom'
+import { Form, Button, Image, Container, Row, Col, Alert } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
-import 'bootstrap/dist/css/bootstrap.min.css'
-import './Login.scss'
+import './Login.scss';
 import { login } from "../../redux/actions/indexActions";
+import ButttonGoHome from '../ButtonGoHome/ButttonGoHome';
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -13,9 +13,7 @@ export const Login = () => {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
-  const goHome = () => {
-    navigate('/');
-  };
+
 
   /*const [userName, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -48,7 +46,7 @@ export const Login = () => {
 
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
-  
+
   const handleLogin = async () => {
     try {
       dispatch(login(JSON.stringify(credentials)))
@@ -78,7 +76,7 @@ export const Login = () => {
     e.preventDefault();
     if (credentials.email.trim() === '' || credentials.password.trim() === '') {
       setShowErrorAlert(true);
-        setAlertMessage('Please complete all fields.');
+      setAlertMessage('Please complete all fields.');
       return;
     }
     handleLogin();
@@ -87,8 +85,9 @@ export const Login = () => {
 
   return (
     <div>
-      <button onClick={goHome}>Go Back</button>
+
       <div className="card p-5 mt-5">
+      <ButttonGoHome />
         {showSuccessAlert && (
           <Alert variant="success" onClose={() => setShowSuccessAlert(false)} dismissible>
             <Alert.Heading>{alertMessage}</Alert.Heading>
@@ -111,7 +110,7 @@ export const Login = () => {
               <Image src="hardtv2.png" alt="Descripción de la imagen" fluid width={400} />
             </Col>
             <Col className='column col-12 col-xl-6 m-3'>
-            {error && <Alert variant="danger">{error}</Alert>}
+              {error && <Alert variant="danger">{error}</Alert>}
               <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3 " controlId="formBasicEmail">
                   <Form.Label>Email</Form.Label>
@@ -133,7 +132,7 @@ export const Login = () => {
                     onChange={handleChange}
                     required />
                 </Form.Group>
-                <Link to ="/password" className='nav-link'><p></p>Forgot password</Link>
+                <Link to="/password" className='nav-link'><p></p>Forgot password</Link>
                 <Button variant="primary" type="submit">
                   SignIn
                 </Button>

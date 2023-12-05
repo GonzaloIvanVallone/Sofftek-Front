@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Form, Button, Container, Row, Col, Image,Alert } from 'react-bootstrap';
 import '../Login/Login.scss'
+import ButttonGoHome from "../ButtonGoHome/ButttonGoHome";
 
 export const Register = () => {
   const dispatch = useDispatch();
@@ -68,14 +69,12 @@ export const Register = () => {
     setPassword('');
     setConfirmPassword('');
   };
-  const goHome = () => {
-    navigate('/');
-  };
+  
 
   return (
     <div>
-      <button onClick={goHome}>Go Back</button>
       <div className="card p-5 mt-5">
+        <ButttonGoHome/>
         {showSuccessAlert && (
           <Alert variant="success" onClose={() => setShowSuccessAlert(false)} dismissible>
             <Alert.Heading>{alertMessage}</Alert.Heading>
