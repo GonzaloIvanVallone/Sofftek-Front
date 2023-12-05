@@ -1,40 +1,55 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import "./ProductDetail.css";
-import { useSelector } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
+import "./ProductDetail.scss";
+import { Footer } from "../Footer/Footer";
+import { NavBar } from "../NavBar/NavBar";
 
 export const ProductDetail = () => {
-  const { id } = useParams();
-  const allProducts = useSelector((state) => state.allProducts);
-  const product1 = allProducts.find(
-    (product) => product.idProduct === parseInt(id, 10)
-  );
+  const navigate = useNavigate();
+  const location = useLocation();
+  const product = location.state && location.state.product;
+
+  const handleBuyClick = () => {
+    // Use useNavigate to navigate to the '/comprar' route
+    navigate("/comprar", { state: { product } });
+  };
 
   return (
-    <div>
+    <div className="container-product-deteil">
+      <NavBar />
       <div className="container-facher">
-        <div className="container-img">
-          <img
-            className="img"
-            src={product1.productImg}
-            alt="imagen del producto"
-          />
+        <div className="container-information">
+          <div className="container-img">
+            <img
+              className="img"
+              src={product.productImg}
+              alt="imagen del producto"
+            />
+          </div>
+          <div className="container-card-info">
+            <h3>{product.productName}</h3>
+            <p>{product.productPrice}</p>
+            <p>{product.productStock}</p>
+            <p className="text-start">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Voluptate vitae reprehenderit reiciendis cumque. Odio blanditiis
+              cumque voluptatem earum dicta, iste sit itaque libero magni
+              veritatis ex culpa commodi totam quidem.
+            </p>
+          </div>
         </div>
-        <div className="container-card-info">
-          <h3>{product1.productName}</h3>
-          <p>{product1.productPrice}</p>
-          <p>{product1.productStock}</p>
-          <p className="text-start">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate
-            vitae reprehenderit reiciendis cumque. Odio blanditiis cumque
-            voluptatem earum dicta, iste sit itaque libero magni veritatis ex
-            culpa commodi totam quidem.
-          </p>
+        <div className="button-payment">
+          <button className="btn btn-success" onClick={handleBuyClick}>
+            Comprar
+          </button>
+          <button className="btn btn-success">Add to Cart</button>
+        </div>
+
+        <div className="footer-container">
+          <Footer />
         </div>
       </div>
-      <div>
-        <button className="btn btn-success">Add to Cart</button>
-      </div>
+      <div></div>
     </div>
   );
 };

@@ -1,0 +1,14 @@
+@import "../../assets/variables.scss";
+
+.footer {
+  background-color: #f8f8f8;
+  padding: 10px;
+  height: 100px;
+  border-bottom: 4px solid;
+  border-radius: 8px;
+  text-align: center;
+  background-color: $color1;
+  color: $color2;
+  bottom: 0;
+  width: 100%;
+}

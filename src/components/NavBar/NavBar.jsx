@@ -1,22 +1,21 @@
-import React, { useEffect } from 'react';
-import './NavBar.scss';
-import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import {CartWidget} from '../CartWidget/CartWidget';
-import logo from '../../assets/hardtv2.png';
+import React, { useEffect } from "react";
+import "./NavBar.scss";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { CartWidget } from "../CartWidget/CartWidget";
+import logo from "../../assets/hardtv2.png";
 import { logout } from "../../redux/actions/indexActions";
 
 export const NavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLoggedIn = useSelector(state => state.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
 
-  const handleLogin = () => navigate('/login');
-  const handleRegister = () => navigate('/register');
+  const handleLogin = () => navigate("/login");
+  const handleRegister = () => navigate("/register");
   const handleLogout = () => dispatch(logout());
 
-  useEffect(() => {
-  }, [isLoggedIn]);
+  useEffect(() => {}, [isLoggedIn]);
 
   return (
     <nav className="navbar">
@@ -30,20 +29,26 @@ export const NavBar = () => {
         />
       </div>
       <div className="nav-right d-flex ">
-        <div className=''>
+        <div className="">
           <CartWidget />
         </div>
         {isLoggedIn ? (
-          <div className=''>
-            <button className='btn' onClick={handleLogout}>Logout</button>
+          <div className="">
+            <button className="btn" onClick={handleLogout}>
+              Logout
+            </button>
           </div>
         ) : (
-          <div className=''>
-            <button className='btn' onClick={handleLogin}>Login</button>
-            <button className='btn' onClick={handleRegister}>Register</button>
+          <div className="">
+            <button className="btn" onClick={handleLogin}>
+              Login
+            </button>
+            <button className="btn" onClick={handleRegister}>
+              Register
+            </button>
           </div>
         )}
       </div>
     </nav>
   );
-}
+};

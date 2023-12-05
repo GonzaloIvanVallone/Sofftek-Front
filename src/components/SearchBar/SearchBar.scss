@@ -9,11 +9,12 @@
     margin: 12px;
   }
   button {
-    font-size: 20px;
-    .btn{
-        height: 48px;
-        line-height: 48px;
-        vertical-align: middle;
+    font-size: 28px;
+    .btn {
+      font-size: 28px;
+      height: 48px;
+      line-height: 48px;
+      vertical-align: middle;
     }
     &:hover {
       background-color: $color1;
