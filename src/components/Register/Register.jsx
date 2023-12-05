@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { Form, Button, Container, Row, Col, Image,Alert } from 'react-bootstrap';
 import '../Login/Login.scss'
 
 export const Register = () => {
-
+  const dispatch = useDispatch();
   const [username, setUsername] = useState('');
   const [email, setUseremail] = useState('')
   const [password, setPassword] = useState('');
@@ -50,6 +51,9 @@ export const Register = () => {
 
       if (response.ok) {
         // Registro exitoso
+          dispatch({
+            type: "LOGIN"
+          })
           setShowSuccessAlert(true);
           setAlertMessage('Successfully Registered User!');
           // Espera un momento antes de redirigir al usuario para dar tiempo a que el usuario vea la alerta
