@@ -3,6 +3,7 @@ const initialState = {
     allProducts: [],
     filteredProducts: [],
     allCategories: [],
+    isLoggedIn: false,
 }; 
 
 const rootReducer = (state = initialState, action) => {
@@ -31,6 +32,8 @@ const rootReducer = (state = initialState, action) => {
             ...state,
             allProducts: action.payload
         }
+        case 'LOGIN':  return { ...state, isLoggedIn: true };
+        case "LOGOUT": return { ...state, isLoggedIn: false };
         default: return state;
     }
 }

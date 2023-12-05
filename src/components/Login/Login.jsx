@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Image, Container, Row, Col,Alert } from 'react-bootstrap';
 import {Link} from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './Login.scss'
@@ -10,6 +11,7 @@ import './Login.scss'
 
 
 export const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
@@ -58,6 +60,9 @@ export const Login = () => {
       });
 
       if (response.ok) {
+        dispatch({
+          type: "LOGIN"
+        })
         const data = await response.json();
           setShowSuccessAlert(true);
           setAlertMessage('Successful login!');

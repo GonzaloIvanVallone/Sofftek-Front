@@ -1,30 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import './NavBar.scss';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import CartWidget from '../CartWidget/CartWidget';
 import logo from '../../assets/hardtv2.png';
 import { logout } from "../../redux/actions/indexActions";
-import { useDispatch } from "react-redux";
 
 export const NavBar = () => {
-  
-  const navigate = useNavigate();
-
-
-  const handleLogin = () => navigate('/login')
-
-  const handleRegister = () => navigate('/register')
   const dispatch = useDispatch();
-  const handleLogout = () => dispatch(logout())
-  // Check if localStorage.token exists
-  // const isLoggedIn = localStorage.getItem('token') !== null;
-  useEffect(() => {     setIsLoggedIn(!!localStorage.getItem('token'));   }, []);
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
-  
+  const navigate = useNavigate();
+  const isLoggedIn = useSelector(state => state.isLoggedIn);
+
+  const handleLogin = () => navigate('/login');
+  const handleRegister = () => navigate('/register');
+  const handleLogout = () => dispatch(logout());
+
+  useEffect(() => {
+  }, [isLoggedIn]);
+
   return (
     <nav className="navbar">
       <div className="nav-left">
-      <img
+        <img
           src={logo}
           width="100"
           height="100"
@@ -36,16 +33,16 @@ export const NavBar = () => {
         <div className=''>
           <CartWidget />
         </div>
-        {isLoggedIn?(
-        <div className=''>
-        <button className='btn' onClick={handleLogout}>Logout</button>
-        <button className='btn'>{}</button>
-      </div>
-        ):(
+        {isLoggedIn ? (
           <div className=''>
-          <button className='btn' onClick={handleLogin}>Login</button>
-          <button className='btn' onClick={handleRegister}>Register</button>
-        </div>
+            <button className='btn' onClick={handleLogout}>Logout</button>
+            {/* Additional authenticated user actions */}
+          </div>
+        ) : (
+          <div className=''>
+            <button className='btn' onClick={handleLogin}>Login</button>
+            <button className='btn' onClick={handleRegister}>Register</button>
+          </div>
         )}
       </div>
     </nav>

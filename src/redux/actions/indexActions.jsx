@@ -77,6 +77,9 @@ export const logout=()=>async(dispatch)=>{
     try{
         let response = await axios.post(`${product_route}/logout`)
         localStorage.removeItem("token")
+        return dispatch({
+            type: "LOGOUT"
+        })
     }catch{
         console.log("error")
     }
