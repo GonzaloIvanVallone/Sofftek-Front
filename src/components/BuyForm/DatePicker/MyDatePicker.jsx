@@ -15,7 +15,6 @@ export const MyDatePicker = () => {
 
     // Verifica si la fecha seleccionada es mayor a una semana a la fecha de hoy
     if (date && date > today) {
-      console.log("Entre");
       alert("Por favor, selecciona una fecha más cercana.");
       return; // No actualiza el estado si la fecha es mayor a una semana a la fecha de hoy
     }

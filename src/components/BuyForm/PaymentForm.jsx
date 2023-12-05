@@ -4,7 +4,7 @@ import Accordion from "react-bootstrap/Accordion";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./PaymentForm.scss";
-import { MyDatePicker } from "./MyDatePicker";
+import { MyDatePicker } from "./DatePicker/MyDatePicker";
 
 const Buyform = () => {
   // Accede al producto desde la ubicación
@@ -161,7 +161,7 @@ const Buyform = () => {
 
           <MyDatePicker />
 
-          <button type="submit">Enviar</button>
+          <button type="#">Enviar</button>
         </div>
       </form>
     </div>

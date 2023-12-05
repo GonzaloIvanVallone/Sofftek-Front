@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import "./ProductDetail.css";
+import "./ProductDetail.scss";
 import { Footer } from "../Footer/Footer";
 import { NavBar } from "../NavBar/NavBar";
 
