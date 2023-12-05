@@ -12,7 +12,6 @@ export const ProductDetail = () => {
   const handleBuyClick = () => {
     // Use useNavigate to navigate to the '/comprar' route
     navigate("/comprar", { state: { product } });
-    console.log("holaaaaaa: " + navigate);
   };
 
   return (

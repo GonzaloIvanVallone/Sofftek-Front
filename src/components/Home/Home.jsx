@@ -8,7 +8,7 @@ import { ProductCard } from "../ProductCard/ProductCard";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { Pagination } from "../Pagination/Pagination";
 import "./Home.scss";
-import { CategoryFilter } from "../CategoryFilter/CategoryFilter";
+import CategoryFilter from "../CategoryFilter/CategoryFilter";
 
 export const Home = () => {
   const allProducts = useSelector((state) => state.allProducts);
