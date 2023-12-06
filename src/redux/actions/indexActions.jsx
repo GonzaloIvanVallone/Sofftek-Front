@@ -3,16 +3,29 @@ const category_route = "http://localhost:8080/api/v1/category";
 const product_route = "http://localhost:8080/api/v1/product";
 const auth_route = "http://localhost:8080/api/v1/auth";
 const user_route = "http://localhost:8080/api/v1/admin/user";
+import Swal from 'sweetalert2';
 
 export const getAllProducts = () => async (dispatch) => {
-  try {
+  try{
     let response = await axios.get("http://localhost:8080/api/v1/product/list");
     return dispatch({
       type: "GET_ALL_PRODUCTS",
       payload: response.data,
     });
-  } catch (error) {
-    console.log(error);
+  }catch(error) {
+    if(error.response){
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: 'error',
+        confirmButtonText: 'Continue'
+      })
+    }else{
+      Swal.fire({
+        title: 'No response received from the server',
+        icon: 'error',
+        confirmButtonText: 'Continue'
+      });
+    }
   }
 };
 
@@ -30,8 +43,14 @@ export const getAllCategories = () => async (dispatch) => {
       type: "GET_ALL_CATEGORIES",
       payload: response.data,
     });
-  } catch (error) {
-    console.log(error);
+  }catch(error){
+    if(error.response){
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: 'error',
+        confirmButtonText: 'Continue'
+      })
+    }
   }
 };
 
@@ -42,8 +61,14 @@ export const getProductsByName = (name) => async (dispatch) => {
       type: "GET_PRODUCTS_BY_NAME",
       payload: response.data,
     });
-  } catch (error) {
-    console.log(error);
+  }catch(error){
+    if(error.response){
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: 'error',
+        confirmButtonText: 'Continue'
+      })
+    }
   }
 };
 
@@ -54,8 +79,14 @@ export const sendEmail = (email) => async (dispatch) => {
       type: "",
       payload: response.data,
     });
-  } catch {
-    console.log("error");
+  }catch(error){
+    if(error.response){
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: 'error',
+        confirmButtonText: 'Continue'
+      })
+    }
   }
 };
 
@@ -66,8 +97,14 @@ export const resetPassword = (payload) => async (dispatch) => {
       type: "",
       payload: response.data,
     });
-  } catch {
-    console.log("error");
+  }catch(error){
+    if(error.response){
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: 'error',
+        confirmButtonText: 'Continue'
+      })
+    }
   }
 };
 
@@ -78,8 +115,14 @@ export const logout = () => async (dispatch) => {
     return dispatch({
       type: "LOGOUT",
     });
-  } catch {
-    console.log("error");
+  }catch(error){
+    if(error.response){
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: 'error',
+        confirmButtonText: 'Continue'
+      })
+    }
   }
 };
 
@@ -92,7 +135,7 @@ export const login = (payload) => async (dispatch) => {
     return dispatch({
       type: "LOGIN",
     });
-  } catch {
+  }catch(error){
     console.log("error");
   }
 };

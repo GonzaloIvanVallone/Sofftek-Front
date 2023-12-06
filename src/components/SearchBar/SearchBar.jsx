@@ -7,6 +7,7 @@ export const SearchBar = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
 
+
   const handleChange = (e) => {
     e.preventDefault();
     setName(e.target.value);
@@ -14,13 +15,11 @@ export const SearchBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault(e);
-    if (name) {
+    if(name){
       dispatch(getProductsByName(name));
       let inputs = document.querySelectorAll("input");
       inputs.forEach((input) => (input.value = ""));
       setName("");
-    } else {
-      console.log("error");
     }
   };
 

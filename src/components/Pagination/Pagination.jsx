@@ -7,12 +7,17 @@ export const Pagination = ({ pageSize, totalProducts, page, pagination }) => {
   
     return (
       <div className="pagination">
-        {pageNumbers.map((pageNumber) => (
-          <button key={pageNumber} onClick={() => pagination(pageNumber)} className={pageNumber === page ? 'active' : ''}>
-            {pageNumber}
-          </button>
-        ))}
-        
-      </div>
+      {page > 1 && (
+        <button onClick={() => pagination(page - 1)}>{'<'}</button>
+      )}
+      {pageNumbers.map((pageNumber) => (
+        <button key={pageNumber} onClick={() => pagination(pageNumber)} className={pageNumber === page ? 'active' : ''}>
+          {pageNumber}
+        </button>
+      ))}
+      {page < totalPages && (
+        <button onClick={() => pagination(page + 1)}>{'>'}</button>
+      )}
+    </div>
     );
   };
