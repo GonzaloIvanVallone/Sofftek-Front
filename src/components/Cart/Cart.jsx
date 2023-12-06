@@ -53,7 +53,7 @@ export const Cart = () => {
         const handleRemoveFromCart = (productId) => {
             dispatch(removeFromCart(productId));
             Swal.fire({
-              title: "¡Producto eliminado!",
+              title: "¡Product removed!",
               icon: "success",
               showConfirmButton: false,
               timer: 1500,
@@ -69,12 +69,12 @@ export const Cart = () => {
           
           return (
             <div>
-              <h1>Carrito de Compras</h1>
               {Object.keys(groupedCart).length === 0 ? (
                 <div>
-                  <p>El carrito está vacío.</p>
+                  <h1>The cart is empty</h1>
+
                   <Link to="/">
-                    <button>Comenzar a Comprar</button>
+                    <button>Start shopping</button>
                   </Link>
                 </div>
               ) : (
@@ -89,13 +89,13 @@ export const Cart = () => {
                         </p>
                         <div className="cart-item-info">
                           <button onClick={() => handleRemoveFromCart(groupedProduct.idProduct)}>
-                            Eliminar del carrito
+                            Remove
                           </button>
                         </div>
                       </div>
                     ))}
                     <div>
-                      <p>Total de la compra: ${totalPrice.toFixed(2)}</p>
+                      <p>Total: ${totalPrice.toFixed(2)}</p>
                     </div>
                     <div>
                       <button onClick={goHome}>Go Back</button>
