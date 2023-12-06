@@ -45,10 +45,7 @@ export const ProductDetail = () => {
             <p>$ {product.productPrice}</p>
             <p>Stock: {product.productStock}</p>
             <p className="text-start">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Voluptate vitae reprehenderit reiciendis cumque. Odio blanditiis
-              cumque voluptatem earum dicta, iste sit itaque libero magni
-              veritatis ex culpa commodi totam quidem.
+            {product.description}
             </p>
           </div>
         </div>
