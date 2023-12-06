@@ -1,33 +1,14 @@
 import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import "./ProductDetail.scss";
-import { Footer } from "../Footer/Footer";
+import { useDispatch, useSelector } from "react-redux";
 
 export const ProductDetail = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
-  const product = location.state && location.state.product;
-
-  const handleBuyClick = () => {
-    // Use useNavigate to navigate to the '/comprar' route
-    isLoggedIn
-      ? navigate("/Buy", { state: { product } })
-      : navigate("/NotLoggin", {
-          state: "no puede comprar productos sin antes ingresar a su cuenta",
-        });
-    // navigate("/Buy", { state: { product } });
-  };
-
-  const handleAddCarClick = () => {
-    isLoggedIn
-      ? navigate("/cart")
-      : navigate("/NotLoggin", {
-          state:
-            "no puede agregar productos al carrito sin antes ingresar a su cuenta",
-        });
-  };
+  const { id } = useParams();
+  const allProducts = useSelector((state) => state.allProducts);
+  const product1 = allProducts.find(
+    (product) => product.idProduct === parseInt(id, 10)
+  );
 
   return (
     <div className="container-product-deteil mt-1 mb-3">
@@ -48,22 +29,16 @@ export const ProductDetail = () => {
             {product.description}
             </p>
           </div>
+        <div className="container-img">
+          <img
+            className="img"
+            src={product1.productImg}
+            alt="imagen del producto"
+          />
         </div>
-        <div className="button-payment">
-          <button
-            className="btn-detail btn btn-success"
-            onClick={handleBuyClick}
-          >
-            Buy
-          </button>
-          <button
-            className="btn-detail btn btn-success"
-            onClick={handleAddCarClick}
-          >
-            Add to Cart
-          </button>
-        </div>
-        <div className="footer-container">{/* <Footer /> */}</div>
+      </div>
+      <div>
+        <button className="btn btn-success">Comprar</button>
       </div>
       <div></div>
     </div>

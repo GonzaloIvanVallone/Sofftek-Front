@@ -1,0 +1,39 @@
+.cart-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .cart-item {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd; /* Añade un borde para separar los elementos */
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-right: 0;
+  }
+  
+  .cart-item img {
+    width: 50px; /* Ajusta el tamaño de la imagen según tus necesidades */
+    height: auto;
+    margin-right: 0px;
+  }
+  
+  .cart-item-info {
+    flex-grow: 1;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  /* Estilos adicionales para hacer más compactos los elementos */
+  .cart-item h5 {
+    margin-bottom: 5px; /* Reduce el margen inferior del título */
+    font-size: 1em; /* Ajusta el tamaño del texto según sea necesario */
+  }
+  
+  .cart-item p {
+    margin-bottom: 0; /* Elimina el margen inferior del texto del precio */
+  }
+  .card-img-top{
+    width: 50px;
+    height: 50px;
+  }

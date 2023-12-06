@@ -15,6 +15,11 @@ export const Home = () => {
   const allProducts = useSelector((state) => state.allProducts);
   const isAdmin = useSelector((state) => state.isAdmin);
   const navigate = useNavigate();
+  const cart = useSelector((state) => state.cart);
+
+
+  
+  
 
   const handleBuyClick = (id, product) => {
     // Utiliza navigate para navegar a la ruta '/product/:id' y pasar el producto como estado de ubicación

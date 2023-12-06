@@ -6,21 +6,27 @@ import { ProductDetail } from "./components/ProductDetail/ProductDetail";
 import { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
-import { getAllProducts } from "./redux/actions/indexActions";
-import { useDispatch } from "react-redux";
+import {getAllProducts} from "./redux/actions/indexActions";
+import { useDispatch } from 'react-redux';
+import { ForgotPassword} from "./components/ForgotPassword/ForgotPassword"
+import { NewPassword} from "./components/ForgotPassword/NewPassword"
+import { getCart } from "./redux/actions/indexActions";
 import { Cart } from "./components/Cart/Cart";
-import { ForgotPassword } from "./components/ForgotPassword/ForgotPassword";
-import { NewPassword } from "./components/ForgotPassword/NewPassword";
 import { Paymentform } from "./components/BuyForm/PaymentForm";
 import { NavBar } from "./components/NavBar/NavBar";
 import { Footer } from "./components/Footer/Footer";
 import { NotLoggin } from "./components/NotLoggin/NotLoggin";
+
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllProducts());
+  }, []);
+
+  useEffect(() => {
+    dispatch(getCart());
   }, []);
 
   return (
