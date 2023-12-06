@@ -1,22 +1,36 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./ProductDetail.scss";
 import { Footer } from "../Footer/Footer";
-import { NavBar } from "../NavBar/NavBar";
 
 export const ProductDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const product = location.state && location.state.product;
 
   const handleBuyClick = () => {
     // Use useNavigate to navigate to the '/comprar' route
-    navigate("/comprar", { state: { product } });
+    isLoggedIn
+      ? navigate("/Buy", { state: { product } })
+      : navigate("/NotLoggin", {
+          state: "no puede comprar productos sin antes ingresar a su cuenta",
+        });
+    // navigate("/Buy", { state: { product } });
+  };
+
+  const handleAddCarClick = () => {
+    isLoggedIn
+      ? navigate("/cart")
+      : navigate("/NotLoggin", {
+          state:
+            "no puede agregar productos al carrito sin antes ingresar a su cuenta",
+        });
   };
 
   return (
     <div className="container-product-deteil mt-1 mb-3">
-      {/*<NavBar />*/}
       <div className="container-facher">
         <div className="container-information">
           <div className="container-img">
@@ -39,14 +53,20 @@ export const ProductDetail = () => {
           </div>
         </div>
         <div className="button-payment">
-          <button className="btn-detail btn btn-success" onClick={handleBuyClick}>
-            Comprar
+          <button
+            className="btn-detail btn btn-success"
+            onClick={handleBuyClick}
+          >
+            Buy
           </button>
-          <button className="btn-detail btn btn-success">Add to Cart</button>
+          <button
+            className="btn-detail btn btn-success"
+            onClick={handleAddCarClick}
+          >
+            Add to Cart
+          </button>
         </div>
-        <div className="footer-container">
-          <Footer />
-        </div>
+        <div className="footer-container">{/* <Footer /> */}</div>
       </div>
       <div></div>
     </div>

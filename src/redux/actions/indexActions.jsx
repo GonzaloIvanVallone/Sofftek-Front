@@ -110,7 +110,7 @@ export const resetPassword = (payload) => async (dispatch) => {
 
 export const logout = () => async (dispatch) => {
   try {
-    let response = await axios.post(`${product_route}/logout`);
+    let response = await axios.post(`${auth_route}/logout`);
     localStorage.removeItem("token");
     return dispatch({
       type: "LOGOUT",

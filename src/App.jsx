@@ -11,9 +11,10 @@ import { useDispatch } from "react-redux";
 import { Cart } from "./components/Cart/Cart";
 import { ForgotPassword } from "./components/ForgotPassword/ForgotPassword";
 import { NewPassword } from "./components/ForgotPassword/NewPassword";
-import BuyForm from "./components/BuyForm/PaymentForm";
+import { Paymentform } from "./components/BuyForm/PaymentForm";
 import { NavBar } from "./components/NavBar/NavBar";
 import { Footer } from "./components/Footer/Footer";
+import { NotLoggin } from "./components/NotLoggin/NotLoggin";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,7 +39,8 @@ function App() {
             path={"/password/new/:token"}
             element={<NewPassword />}
           />
-          <Route path="/comprar" element={<BuyForm />} />
+          <Route exact path={"/Buy"} element={<Paymentform />} />
+          <Route exact path={"/NotLoggin"} element={<NotLoggin />} />
         </Routes>
         <Footer />
       </div>
