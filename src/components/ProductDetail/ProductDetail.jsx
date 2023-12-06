@@ -19,14 +19,14 @@ export const ProductDetail = () => {
     if (product1.productStock > 0) {
       dispatch(addToCart(product1));
       Swal.fire({
-        title: "¡Producto agregado al carrito!",
+        title: "¡Product added to cart!",
         icon: "success",
         showConfirmButton: false,
         timer: 1500,
       });
     } else {
       Swal.fire({
-        title: "¡Producto agotado!",
+        title: "¡Out of stock!",
         icon: "warning",
         showConfirmButton: false,
         timer: 1500,
@@ -58,7 +58,7 @@ export const ProductDetail = () => {
         </div>
       </div>
       <div>
-        <button className="btn btn-success" onClick={handleAddToCart}>Comprar</button>
+        <button className="btn btn-success" onClick={handleAddToCart}>Buy</button>
       </div>
   </div>
   );
