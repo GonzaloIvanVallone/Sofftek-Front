@@ -41,7 +41,7 @@ export const Home = () => {
     <div className="container-fluid mb-2">
       {/*<NavBar />*/}
       <SearchBar />
-      <CategoryFilter onFilter={handleFilter}/>
+      <CategoryFilter onFilter={handleFilter} />
       <div className="content">
         <div className="divPagination">
           <Pagination
@@ -69,7 +69,6 @@ export const Home = () => {
           })}
         </div>
       </div>
-      {/*<Footer />*/}
     </div>
   );
 };

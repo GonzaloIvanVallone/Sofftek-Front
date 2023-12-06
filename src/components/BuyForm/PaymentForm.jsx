@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./PaymentForm.scss";
 import { MyDatePicker } from "./DatePicker/MyDatePicker";
 
-const Buyform = () => {
+export const Paymentform = () => {
   // Accede al producto desde la ubicación
   const location = useLocation();
 
@@ -167,5 +167,3 @@ const Buyform = () => {
     </div>
   );
 };
-
-export default Buyform;
