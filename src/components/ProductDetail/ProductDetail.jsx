@@ -17,10 +17,7 @@ export const ProductDetail = () => {
 
   const handleAddToCart = () => {
     if (product1.productStock > 0) {
-      // Dispatch de la acción addToCart
       dispatch(addToCart(product1));
-
-      // Muestra una notificación
       Swal.fire({
         title: "¡Producto agregado al carrito!",
         icon: "success",
@@ -28,7 +25,6 @@ export const ProductDetail = () => {
         timer: 1500,
       });
     } else {
-      // Muestra una alerta si no hay suficiente stock
       Swal.fire({
         title: "¡Producto agotado!",
         icon: "warning",
@@ -47,30 +43,23 @@ export const ProductDetail = () => {
           <div className="container-img">
             <img
               className="img"
-              src={product.productImg}
+              src={product1.productImg}
               alt="imagen del producto"
             />
           </div>
           <div className="container-card-info">
-            <h3>{product.productName}</h3>
-            <p>$ {product.productPrice}</p>
-            <p>Stock: {product.productStock}</p>
+            <h3>{product1.productName}</h3>
+            <p>$ {product1.productPrice}</p>
+            <p>Stock: {product1.productStock}</p>
             <p className="text-start">
-            {product.description}
+            {product1.description}
             </p>
           </div>
-        <div className="container-img">
-          <img
-            className="img"
-            src={product1.productImg}
-            alt="imagen del producto"
-          />
         </div>
       </div>
       <div>
         <button className="btn btn-success" onClick={handleAddToCart}>Comprar</button>
       </div>
-      <div></div>
-    </div>
+  </div>
   );
 };
