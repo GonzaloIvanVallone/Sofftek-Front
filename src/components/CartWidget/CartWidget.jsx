@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 export const CartWidget = ({itemCount}) => {
 
     const navigate = useNavigate();
+    
 
     function handleCart() {
         navigate('/cart')

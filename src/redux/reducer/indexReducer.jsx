@@ -4,7 +4,9 @@ const initialState = {
     filteredProducts: [],
     allCategories: [],
     isLoggedIn: false,
+    cart: JSON.parse(localStorage.getItem('cart')) || [],
     isAdmin: false,
+
 }; 
 
 const rootReducer = (state = initialState, action) => {
@@ -37,6 +39,37 @@ const rootReducer = (state = initialState, action) => {
             const isAdmin = action.payload == 'ADMIN';
             return { ...state, isLoggedIn: true, isAdmin };
         case "LOGOUT": return { ...state, isLoggedIn: false };
+        case 'GET_CART':
+      return {
+        ...state,
+        cart: action.payload,
+      };
+      case 'ADD_TO_CART':
+      // Agregar lógica para agregar un producto al carrito
+      const addedProduct = action.payload;
+      const updatedCartAdd = [...state.cart, addedProduct];
+      return {
+        ...state,
+        cart: updatedCartAdd,
+        itemCount: updatedCartAdd.length, // Contar la cantidad de productos en el carrito
+      };
+      case 'REMOVE_FROM_CART':
+      // Agregar lógica para eliminar un producto del carrito
+      const productIdToRemove = action.payload;
+      const updatedCartRemove = state.cart.filter(product => product.idProduct !== productIdToRemove);
+      
+      return {
+        ...state,
+        cart: updatedCartRemove,
+        itemCount: updatedCartRemove.length, 
+        // Actualizar la cantidad de productos en el carrito
+      };
+
+      // Actualizar localStorage con el nuevo estado del carrito
+      
+
+      return updatedState = localStorage.setItem('cart', JSON.stringify(updatedCart));
+      
         default: return state;
     }
 }

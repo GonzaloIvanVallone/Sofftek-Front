@@ -5,6 +5,9 @@ const auth_route = "http://localhost:8080/api/v1/auth";
 const user_route = "http://localhost:8080/api/v1/admin/user";
 import Swal from 'sweetalert2';
 
+
+
+
 export const getAllProducts = () => async (dispatch) => {
   try{
     let response = await axios.get("http://localhost:8080/api/v1/product/list");
@@ -25,6 +28,7 @@ export const getAllProducts = () => async (dispatch) => {
         icon: 'error',
         confirmButtonText: 'Continue'
       });
+
     }
   }
 };
@@ -87,8 +91,40 @@ export const sendEmail = (email) => async (dispatch) => {
         confirmButtonText: 'Continue'
       })
     }
+
   }
-};
+}
+
+export const addToCart = (product) => (dispatch, getState) => {
+    // Agregar el producto al estado
+    dispatch({
+      type: 'ADD_TO_CART',
+      payload: product,
+    });
+    const cart = getState().cart;
+    localStorage.setItem('cart', JSON.stringify(cart));
+  };
+  
+  export const getCart = () => (dispatch) => {
+    // Obtener el carrito desde localStorage
+    const storedCart = localStorage.getItem('cart');
+    const cart = storedCart ? JSON.parse(storedCart) : [];
+  
+    // Actualizar el estado del carrito
+    dispatch({
+      type: 'GET_CART',
+      payload: cart,
+    });
+  };
+
+
+  export const removeFromCart = (productId) => ({
+    type: 'REMOVE_FROM_CART',
+    payload: productId,
+  });
+
+  
+
 
 export const resetPassword = (payload) => async (dispatch) => {
   try {
@@ -146,3 +182,4 @@ export const login = (payload) => async (dispatch) => {
     }
   }
 };
+
