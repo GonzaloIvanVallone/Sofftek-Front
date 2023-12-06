@@ -1,13 +1,16 @@
 import React from 'react';
-
 import { useEffect,useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCart } from '../../redux/actions/indexActions';
 import './Cart.css';
 import { removeFromCart } from '../../redux/actions/indexActions';
 import { Link } from 'react-router-dom';
-import { NavBar } from '../NavBar/NavBar';
 import { useNavigate } from 'react-router-dom';
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
+
+
+
 
 export const Cart = () => {
     const dispatch = useDispatch();
@@ -49,6 +52,12 @@ export const Cart = () => {
 
         const handleRemoveFromCart = (productId) => {
             dispatch(removeFromCart(productId));
+            Swal.fire({
+              title: "¡Producto eliminado!",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1500,
+            });
         }
 
 
