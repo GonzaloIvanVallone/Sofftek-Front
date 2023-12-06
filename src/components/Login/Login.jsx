@@ -51,7 +51,6 @@ export const Login = () => {
     try {
       dispatch(login(JSON.stringify(credentials)))
       const storedToken = localStorage.getItem('token');
-      console.log(localStorage.getItem)
       if (storedToken) {
         setShowSuccessAlert(true);
         setAlertMessage('Successful login!');
