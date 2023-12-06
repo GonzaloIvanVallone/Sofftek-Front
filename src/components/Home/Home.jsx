@@ -70,6 +70,7 @@ export const Home = () => {
                   idproduct={e.idProduct}
                   productImg={e.productImg}
                   productName={e.productName}
+                  description={e.description.slice(0,80)}
                   productPrice={e.productPrice}
                 />
               </Button>

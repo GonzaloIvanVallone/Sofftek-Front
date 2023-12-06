@@ -3,6 +3,7 @@ const category_route = "http://localhost:8080/api/v1/category";
 const product_route = "http://localhost:8080/api/v1/product";
 const auth_route = "http://localhost:8080/api/v1/auth";
 const user_route = "http://localhost:8080/api/v1/admin/user";
+
 import Swal from 'sweetalert2';
 
 
@@ -183,3 +184,29 @@ export const login = (payload) => async (dispatch) => {
   }
 };
 
+
+export const register = (payload) => async (dispatch) => {
+  try{
+    let response = await axios.post(`${auth_route}/register`,payload);
+    localStorage.setItem("token", response.data.token);
+    Swal.fire({
+      title: "User registered",
+      icon: 'success',
+      confirmButtonText: 'Continue'
+    })
+  }catch(error) {
+    if(error.response){
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: 'error',
+        confirmButtonText: 'Continue'
+      })
+    }else{
+      Swal.fire({
+        title: 'No response received from the server',
+        icon: 'error',
+        confirmButtonText: 'Continue'
+      });
+    }
+  }
+};

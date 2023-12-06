@@ -8,6 +8,7 @@ export const ProductCard = ({
   productImg,
   productName,
   productPrice,
+  description
 }) => {
   return (
     <div>
@@ -30,8 +31,7 @@ export const ProductCard = ({
           <Card.Body>
             <Card.Title className="title">{productName}</Card.Title>
             <Card.Text className="card-text">
-              Some quick example text to build on the card title and make up the
-              bulk of the Card's content.
+            {description +"..."}
             </Card.Text>
           </Card.Body>
           <Card.Footer>

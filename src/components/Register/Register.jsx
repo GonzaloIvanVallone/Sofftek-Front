@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Form, Button, Container, Row, Col, Image,Alert } from 'react-bootstrap';
 import '../Login/Login.scss'
+import { register } from "../../redux/actions/indexActions";
 
 export const Register = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ export const Register = () => {
         setAlertMessage('Las contraseñas no coinciden');
       return;
     }
+    
     /*console.log(`Registrando: Usuario - ${username}, 
     Email - ${email}, Contraseña - ${password}rol:${roles}`)*/
     const data = {
@@ -36,37 +38,16 @@ export const Register = () => {
       roles:[1]
     };
 
-    try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
+    dispatch(register(data))
 
-      if (response.ok) {
-          dispatch({
-            type: "LOGIN"
-          })
-          setShowSuccessAlert(true);
-          setAlertMessage('Successfully Registered User!');
-          setTimeout(() => {
-            localStorage.setItem('token', data.token);
-            navigate('/');
-          }, 2000);
-      } else {
-        setShowErrorAlert(true);
-        setAlertMessage('Error registering user. Please try again.');
-      }
-    } catch (error) {
-      setShowErrorAlert(true);
-      setAlertMessage('Error registering user. Please try again.');
-    }
     setUsername('');
     setUseremail('')
     setPassword('');
     setConfirmPassword('');
+    
+    setTimeout(() => {
+      navigate('/');
+    }, 2000);
   };
   
 
