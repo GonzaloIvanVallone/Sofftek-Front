@@ -16,7 +16,7 @@ export const NavBar = () => {
   const handleLogout = () => dispatch(logout());
 
   const goHome = () => {
-    navigate('/');
+    navigate("/");
   };
 
   useEffect(() => {}, [isLoggedIn]);
@@ -25,18 +25,21 @@ export const NavBar = () => {
     <nav className="navbar">
       <div className="nav-left d-flex">
         <button className="btnLogo" onClick={goHome}>
-        <img
-          src={logo}
-          width="100"
-          height="100"
-          className="d-inline-block align-top"
-          alt="Logo"
-        /></button>
+          <img
+            src={logo}
+            width="100"
+            height="100"
+            className="d-inline-block align-top"
+            alt="Logo"
+          />
+        </button>
       </div>
       <div className="nav-right d-flex ">
-        <div className="">
-          <CartWidget />
-        </div>
+        {isLoggedIn ? (
+          <div className="">
+            <CartWidget />
+          </div>
+        ) : null}
         {isLoggedIn ? (
           <div className="">
             <button className="btn" onClick={handleLogout}>
