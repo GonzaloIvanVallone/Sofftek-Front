@@ -11,12 +11,18 @@ import { useDispatch } from 'react-redux';
 import Carrito from './components/Cart/Cart';
 import { ForgotPassword} from "./components/ForgotPassword/ForgotPassword"
 import { NewPassword} from "./components/ForgotPassword/NewPassword"
+import { getCart } from "./redux/actions/indexActions";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllProducts());
+  }, []);
+
+  useEffect(() => {
+    // Llama a la acción para obtener el carrito al cargar el componente
+    dispatch(getCart());
   }, []);
 
   return (

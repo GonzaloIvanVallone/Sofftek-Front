@@ -2,13 +2,26 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import "./ProductDetail.css";
 import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../redux/actions/indexActions";
+
+
 
 const ProductDetail = () => {
   const { id } = useParams();
   const allProducts = useSelector((state) => state.allProducts);
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  
   const product1 = allProducts.find(
     (product) => product.idProduct === parseInt(id, 10)
   );
+ 
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(product1));
+    console.log(cart)
+  };
+
 
   return (
     <div>
@@ -33,7 +46,8 @@ const ProductDetail = () => {
         </div>
       </div>
       <div>
-        <button className="btn btn-success">Comprar</button>
+        <button className="btn btn-success" onClick={handleAddToCart}>Comprar</button>
+        
       </div>
     </div>
   );

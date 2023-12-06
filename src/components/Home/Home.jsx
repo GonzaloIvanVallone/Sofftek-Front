@@ -14,8 +14,10 @@ import CategoryFilter from '../CategoryFilter/CategoryFilter';
 const Home = () => {
   const allProducts = useSelector((state) => state.allProducts);
   const navigate = useNavigate();
+  const cart = useSelector((state) => state.cart);
 
-
+  console.log(cart)
+  
   const handleBuyClick = (id, product) => {
     // Utiliza navigate para navegar a la ruta '/product/:id' y pasar el producto como estado de ubicación
     navigate("/product/" + id, { state: { product } });
