@@ -9,17 +9,13 @@ import { SearchBar } from "../SearchBar/SearchBar";
 import { Pagination } from "../Pagination/Pagination";
 import "./Home.scss";
 import CategoryFilter from "../CategoryFilter/CategoryFilter";
-import { AdminNavbar } from '../AdminNavbar/AdminNavbar';
+import { AdminNavbar } from "../AdminNavbar/AdminNavbar";
 
 export const Home = () => {
   const allProducts = useSelector((state) => state.allProducts);
   const isAdmin = useSelector((state) => state.isAdmin);
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
-
-
-  
-  
 
   const handleBuyClick = (id, product) => {
     // Utiliza navigate para navegar a la ruta '/product/:id' y pasar el producto como estado de ubicación
@@ -46,7 +42,7 @@ export const Home = () => {
 
   return (
     <div className="container-fluid mb-2">
-      {/*<NavBar />*/}
+      <NavBar />
       {isAdmin && <AdminNavbar />}
       <SearchBar />
       <CategoryFilter onFilter={handleFilter} />
@@ -70,7 +66,7 @@ export const Home = () => {
                   idproduct={e.idProduct}
                   productImg={e.productImg}
                   productName={e.productName}
-                  description={e.description.slice(0,80)}
+                  description={e.description.slice(0, 80)}
                   productPrice={e.productPrice}
                 />
               </Button>
@@ -78,6 +74,7 @@ export const Home = () => {
           })}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

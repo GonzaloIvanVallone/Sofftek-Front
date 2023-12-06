@@ -1,23 +1,24 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import "./ProductDetail.scss";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { addToCart } from "../../redux/actions/indexActions";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 
 export const ProductDetail = () => {
-  const { id } = useParams();
-  const allProducts = useSelector((state) => state.allProducts);
+  // const { id } = useParams();
+  // const allProducts = useSelector((state) => state.allProducts);
   const dispatch = useDispatch();
 
-  const product1 = allProducts.find(
-    (product) => product.idProduct === parseInt(id, 10)
-  );
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const product = location.state && location.state.product;
 
   const handleAddToCart = () => {
-    if (product1.productStock > 0) {
-      dispatch(addToCart(product1));
+    if (product.productStock > 0) {
+      dispatch(addToCart(product));
       Swal.fire({
         title: "¡Product added to cart!",
         icon: "success",
@@ -32,9 +33,26 @@ export const ProductDetail = () => {
         timer: 1500,
       });
     }
-    
   };
 
+  const handleBuyClick = () => {
+    // Use useNavigate to navigate to the '/comprar' route
+    isLoggedIn
+      ? navigate("/Buy", { state: { product } })
+      : navigate("/NotLoggin", {
+          state: "no puede comprar productos sin antes ingresar a su cuenta",
+        });
+    // navigate("/Buy", { state: { product } });
+  };
+
+  const handleAddCartClick = () => {
+    isLoggedIn
+      ? handleAddToCart()
+      : navigate("/NotLoggin", {
+          state:
+            "no puede agregar productos al carrito sin antes ingresar a su cuenta",
+        });
+  };
 
   return (
     <div className="container-product-deteil mt-1 mb-3">
@@ -43,23 +61,30 @@ export const ProductDetail = () => {
           <div className="container-img">
             <img
               className="img"
-              src={product1.productImg}
+              src={product.productImg}
               alt="imagen del producto"
             />
           </div>
           <div className="container-card-info">
-            <h3>{product1.productName}</h3>
-            <p>$ {product1.productPrice}</p>
-            <p>Stock: {product1.productStock}</p>
-            <p className="text-start">
-            {product1.description}
-            </p>
+            <h3>{product.productName}</h3>
+            <p>$ {product.productPrice}</p>
+            <p>Stock: {product.productStock}</p>
+            <p className="text-start">{product.description}</p>
           </div>
         </div>
       </div>
-      <div>
-        <button className="btn btn-success" onClick={handleAddToCart}>Buy</button>
+      <div className="container_buttons">
+        <div className="buttons_actions">
+          <button className="btn btn-success" onClick={handleBuyClick}>
+            Buy
+          </button>
+        </div>
+        <div className="buttons_actions">
+          <button className="btn btn-success" onClick={handleAddCartClick}>
+            Add to Cart
+          </button>
+        </div>
       </div>
-  </div>
+    </div>
   );
 };
