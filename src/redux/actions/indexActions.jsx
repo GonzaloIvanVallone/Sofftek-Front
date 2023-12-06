@@ -134,8 +134,15 @@ export const login = (payload) => async (dispatch) => {
     localStorage.setItem("token", response.data.token);
     return dispatch({
       type: "LOGIN",
+      payload: response.data.user.roles[0],
     });
   }catch(error){
-    console.log("error");
+    if(error.response){
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: 'error',
+        confirmButtonText: 'Continue'
+      })
+    }
   }
 };
