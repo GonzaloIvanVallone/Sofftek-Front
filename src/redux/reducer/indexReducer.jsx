@@ -1,48 +1,41 @@
 const initialState = {
-  backupProducts: [],
-  allProducts: [],
-  filteredProducts: [],
-  allCategories: [],
-  cart: JSON.parse(localStorage.getItem('cart')) || [],
-};
-
-
+    backupProducts:[],
+    allProducts: [],
+    filteredProducts: [],
+    allCategories: [],
+    isLoggedIn: false,
+    cart: JSON.parse(localStorage.getItem('cart')) || [],
+}; 
 
 const rootReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "GET_ALL_PRODUCTS":
-      return {
-        ...state,
-        filteredProducts: action.payload,
-        allProducts: action.payload,
-        backupProducts: action.payload,
-      };
-    case "FILTER_BY_CATEGORIES":
-      if (action.payload == "all") {
-        return { ...state, allProducts: state.backupProducts };
-      } else {
-        const filteredByCategory = state.backupProducts.filter(
-          (e) => e.typeCategory.category === action.payload
-        );
-        return { ...state, allProducts: filteredByCategory };
-      }
-    case "GET_ALL_CATEGORIES":
-      const updatedCategories = [...action.payload];
-      updatedCategories.unshift({
-        idCategory: 0,
-        category: "all",
-        status: true,
-      });
-      return {
-        ...state,
-        allCategories: updatedCategories,
-      };
-    case "GET_PRODUCTS_BY_NAME":
-      return {
-        ...state,
-        allProducts: action.payload,
-      };
-      case 'GET_CART':
+    switch (action.type){
+        case "GET_ALL_PRODUCTS": return {
+            ...state,
+            filteredProducts: action.payload,
+            allProducts: action.payload,
+            backupProducts: action.payload
+        };
+        case "FILTER_BY_CATEGORIES": 
+            if(action.payload == "all"){
+                return {...state, allProducts: state.backupProducts}
+            }else{
+                const filteredByCategory = state.backupProducts.filter(e=>e.typeCategory.category === action.payload)
+                return {...state, allProducts: filteredByCategory}
+            }
+        case "GET_ALL_CATEGORIES":   
+            const updatedCategories = [...action.payload]; 
+            updatedCategories.unshift({ idCategory: 0, category: "all", status: true });
+            return {
+            ...state,
+            allCategories: updatedCategories,
+            };
+        case "GET_PRODUCTS_BY_NAME": return{
+            ...state,
+            allProducts: action.payload
+        }
+        case 'LOGIN':  return { ...state, isLoggedIn: true };
+        case "LOGOUT": return { ...state, isLoggedIn: false };
+        case 'GET_CART':
       return {
         ...state,
         cart: action.payload,
@@ -73,13 +66,8 @@ const rootReducer = (state = initialState, action) => {
 
       return updatedState = localStorage.setItem('cart', JSON.stringify(updatedCart));
       
-    
-    default:
-      return state;
-  }
-};
-
-
-
+        default: return state;
+    }
+}
 
 export default rootReducer;

@@ -4,16 +4,16 @@ import { filterByCategories, getAllCategories } from "../../redux/actions/indexA
 
 import './CategoryFilter.scss';
 
-const CategoryFilter = () => {
+const CategoryFilter = ({ onFilter }) => {
     const dispatch = useDispatch();
     
     const allCategories = useSelector((state) => state.allCategories)
 
 
     const handleFilterType = (e) => {
-
         e.preventDefault();
         dispatch(filterByCategories(e.target.value));
+        onFilter();
     }
     useEffect(() => {
         dispatch(getAllCategories());

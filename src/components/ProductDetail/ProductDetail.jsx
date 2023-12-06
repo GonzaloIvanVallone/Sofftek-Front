@@ -1,30 +1,17 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import "./ProductDetail.css";
+import "./ProductDetail.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/actions/indexActions";
 
-
-
-const ProductDetail = () => {
+export const ProductDetail = () => {
   const { id } = useParams();
   const allProducts = useSelector((state) => state.allProducts);
-  const cart = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
-  
   const product1 = allProducts.find(
     (product) => product.idProduct === parseInt(id, 10)
   );
- 
-
-  const handleAddToCart = () => {
-    dispatch(addToCart(product1));
-    console.log(cart)
-  };
-
 
   return (
-    <div>
+    <div className="container-product-deteil mt-1 mb-3">
       <div className="container-facher">
         <div className="container-img">
           <img
@@ -46,11 +33,9 @@ const ProductDetail = () => {
         </div>
       </div>
       <div>
-        <button className="btn btn-success" onClick={handleAddToCart}>Comprar</button>
-        
+        <button className="btn btn-success">Comprar</button>
       </div>
+      <div></div>
     </div>
   );
 };
-
-export default ProductDetail;

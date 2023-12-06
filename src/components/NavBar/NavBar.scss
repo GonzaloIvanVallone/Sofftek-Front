@@ -1,33 +1,39 @@
-@import '../../assets/variables.scss';
+@import "../../assets/variables.scss";
 .navbar {
-    padding: 16px;
-    border-bottom: 4px solid;
-    border-radius: 8px;
-    margin: 0;
-    height: 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    align-content: center;
-    background-color: $color1;
-    color: $color2;
-    margin-bottom: 40px;
-    .nav-left{
-        margin-left: 24px
-    }
-
-    .btn{
-        margin: 4px;
-        font-size: 20px;
-        color: $color2;
-        &:hover{
-            cursor: pointer;
-            color: $color1;
-            background-color: $color2;
-        }
-
-    }
-    
-
-
+  padding: 16px;
+  border-bottom: 4px solid;
+  border-radius: 8px;
+  margin: 0;
+  height: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  background-color: $color1;
+  color: $color2;
+  margin-bottom: 40px;
+  .nav-left {
+    margin-left: 24px;
   }
+  .btnLogo {
+    size: 90px;
+    max-width: 100%;
+    background-color: $color1;
+    font-size: 16px;
+    color: $color2;
+    border: none;
+    &:hover {
+    }
+  }
+
+  .btn {
+    margin: 4px;
+    font-size: 20px;
+    color: $color2;
+    &:hover {
+      cursor: pointer;
+      color: $color1;
+      background-color: $color2;
+    }
+  }
+}

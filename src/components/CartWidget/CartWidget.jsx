@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import './CartWidget.scss';
 import { useNavigate } from 'react-router-dom';
 
-const CartWidget = ({itemCount}) => {
+export const CartWidget = ({itemCount}) => {
 
     const navigate = useNavigate();
     
@@ -16,16 +16,14 @@ const CartWidget = ({itemCount}) => {
     }
 
     return (
-            <Button className='button'
-                onClick={handleCart}>
-                <FontAwesomeIcon icon={faShoppingCart} />
-                &nbsp;Cart{itemCount > 0 && <span className="badge bg-secondary">{itemCount}</span>}
-            </Button>
+        <Button className='button'
+            onClick={handleCart}>
+            <FontAwesomeIcon icon={faShoppingCart} />
+            &nbsp;Cart{itemCount > 0 && <span className="badge bg-secondary">{itemCount}</span>}
+        </Button>
     );
 }
 
 CartWidget.propTypes = {
     itemCount: PropTypes.number, // Define la validación de tipo y que es requerido
-  };
-
-export default CartWidget;
+};
