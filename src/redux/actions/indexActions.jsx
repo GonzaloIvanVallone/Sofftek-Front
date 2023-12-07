@@ -162,7 +162,10 @@ export const login = (payload) => async (dispatch) => {
     localStorage.setItem("token", response.data.token);
     return dispatch({
       type: "LOGIN",
-      payload: response.data.user.roles[0],
+      payload: {
+        role: response.data.user.roles[0],
+        userName: response.data.user.userName
+      }
     });
   } catch (error) {
     if (error.response) {
@@ -186,7 +189,10 @@ export const register = (payload) => async (dispatch) => {
     });
     return dispatch({
       type: "LOGIN",
-      payload: response.data.user.roles[0],
+      payload: {
+        role: response.data.user.roles[0],
+        userName: response.data.user.userName
+      }
     });
   } catch (error) {
     if (error.response) {
