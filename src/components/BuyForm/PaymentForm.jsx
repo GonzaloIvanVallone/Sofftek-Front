@@ -51,14 +51,14 @@ export const Paymentform = () => {
         <Accordion.Item eventKey="0">
           <Accordion.Header>Products</Accordion.Header>
           <Accordion.Body>
-            {products?.map((p) => (
+            {/* {products?.map((p) => (
               <div className="informationProduct" key={p.productId}>
                 <div className="productName">
                   <p>{p.productName}</p>
                 </div>
                 <div className="informationPrice">{p.productPrice}</div>
               </div>
-            ))}
+            ))} */}
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
@@ -173,16 +173,16 @@ export const Paymentform = () => {
             </div>
           )}
           <MyDatePicker />
-          {
+        </div>
+      </form>
+      {preferenceId && 
             <Wallet
               initialization={{
                 preferenceId,
-                redirectMode: "blank",
+                redirectMode: "modal",
               }}
             />
           }
-        </div>
-      </form>
     </div>
   );
 };
