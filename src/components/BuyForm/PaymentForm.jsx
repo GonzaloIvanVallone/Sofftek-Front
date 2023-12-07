@@ -1,15 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./PaymentForm.scss";
 import { MyDatePicker } from "./DatePicker/MyDatePicker";
+import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
+
+import { useSelector } from "react-redux";
 
 export const Paymentform = () => {
   const location = useLocation();
-
+  const preferenceId = useSelector((state) => state.idPreference);
+  // initMercadoPago("TEST-318bcc68-f6f3-4251-bcbd-b07aac21c30d");
   const products = location.state && location.state.cart;
+
+  useEffect(() => {
+    initMercadoPago("TEST-318bcc68-f6f3-4251-bcbd-b07aac21c30d", {
+      locale: "es-AR",
+    });
+  }, []);
 
   const sum = products?.reduce(
     (total, product) => total + product.productPrice,
@@ -162,10 +172,15 @@ export const Paymentform = () => {
               </div>
             </div>
           )}
-
           <MyDatePicker />
-
-          <button type="#">Enviar</button>
+          {
+            <Wallet
+              initialization={{
+                preferenceId,
+                redirectMode: "blank",
+              }}
+            />
+          }
         </div>
       </form>
     </div>

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { addToCart } from "../../redux/actions/indexActions";
+import { createPreference } from "../../redux/actions/indexActions";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export const ProductDetail = () => {
@@ -34,11 +35,25 @@ export const ProductDetail = () => {
   };
 
   const handleBuyClick = () => {
-    isLoggedIn
-      ? navigate("/Buy", { state: { cart: [product] } })
-      : navigate("/NotLoggin", {
-          state: "no puede comprar productos sin antes ingresar a su cuenta",
-        });
+    if (isLoggedIn) {
+      const itemEntities = {
+        idItem: 1, // Asigna un valor para idItem, puede ser cualquier lógica que necesites
+        // Puedes establecer un valor predeterminado si es necesario
+        product: product, // Asegúrate de tener un objeto ProductEntity aquí
+        quantitySelected: 1,
+        totalForProduct: product.productPrice, // Puedes establecer un valor predeterminado si es necesario
+      };
+      const paymentMPDTOFromFrontend = {
+        lstItem: [itemEntities], // Agrega el item construido
+      };
+      console.log(paymentMPDTOFromFrontend);
+      dispatch(createPreference(paymentMPDTOFromFrontend));
+      navigate("/Buy", { state: { cart: [product] } });
+    } else {
+      navigate("/NotLoggin", {
+        state: "no puede comprar productos sin antes ingresar a su cuenta",
+      });
+    }
   };
 
   const handleAddCartClick = () => {

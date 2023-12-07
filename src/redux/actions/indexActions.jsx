@@ -204,3 +204,24 @@ export const register = (payload) => async (dispatch) => {
     }
   }
 };
+
+export const createPreference = (payload) => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:8080/api/v1/product/mercadoPago/compra",
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    console.log(response.data);
+    return dispatch({
+      type: "CALL_MERCADO_PAGO",
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

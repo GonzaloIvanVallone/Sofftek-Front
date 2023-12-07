@@ -6,6 +6,7 @@ const initialState = {
   isLoggedIn: false,
   cart: JSON.parse(localStorage.getItem("cart")) || [],
   isAdmin: false,
+  idPreference: "",
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -81,6 +82,8 @@ const rootReducer = (state = initialState, action) => {
         "cart",
         JSON.stringify(updatedCart)
       ));
+    case "CALL_MERCADO_PAGO":
+      return { ...state, idPreference: action.payload };
 
     default:
       return state;
