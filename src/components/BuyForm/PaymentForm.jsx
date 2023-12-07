@@ -7,21 +7,23 @@ import "./PaymentForm.scss";
 import { MyDatePicker } from "./DatePicker/MyDatePicker";
 
 export const Paymentform = () => {
-  // Accede al producto desde la ubicación
   const location = useLocation();
 
-  const product = location.state && location.state.product;
+  const products = location.state && location.state.cart;
 
-  const sum = product.productPrice;
+  const sum = products?.reduce(
+    (total, product) => total + product.productPrice,
+    0
+  );
 
   const [formData, setFormData] = useState({
-    provincia: "",
-    localidad: "",
-    calle: "",
-    numeroCalle: "",
-    esDepartamento: false,
-    numeroDepartamento: "",
-    numeroDePiso: "",
+    province: "",
+    locality: "",
+    street: "",
+    streetNumber: "",
+    isApartment: false,
+    apartmentNumber: "",
+    floorNumber: "",
   });
 
   const handleChange = (e) => {
@@ -34,17 +36,19 @@ export const Paymentform = () => {
 
   return (
     <div className="container-payment">
-      <p>Bienvenido a la facturacion</p>
+      <h1>Welcome to Invoicing</h1>
       <Accordion>
         <Accordion.Item eventKey="0">
-          <Accordion.Header>Accordion Item #1</Accordion.Header>
+          <Accordion.Header>Products</Accordion.Header>
           <Accordion.Body>
-            <div className="informationProduct">
-              <div className="productName">
-                <p>{product.productName}</p>
+            {products?.map((p) => (
+              <div className="informationProduct" key={p.productId}>
+                <div className="productName">
+                  <p>{p.productName}</p>
+                </div>
+                <div className="informationPrice">{p.productPrice}</div>
               </div>
-              <div className="informationPrice">{product.productPrice}</div>
-            </div>
+            ))}
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
@@ -54,30 +58,30 @@ export const Paymentform = () => {
         <div className="form-container">
           <div className="form-row">
             <div className="form-group">
-              <p className="input-title">Provincia:</p>
+              <p className="input-title">Province:</p>
               <InputGroup className="input mb-3">
                 <Form.Control
                   type="text"
-                  placeholder="Provincia"
-                  aria-label="Provincia"
+                  placeholder="province"
+                  aria-label="province"
                   aria-describedby="basic-addon1"
-                  name="provincia"
-                  value={formData.provincia}
+                  name="province"
+                  value={formData.province}
                   onChange={handleChange}
                 />
               </InputGroup>
             </div>
 
             <div className="form-group">
-              <p className="input-title">Localidad:</p>
+              <p className="input-title">Locality:</p>
               <InputGroup className="input mb-3">
                 <Form.Control
                   type="text"
-                  placeholder="localidad"
-                  aria-label="localidad"
+                  placeholder="locality"
+                  aria-label="locality"
                   aria-describedby="basic-addon1"
-                  name="localidad"
-                  value={formData.localidad}
+                  name="locality"
+                  value={formData.locality}
                   onChange={handleChange}
                 />
               </InputGroup>
@@ -85,30 +89,30 @@ export const Paymentform = () => {
           </div>
           <div className="form-row">
             <div className="from-group">
-              <p className="input-title">Calle:</p>
+              <p className="input-title">Street:</p>
               <InputGroup className="input mb-3">
                 <Form.Control
                   type="text"
-                  placeholder="calle"
-                  aria-label="calle"
+                  placeholder="street"
+                  aria-label="street"
                   aria-describedby="basic-addon1"
-                  name="calle"
-                  value={formData.calle}
+                  name="street"
+                  value={formData.street}
                   onChange={handleChange}
                 />
               </InputGroup>
             </div>
 
             <div className="from-group">
-              <p className="input-title">Número de Calle:</p>
+              <p className="input-title">Street Number:</p>
               <InputGroup className="input mb-3">
                 <Form.Control
                   type="text"
-                  placeholder="numeroCalle"
-                  aria-label="numeroCalle"
+                  placeholder="streetNumber"
+                  aria-label="streetNumber"
                   aria-describedby="basic-addon1"
-                  name="numeroCalle"
-                  value={formData.numeroCalle}
+                  name="streetNumber"
+                  value={formData.streetNumber}
                   onChange={handleChange}
                 />
               </InputGroup>
@@ -116,42 +120,42 @@ export const Paymentform = () => {
           </div>
           <div>
             <label>
-              ¿Es un departamento?
+              ¿is Apartment?
               <input
                 type="checkbox"
-                name="esDepartamento"
-                checked={formData.esDepartamento}
+                name="isApartment"
+                checked={formData.isApartment}
                 onChange={handleChange}
               />
             </label>
           </div>
 
-          {formData.esDepartamento && (
+          {formData.isApartment && (
             <div>
               <div>
-                <p className="input-title">Numero de Piso</p>
+                <p className="input-title">Floor number</p>
                 <InputGroup className="input mb-3">
                   <Form.Control
                     type="text"
-                    placeholder="numeroDePiso"
-                    aria-label="numeroDePiso"
+                    placeholder="floorNumber"
+                    aria-label="floorNumber"
                     aria-describedby="basic-addon1"
-                    name="numeroDePiso"
-                    value={formData.numeroDePiso}
+                    name="floorNumber"
+                    value={formData.floorNumber}
                     onChange={handleChange}
                   />
                 </InputGroup>
               </div>
               <div>
-                <p className="input-title">Numero Departamento</p>
+                <p className="input-title">Apartment Number</p>
                 <InputGroup className="input mb-3">
                   <Form.Control
                     type="text"
-                    placeholder="numeroDepartamento"
-                    aria-label="numeroDepartamento"
+                    placeholder="apartmentNumber"
+                    aria-label="apartmentNumber"
                     aria-describedby="basic-addon1"
-                    name="numeroDepartamento"
-                    value={formData.numeroDepartamento}
+                    name="apartmentNumber"
+                    value={formData.apartmentNumber}
                     onChange={handleChange}
                   />
                 </InputGroup>

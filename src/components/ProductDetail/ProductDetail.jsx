@@ -4,11 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { addToCart } from "../../redux/actions/indexActions";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const ProductDetail = () => {
-  // const { id } = useParams();
-  // const allProducts = useSelector((state) => state.allProducts);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -36,13 +34,11 @@ export const ProductDetail = () => {
   };
 
   const handleBuyClick = () => {
-    // Use useNavigate to navigate to the '/comprar' route
     isLoggedIn
-      ? navigate("/Buy", { state: { product } })
+      ? navigate("/Buy", { state: { cart: [product] } })
       : navigate("/NotLoggin", {
           state: "no puede comprar productos sin antes ingresar a su cuenta",
         });
-    // navigate("/Buy", { state: { product } });
   };
 
   const handleAddCartClick = () => {
