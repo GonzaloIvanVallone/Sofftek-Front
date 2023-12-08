@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ProductDetail.scss";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
@@ -13,6 +13,7 @@ export const ProductDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const [productToSend, setproductToSend] = useState({});
   const product = location.state && location.state.product;
 
   const handleAddToCart = () => {
@@ -34,9 +35,23 @@ export const ProductDetail = () => {
     }
   };
 
+  useEffect(() => {
+    // Aquí puedes agregar lógica para modificar o agregar nuevos atributos a productToSend
+    // Por ejemplo, podrías añadir una nueva propiedad llamada 'totalPrice'
+
+    const updatedProductToSend = {
+      ...product,
+      totalPrice: product.productPrice,
+      quantity: 1,
+      // Agrega otros atributos según sea necesario
+    };
+
+    setproductToSend(updatedProductToSend);
+  }, [product]);
+
   const handleBuyClick = () => {
     if (isLoggedIn) {
-      navigate("/Buy", { state: { cart: [product] } });
+      navigate("/Buy", { state: { cart: [productToSend] } });
     } else {
       navigate("/NotLoggin", {
         state: "no puede comprar productos sin antes ingresar a su cuenta",

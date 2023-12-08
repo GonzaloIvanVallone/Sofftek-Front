@@ -15,6 +15,7 @@ export const Success = () => {
   const handleGoHome = () => {
     dispatch(bibSave(JSON.parse(localStorage.getItem("formData"))));
     localStorage.removeItem("formData");
+    localStorage.removeItem("grouped");
     navigate("/");
   };
 
