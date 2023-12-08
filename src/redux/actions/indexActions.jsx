@@ -226,11 +226,11 @@ export const createPreference = (payload) => async (dispatch) => {
   }
 };
 
-export const bibSave = () => async (dispatch) => {
+export const bibSave = (bill) => async (dispatch) => {
   try {
     const response = await axios.post(
       "http://localhost:8080/api/v1/product/mercadoPago/newBid",
-      JSON.parse(localStorage.getItem("formData")),
+      bill,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

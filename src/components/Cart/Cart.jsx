@@ -59,9 +59,9 @@ export const Cart = () => {
   };
 
   const handleBuyClick = () => {
-    // console.log(cart);
+    localStorage.setItem("grouped", JSON.stringify(groupedCart));
     isLoggedIn
-      ? navigate("/Buy", { state: { cart } })
+      ? navigate("/Buy", { state: { cart: groupedCart } })
       : navigate("/NotLoggin", {
           state: "no puede comprar productos sin antes ingresar a su cuenta",
         });

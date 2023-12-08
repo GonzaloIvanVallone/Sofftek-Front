@@ -5,7 +5,6 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./PaymentForm.scss";
-// import { MyDatePicker } from "./DatePicker/MyDatePicker";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import { createPreference } from "../../redux/actions/indexActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,8 +24,8 @@ export const Paymentform = () => {
     });
   }, []);
 
-  const sum = products?.reduce(
-    (total, product) => total + product.productPrice,
+  const total = Object.values(products).reduce(
+    (sum, product) => sum + product.totalPrice,
     0
   );
 
@@ -38,16 +37,17 @@ export const Paymentform = () => {
     }));
   };
 
-  const items = products.map((product) => ({
+  const items = Object.values(products).map((product) => ({
     idItem: product.productId, // Usar un identificador único del producto
-    quantitySelected: 1, // Puedes establecer la cantidad seleccionada según tus necesidades
+    quantitySelected: product.quantity, // Puedes establecer la cantidad seleccionada según tus necesidades
     product: product,
-    totalForProduct: product.productPrice, // Otras lógicas para calcular el total si es necesario
+    totalForProduct: product.productPrice * product.quantity, // Otras lógicas para calcular el total si es necesario
   }));
 
   const paymentMPDTOFromFrontend = {
     lstItem: items,
   };
+
   const [formData, setFormData] = useState({
     province: "",
     locality: "",
@@ -56,8 +56,9 @@ export const Paymentform = () => {
     isApartment: false,
     apartmentNumber: "",
     floorNumber: "",
-    paymentMPDTOFromFrontend,
+    lstItem: items,
     selectedDate: null,
+    amount: total,
   });
 
   const handleRequestPreferenceId = (name, type, checked, value) => {
@@ -102,9 +103,6 @@ export const Paymentform = () => {
     );
   };
 
-  // console.log(localStorage.getItem("formData"));
-  //
-
   return (
     <div className="container-payment">
       <h1>Welcome to Invoicing</h1>
@@ -112,18 +110,23 @@ export const Paymentform = () => {
         <Accordion.Item eventKey="0">
           <Accordion.Header>Products</Accordion.Header>
           <Accordion.Body>
-            {products?.map((p) => (
-              <div className="informationProduct" key={p.productId}>
-                <div className="productName">
-                  <p>{p.productName}</p>
+            {products &&
+              Object.values(products).map((p) => (
+                <div className="informationProduct" key={p.productId}>
+                  <div className="productName">
+                    <p>{p.productName}</p>
+                  </div>
+                  <div className="productQuantity">
+                    <p>{p.quantity}</p>
+                  </div>
+                  <div className="informationPrice">{p.totalPrice}</div>
+                  {/* Assuming you want to display the total price instead of product price */}
                 </div>
-                <div className="informationPrice">{p.productPrice}</div>
-              </div>
-            ))}
+              ))}
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
-      <h2>total : {sum}</h2>
+      <h2>total : {total}</h2>
 
       <form>
         <div className="form-container">
