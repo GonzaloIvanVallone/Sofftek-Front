@@ -55,6 +55,25 @@ export const getAllCategories = () => async (dispatch) => {
   }
 };
 
+
+export const newCategory = (payload) => async () => {
+  try {
+    const token = localStorage.getItem('token');
+    let response = await axios.post(`${category_route}/new`, payload, {
+      headers: { Authorization: `Bearer ${token}`},
+    });
+  }catch(error){
+    if (error.response) {
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    }
+  }
+};
+
+
 export const getProductsByName = (name) => async (dispatch) => {
   try {
     let response = await axios.get(`${product_route}/find/${name}`);
@@ -162,7 +181,10 @@ export const login = (payload) => async (dispatch) => {
     localStorage.setItem("token", response.data.token);
     return dispatch({
       type: "LOGIN",
-      payload: response.data.user.roles[0],
+      payload: {
+        role: response.data.user.roles[0],
+        userName: response.data.user.userName
+      }
     });
   } catch (error) {
     if (error.response) {
@@ -186,7 +208,10 @@ export const register = (payload) => async (dispatch) => {
     });
     return dispatch({
       type: "LOGIN",
-      payload: response.data.user.roles[0],
+      payload: {
+        role: response.data.user.roles[0],
+        userName: response.data.user.userName
+      }
     });
   } catch (error) {
     if (error.response) {

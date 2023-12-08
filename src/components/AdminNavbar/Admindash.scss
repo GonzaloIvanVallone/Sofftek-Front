@@ -1,0 +1,10 @@
+@import '../../assets/variables.scss';
+
+h2{display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    background-color: $color1;
+    color: $color2;
+    border-bottom: 4px $color3 solid;
+}
