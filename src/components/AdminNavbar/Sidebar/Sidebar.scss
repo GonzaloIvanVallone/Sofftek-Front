@@ -1,0 +1,16 @@
+.h-100 {
+  height: 100%;
+  margin-left: 0;
+  margin-right: 0;
+
+  /* Estilos para que los botones estén uno encima del otro */
+  .d-flex.flex-column {
+    flex-direction: column;
+  }
+
+  /* Asegurar que los botones ocupen el ancho completo del sidebar */
+  .d-flex.flex-column .btn {
+    width: 100%;
+  }
+  
+}

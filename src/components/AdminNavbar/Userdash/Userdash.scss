@@ -1,0 +1,10 @@
+@import "../../../assets/variables.scss";
+
+.btn-primary {
+  color: $color2;
+  background-color: $color1;
+  &:hover {
+    color: $color1;
+    background-color: $color2;
+  }
+}
