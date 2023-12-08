@@ -13,22 +13,30 @@ import "react-datepicker/dist/react-datepicker.css";
 
 export const Paymentform = () => {
   const location = useLocation();
-  const preferenceId = useSelector((state) => state.idPreference);
   const dispatch = useDispatch();
+  const preferenceId = useSelector((state) => state.idPreference);
   const products = location.state && location.state.cart;
-  // const [selectedDate, setSelectedDate] = useState(null);
-  console.log(products);
+  const [totalprice, setTotalprice] = useState(0);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     initMercadoPago("TEST-318bcc68-f6f3-4251-bcbd-b07aac21c30d", {
       locale: "es-AR",
     });
-  }, []);
 
-  const total = Object.values(products).reduce(
-    (sum, product) => sum + product.totalPrice,
-    0
-  );
+    const total = Object.values(products).reduce(
+      (sum, product) => sum + product.totalPrice,
+      0
+    );
+    setTotalprice(total);
+    const items = Object.values(products).map((product) => ({
+      idItem: product.productId, // Usar un identificador único del producto
+      quantitySelected: product.quantity, // Puedes establecer la cantidad seleccionada según tus necesidades
+      product: product,
+      totalForProduct: product.productPrice * product.quantity, // Otras lógicas para calcular el total si es necesario
+    }));
+    setItems(items);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -37,13 +45,6 @@ export const Paymentform = () => {
       [name]: type === "checkbox" ? checked : value,
     }));
   };
-
-  const items = Object.values(products).map((product) => ({
-    idItem: product.productId, // Usar un identificador único del producto
-    quantitySelected: product.quantity, // Puedes establecer la cantidad seleccionada según tus necesidades
-    product: product,
-    totalForProduct: product.productPrice * product.quantity, // Otras lógicas para calcular el total si es necesario
-  }));
 
   const paymentMPDTOFromFrontend = {
     lstItem: items,
@@ -59,7 +60,8 @@ export const Paymentform = () => {
     floorNumber: "",
     lstItem: items,
     selectedDate: null,
-    amount: total,
+    amount: totalprice,
+    token: localStorage.getItem("token"),
   });
 
   const handleRequestPreferenceId = (name, type, checked, value) => {
@@ -121,13 +123,12 @@ export const Paymentform = () => {
                     <p>{p.quantity}</p>
                   </div>
                   <div className="informationPrice">{p.totalPrice}</div>
-                  {/* Assuming you want to display the total price instead of product price */}
                 </div>
               ))}
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
-      <h2>total : {total}</h2>
+      <h2>total : {totalprice}</h2>
 
       <form>
         <div className="form-container">
@@ -141,6 +142,7 @@ export const Paymentform = () => {
                   aria-label="province"
                   aria-describedby="basic-addon1"
                   name="province"
+                  maxLength={10}
                   value={formData.province}
                   onChange={handleChange}
                 />
