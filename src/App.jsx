@@ -16,6 +16,7 @@ import { Paymentform } from "./components/BuyForm/PaymentForm";
 import { NavBar } from "./components/NavBar/NavBar";
 import { Footer } from "./components/Footer/Footer";
 import { NotLoggin } from "./components/NotLoggin/NotLoggin";
+import { Success } from "./components/success/success";
 
 function App() {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ function App() {
           />
           <Route exact path={"/Buy"} element={<Paymentform />} />
           <Route exact path={"/NotLoggin"} element={<NotLoggin />} />
+          <Route exact path={"/Success"} element={<Success />} />
         </Routes>
         {/* <Footer /> */}
       </div>

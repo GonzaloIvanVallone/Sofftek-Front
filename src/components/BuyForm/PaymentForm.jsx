@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
+import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./PaymentForm.scss";
 import { MyDatePicker } from "./DatePicker/MyDatePicker";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
-
-import { useSelector } from "react-redux";
+import { createPreference } from "../../redux/actions/indexActions";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Paymentform = () => {
   const location = useLocation();
   const preferenceId = useSelector((state) => state.idPreference);
-  // initMercadoPago("TEST-318bcc68-f6f3-4251-bcbd-b07aac21c30d");
+  const dispatch = useDispatch();
   const products = location.state && location.state.cart;
 
   useEffect(() => {
@@ -44,6 +45,32 @@ export const Paymentform = () => {
     }));
   };
 
+  const items = products.map((product) => ({
+    idItem: product.productId, // Usar un identificador único del producto
+    quantitySelected: 1, // Puedes establecer la cantidad seleccionada según tus necesidades
+    product: product,
+    totalForProduct: product.productPrice, // Otras lógicas para calcular el total si es necesario
+  }));
+
+  const paymentMPDTOFromFrontend = {
+    lstItem: items,
+  };
+
+  const handleRequestPreferenceId = () => {
+    // const itemEntities = {
+    //   idItem: 1, // Asigna un valor para idItem, puede ser cualquier lógica que necesites
+    //   // Puedes establecer un valor predeterminado si es necesario
+    //   product: products, // Asegúrate de tener un objeto ProductEntity aquí
+    //   quantitySelected: 1,
+    //   totalForProduct: products.productPrice, // Puedes establecer un valor predeterminado si es necesario
+    // };
+    // const paymentMPDTOFromFrontend = {
+    //   lstItem: [itemEntities], // Agrega el item construido
+    // };
+    console.log(paymentMPDTOFromFrontend);
+    dispatch(createPreference(paymentMPDTOFromFrontend));
+  };
+
   return (
     <div className="container-payment">
       <h1>Welcome to Invoicing</h1>
@@ -51,14 +78,14 @@ export const Paymentform = () => {
         <Accordion.Item eventKey="0">
           <Accordion.Header>Products</Accordion.Header>
           <Accordion.Body>
-            {/* {products?.map((p) => (
+            {products?.map((p) => (
               <div className="informationProduct" key={p.productId}>
                 <div className="productName">
                   <p>{p.productName}</p>
                 </div>
                 <div className="informationPrice">{p.productPrice}</div>
               </div>
-            ))} */}
+            ))}
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
@@ -173,16 +200,27 @@ export const Paymentform = () => {
             </div>
           )}
           <MyDatePicker />
+          <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              Dropdown Button
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={handleRequestPreferenceId}>
+                Action
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
       </form>
-      {preferenceId && 
-            <Wallet
-              initialization={{
-                preferenceId,
-                redirectMode: "modal",
-              }}
-            />
-          }
+      {preferenceId && (
+        <Wallet
+          initialization={{
+            preferenceId,
+            redirectMode: "modal",
+          }}
+        />
+      )}
     </div>
   );
 };

@@ -36,18 +36,6 @@ export const ProductDetail = () => {
 
   const handleBuyClick = () => {
     if (isLoggedIn) {
-      const itemEntities = {
-        idItem: 1, // Asigna un valor para idItem, puede ser cualquier lógica que necesites
-        // Puedes establecer un valor predeterminado si es necesario
-        product: product, // Asegúrate de tener un objeto ProductEntity aquí
-        quantitySelected: 1,
-        totalForProduct: product.productPrice, // Puedes establecer un valor predeterminado si es necesario
-      };
-      const paymentMPDTOFromFrontend = {
-        lstItem: [itemEntities], // Agrega el item construido
-      };
-      console.log(paymentMPDTOFromFrontend);
-      dispatch(createPreference(paymentMPDTOFromFrontend));
       navigate("/Buy", { state: { cart: [product] } });
     } else {
       navigate("/NotLoggin", {
