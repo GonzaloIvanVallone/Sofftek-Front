@@ -6,17 +6,6 @@
   min-height: 100vh;
 }
 
-.container-facher {
-  padding-top: 16px;
-  margin-top: 16px;
-  display: flex;
-  flex-wrap: nowrap;
-  /* min-height: 100vh; */
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-}
-
 .container-information {
   display: flex;
 }
@@ -67,4 +56,12 @@
   position: fixed;
   bottom: 0;
   width: 98%;
+}
+.Product-Detail{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-content:center;
+  min-height: 100vh;
 }
