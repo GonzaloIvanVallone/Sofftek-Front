@@ -55,6 +55,25 @@ export const getAllCategories = () => async (dispatch) => {
   }
 };
 
+
+export const newCategory = (payload) => async () => {
+  try {
+    const token = localStorage.getItem('token');
+    let response = await axios.post(`${category_route}/new`, payload, {
+      headers: { Authorization: `Bearer ${token}`},
+    });
+  }catch(error){
+    if (error.response) {
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    }
+  }
+};
+
+
 export const getProductsByName = (name) => async (dispatch) => {
   try {
     let response = await axios.get(`${product_route}/find/${name}`);
