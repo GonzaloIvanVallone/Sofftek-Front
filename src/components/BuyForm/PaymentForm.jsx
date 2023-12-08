@@ -5,16 +5,19 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./PaymentForm.scss";
-import { MyDatePicker } from "./DatePicker/MyDatePicker";
+// import { MyDatePicker } from "./DatePicker/MyDatePicker";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import { createPreference } from "../../redux/actions/indexActions";
 import { useDispatch, useSelector } from "react-redux";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const Paymentform = () => {
   const location = useLocation();
   const preferenceId = useSelector((state) => state.idPreference);
   const dispatch = useDispatch();
   const products = location.state && location.state.cart;
+  const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
     initMercadoPago("TEST-318bcc68-f6f3-4251-bcbd-b07aac21c30d", {
@@ -26,16 +29,6 @@ export const Paymentform = () => {
     (total, product) => total + product.productPrice,
     0
   );
-
-  const [formData, setFormData] = useState({
-    province: "",
-    locality: "",
-    street: "",
-    streetNumber: "",
-    isApartment: false,
-    apartmentNumber: "",
-    floorNumber: "",
-  });
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -55,21 +48,62 @@ export const Paymentform = () => {
   const paymentMPDTOFromFrontend = {
     lstItem: items,
   };
+  const [formData, setFormData] = useState({
+    province: "",
+    locality: "",
+    street: "",
+    streetNumber: "",
+    isApartment: false,
+    apartmentNumber: "",
+    floorNumber: "",
+    paymentMPDTOFromFrontend,
+    selectedDate: null,
+  });
 
-  const handleRequestPreferenceId = () => {
-    // const itemEntities = {
-    //   idItem: 1, // Asigna un valor para idItem, puede ser cualquier lógica que necesites
-    //   // Puedes establecer un valor predeterminado si es necesario
-    //   product: products, // Asegúrate de tener un objeto ProductEntity aquí
-    //   quantitySelected: 1,
-    //   totalForProduct: products.productPrice, // Puedes establecer un valor predeterminado si es necesario
-    // };
-    // const paymentMPDTOFromFrontend = {
-    //   lstItem: [itemEntities], // Agrega el item construido
-    // };
-    console.log(paymentMPDTOFromFrontend);
+  const handleRequestPreferenceId = (name, type, checked, value) => {
+    localStorage.setItem(
+      "formData",
+      JSON.stringify({
+        ...formData,
+        [name]: type === "checkbox" ? checked : value,
+      })
+    );
+    console.log(localStorage.getItem("formData"));
     dispatch(createPreference(paymentMPDTOFromFrontend));
   };
+
+  const handleDateChange = (date) => {
+    const today = new Date();
+    if (date && date <= today) {
+      alert("Por favor, selecciona una fecha futura.");
+      return;
+    }
+
+    today.setDate(today.getDate() + 7);
+
+    if (date && date > today) {
+      alert("Por favor, selecciona una fecha más cercana.");
+      return;
+    }
+
+    // Actualiza el estado del formData
+    setFormData((prevData) => ({
+      ...prevData,
+      selectedDate: date ? date.toISOString() : null,
+    }));
+
+    // Almacena el formData actualizado en el localStorage
+    localStorage.setItem(
+      "formData",
+      JSON.stringify({
+        ...formData,
+        selectedDate: date ? date.toISOString() : null,
+      })
+    );
+  };
+
+  // console.log(localStorage.getItem("formData"));
+  //
 
   return (
     <div className="container-payment">
@@ -199,7 +233,18 @@ export const Paymentform = () => {
               </div>
             </div>
           )}
-          <MyDatePicker />
+          <div>
+            <h3>Selecciona una fecha:</h3>
+            <DatePicker
+              selected={
+                formData.selectedDate ? new Date(formData.selectedDate) : null
+              }
+              onChange={handleDateChange}
+              dateFormat="dd/MM/yyyy" // Puedes ajustar el formato según tus necesidades
+              placeholderText="Haga clic y elija una fecha"
+              title="Haga clic y elija una fecha que sea mayor a la de hoy pero no superior a una semana."
+            />
+          </div>
           <Dropdown>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               Dropdown Button

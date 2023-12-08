@@ -5,27 +5,54 @@ import "react-datepicker/dist/react-datepicker.css";
 export const MyDatePicker = () => {
   const [selectedDate, setSelectedDate] = useState(null);
 
+  const [formData, setFormData] = useState({
+    province: "",
+    locality: "",
+    street: "",
+    streetNumber: "",
+    isApartment: false,
+    apartmentNumber: "",
+    floorNumber: "",
+    selectedDate: null,
+  });
+
   const handleDateChange = (date) => {
     const today = new Date();
     if (date && date <= today) {
       alert("Por favor, selecciona una fecha futura.");
-      return; // No actualiza el estado si la fecha es menor o igual a la actual
+      return;
     }
-    today.setDate(today.getDate() + 7); // Aumenta 7 días a la fecha de hoy
 
-    // Verifica si la fecha seleccionada es mayor a una semana a la fecha de hoy
+    today.setDate(today.getDate() + 7);
+
     if (date && date > today) {
       alert("Por favor, selecciona una fecha más cercana.");
-      return; // No actualiza el estado si la fecha es mayor a una semana a la fecha de hoy
+      return;
     }
-    setSelectedDate(date);
+
+    // Actualiza el estado del formData
+    setFormData((prevData) => ({
+      ...prevData,
+      selectedDate: date ? date.toISOString() : null,
+    }));
+
+    // Almacena el formData actualizado en el localStorage
+    localStorage.setItem(
+      "formData",
+      JSON.stringify({
+        ...formData,
+        selectedDate: date ? date.toISOString() : null,
+      })
+    );
   };
 
   return (
     <div>
       <h3>Selecciona una fecha:</h3>
       <DatePicker
-        selected={selectedDate}
+        selected={
+          formData.selectedDate ? new Date(formData.selectedDate) : null
+        }
         onChange={handleDateChange}
         dateFormat="dd/MM/yyyy" // Puedes ajustar el formato según tus necesidades
         placeholderText="Haga clic y elija una fecha"

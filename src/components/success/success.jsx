@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import zlib from "zlibjs";
+import { useDispatch } from "react-redux";
+import { bibSave } from "../../redux/actions/indexActions";
 
 export const Success = () => {
-  const location = useLocation();
+  const dispatch = useDispatch();
   const [mensajeComprimido, setMensajeComprimido] = useState(null);
 
   useEffect(() => {
-    // Obtén el valor del parámetro 'mensaje' de la cadena de consulta
-    const mensajeComprimido = new URLSearchParams(location.search).get(
-      "mensaje"
-    );
-
-    if (mensajeComprimido) {
-      console.log("recibi el contenido del mensaje!!!!!");
-      setMensajeComprimido(mensajeComprimido);
-    }
-  }, [location.search]);
+    setMensajeComprimido(localStorage.getItem("formData"));
+    dispatch(bibSave());
+  }, []);
 
   return (
     <div>

@@ -84,7 +84,8 @@ const rootReducer = (state = initialState, action) => {
       ));
     case "CALL_MERCADO_PAGO":
       return { ...state, idPreference: action.payload };
-
+    case "SAVE_BID":
+      return { ...state };
     default:
       return state;
   }

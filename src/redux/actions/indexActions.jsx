@@ -225,3 +225,24 @@ export const createPreference = (payload) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const bibSave = () => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:8080/api/v1/product/mercadoPago/newBid",
+      JSON.parse(localStorage.getItem("formData")),
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    console.log(response.data);
+    return dispatch({
+      type: "SAVE_BID",
+      bid: response.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
