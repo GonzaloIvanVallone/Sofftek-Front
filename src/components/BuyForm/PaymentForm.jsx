@@ -16,27 +16,24 @@ export const Paymentform = () => {
   const dispatch = useDispatch();
   const preferenceId = useSelector((state) => state.idPreference);
   const products = location.state && location.state.cart;
-  const [totalprice, setTotalprice] = useState(0);
-  const [items, setItems] = useState([]);
 
   useEffect(() => {
     initMercadoPago("TEST-318bcc68-f6f3-4251-bcbd-b07aac21c30d", {
       locale: "es-AR",
     });
-
-    const total = Object.values(products).reduce(
-      (sum, product) => sum + product.totalPrice,
-      0
-    );
-    setTotalprice(total);
-    const items = Object.values(products).map((product) => ({
-      idItem: product.productId, // Usar un identificador único del producto
-      quantitySelected: product.quantity, // Puedes establecer la cantidad seleccionada según tus necesidades
-      product: product,
-      totalForProduct: product.productPrice * product.quantity, // Otras lógicas para calcular el total si es necesario
-    }));
-    setItems(items);
   }, []);
+
+  const total = Object.values(products).reduce(
+    (sum, product) => sum + product.totalPrice,
+    0
+  );
+
+  const items = Object.values(products).map((product) => ({
+    idItem: product.productId, // Usar un identificador único del producto
+    quantitySelected: product.quantity, // Puedes establecer la cantidad seleccionada según tus necesidades
+    product: product,
+    totalForProduct: product.productPrice * product.quantity, // Otras lógicas para calcular el total si es necesario
+  }));
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -60,7 +57,7 @@ export const Paymentform = () => {
     floorNumber: "",
     lstItem: items,
     selectedDate: null,
-    amount: totalprice,
+    amount: total,
     token: localStorage.getItem("token"),
   });
 
@@ -128,7 +125,7 @@ export const Paymentform = () => {
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
-      <h2>total : {totalprice}</h2>
+      <h2>total : {total}</h2>
 
       <form>
         <div className="form-container">
