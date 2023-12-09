@@ -4,20 +4,19 @@ import { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import '../Userdash/Userdash.scss'
 import CategoryModal from './CategoryModal';
+import { deleteCategory, updateCategory } from "../../../redux/actions/indexActions";
+import { useDispatch } from "react-redux";
 
 const Categorydash = () => {
-
-  //const [categories, setCategories] = useState([]);
+  const dispatch = useDispatch();
   const [categoryList, setCategoryList] = useState([]);
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
-    // Función para obtener las categorías desde el backend
     const fetchCategories = async () => {
       try {
-        // Realiza una solicitud GET al endpoint de categorías del backend
         const response = await axios.get('http://localhost:8080/api/v1/category/list');
-        setCategoryList(response.data); // Actualiza el estado con las categorías obtenidas
+        setCategoryList(response.data); 
       } catch (error) {
         console.error('Error fetching categories:', error);
       }
@@ -25,13 +24,13 @@ const Categorydash = () => {
 
     fetchCategories();
   }, []);
+  const handleDelete = async (idCategory,category) => { 
+    await dispatch(deleteCategory(idCategory,category))
+    setCategoryList(categoryList.filter((c) => c.category !== category));
+ }
 
+  const handleEdit = () => { /*dispatch(updateCategory()) */}
 
-  const handleDelete = () => { console.log("delete") }
-
-  const handleBlock = () => { console.log("block") }
-
-  //Mostrar modal
   const [categotyId, setCategoryId] = useState();
 
   const handleClick = (id) => {
@@ -61,20 +60,17 @@ const Categorydash = () => {
           {categoryList.map((c, idx) => {
             return (
               <tr key={idx}>
-                <td>{c.idx}</td>
+                <td>{c.idCategory}</td>
                 <td>{c.category}</td>
                 <td>
-                  <button className='btn btn-primary m-1' onClick={handleDelete}>Del</button>
-                  <button className='btn btn-primary m-1' onClick={handleBlock}>Edit</button>
+                  <button className='btn btn-primary m-1' onClick={() => handleDelete(c.idCategory,c.category)}>Delete</button>
+                  <button className='btn btn-primary m-1' onClick={handleEdit}>Edit</button>
                 </td>
               </tr>)
           })}
         </tbody>
-
-
       </Table>
       <CategoryModal modal={modal} setModal={setModal} user={categotyId} />
-
     </div>
   )
 }
