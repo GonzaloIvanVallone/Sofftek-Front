@@ -15,6 +15,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export const Paymentform = () => {
   const location = useLocation();
@@ -81,17 +82,10 @@ export const Paymentform = () => {
   const handleRequestPreferenceId = () => {
     console.log(formData);
     // Validación de campos requeridos
-    const requiredFields = [
-      "province",
-      "locality",
-      "street",
-      "streetNumber",
-      "selectedDate",
-    ];
+    const requiredFields = [];
 
     if (formData.isApartment) {
-      console.log("entre");
-      requiredFields.push("floorNumber", "apartmentNumber");
+      requiredFields.push("Floor Number", "Apartment Number");
     }
 
     // Filtrar los campos que están en blanco
@@ -100,9 +94,14 @@ export const Paymentform = () => {
     );
 
     if (emptyFields.length > 0) {
-      alert(
-        `Por favor, completa los siguientes campos: ${emptyFields.join(", ")}`
-      );
+      Swal.fire({
+        title: "DATOS FALTANTES",
+        text: `Por favor, completa los siguientes campos: ${emptyFields.join(
+          ", "
+        )}`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
       return;
     }
 
@@ -114,14 +113,24 @@ export const Paymentform = () => {
   const handleDateChange = (date) => {
     const today = new Date();
     if (date && date <= today) {
-      alert("Por favor, selecciona una fecha futura.");
+      Swal.fire({
+        title: "FECHA INVALIDA",
+        text: `Por favor, selecciona una fecha futura.`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
       return;
     }
 
     today.setDate(today.getDate() + 7);
 
     if (date && date > today) {
-      alert("Por favor, selecciona una fecha más cercana.");
+      Swal.fire({
+        title: "FECHA INVALIDA",
+        text: `Por favor, selecciona una fecha más cercana.`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
       return;
     }
 
@@ -139,178 +148,209 @@ export const Paymentform = () => {
   };
 
   return (
-    <div className="container-payment">
-      <h1>Welcome to Invoicing</h1>
-      <Accordion>
-        <Accordion.Item eventKey="0">
-          <Accordion.Header>Products</Accordion.Header>
-          <Accordion.Body>
-            {products &&
-              Object.values(products).map((p) => (
-                <div className="informationProduct" key={p.productId}>
-                  <div className="productName">
-                    <p>{p.productName}</p>
-                  </div>
-                  <div className="productQuantity">
-                    <p>{p.quantity}</p>
-                  </div>
-                  <div className="informationPrice">{p.totalPrice}</div>
+    <div className="container-invoicing">
+      <div className="payment">
+        <div className="container-payment">
+          <h1>Welcome to Invoicing</h1>
+          <Accordion>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>Products</Accordion.Header>
+              <Accordion.Body>
+                {products && (
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Sub Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {Object.values(products).map((p) => (
+                        <tr key={p.productId} className="informationProduct">
+                          <td className="productName">{p.productName}</td>
+                          <td className="productQuantity">{p.quantity}</td>
+                          <td className="informationPrice">${p.totalPrice}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+          <h2>Total : ${total}</h2>
+
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleRequestPreferenceId();
+            }}
+          >
+            <div className="form-container">
+              <div className="form-row">
+                <div className="form-group">
+                  <p className="input-title">Province:</p>
+                  <InputGroup className="input mb-3">
+                    <Form.Control
+                      type="text"
+                      placeholder="Province"
+                      aria-label="province"
+                      aria-describedby="basic-addon1"
+                      name="province"
+                      maxLength={18}
+                      value={formData.province}
+                      onChange={handleChange}
+                      required
+                    />
+                  </InputGroup>
                 </div>
-              ))}
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
-      <h2>total : {total}</h2>
 
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleRequestPreferenceId();
-        }}
-      >
-        <div className="form-container">
-          <div className="form-row">
-            <div className="form-group">
-              <p className="input-title">Province:</p>
-              <InputGroup className="input mb-3">
-                <Form.Control
-                  type="text"
-                  placeholder="province"
-                  aria-label="province"
-                  aria-describedby="basic-addon1"
-                  name="province"
-                  maxLength={18}
-                  value={formData.province}
-                  onChange={handleChange}
-                />
-              </InputGroup>
-            </div>
+                <div className="form-group">
+                  <p className="input-title">Locality:</p>
+                  <InputGroup className="input mb-3">
+                    <Form.Control
+                      type="text"
+                      placeholder="Locality"
+                      aria-label="locality"
+                      aria-describedby="basic-addon1"
+                      name="locality"
+                      maxLength={18}
+                      value={formData.locality}
+                      onChange={handleChange}
+                      required
+                    />
+                  </InputGroup>
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <p className="input-title">Street:</p>
+                  <InputGroup className="input mb-3">
+                    <Form.Control
+                      type="text"
+                      placeholder="Street"
+                      aria-label="street"
+                      aria-describedby="basic-addon1"
+                      name="street"
+                      maxLength={18}
+                      value={formData.street}
+                      onChange={handleChange}
+                      required
+                    />
+                  </InputGroup>
+                </div>
 
-            <div className="form-group">
-              <p className="input-title">Locality:</p>
-              <InputGroup className="input mb-3">
-                <Form.Control
-                  type="text"
-                  placeholder="locality"
-                  aria-label="locality"
-                  aria-describedby="basic-addon1"
-                  name="locality"
-                  maxLength={18}
-                  value={formData.locality}
-                  onChange={handleChange}
-                />
-              </InputGroup>
-            </div>
-          </div>
-          <div className="form-row">
-            <div className="from-group">
-              <p className="input-title">Street:</p>
-              <InputGroup className="input mb-3">
-                <Form.Control
-                  type="text"
-                  placeholder="street"
-                  aria-label="street"
-                  aria-describedby="basic-addon1"
-                  name="street"
-                  maxLength={18}
-                  value={formData.street}
-                  onChange={handleChange}
-                />
-              </InputGroup>
-            </div>
-
-            <div className="from-group">
-              <p className="input-title">Street Number:</p>
-              <InputGroup className="input mb-3">
-                <Form.Control
-                  type="text"
-                  placeholder="streetNumber"
-                  aria-label="streetNumber"
-                  aria-describedby="basic-addon1"
-                  name="streetNumber"
-                  maxLength={4}
-                  value={formData.streetNumber}
-                  onChange={handleChange}
-                />
-              </InputGroup>
-            </div>
-          </div>
-          <div>
-            <label>
-              <p>¿is Apartment?</p>
-              <input
-                type="checkbox"
-                name="isApartment"
-                checked={formData.isApartment}
-                onChange={handleChange}
-              />
-            </label>
-          </div>
-
-          {formData.isApartment && (
-            <div>
-              <div>
-                <p className="input-title">Floor number</p>
-                <InputGroup className="input mb-3">
-                  <Form.Control
-                    type="text"
-                    placeholder="floorNumber"
-                    aria-label="floorNumber"
-                    aria-describedby="basic-addon1"
-                    name="floorNumber"
-                    value={formData.floorNumber}
-                    onChange={handleChange}
-                  />
-                </InputGroup>
+                <div className="form-group">
+                  <p className="input-title">Street Number:</p>
+                  <InputGroup className="input mb-3">
+                    <Form.Control
+                      type="text"
+                      placeholder="Street Number"
+                      aria-label="streetNumber"
+                      aria-describedby="basic-addon1"
+                      name="streetNumber"
+                      maxLength={4}
+                      value={formData.streetNumber}
+                      onChange={handleChange}
+                      required
+                    />
+                  </InputGroup>
+                </div>
               </div>
               <div>
-                <p className="input-title">Apartment Number</p>
-                <InputGroup className="input mb-3">
-                  <Form.Control
-                    type="text"
-                    placeholder="apartmentNumber"
-                    aria-label="apartmentNumber"
-                    aria-describedby="basic-addon1"
-                    name="apartmentNumber"
-                    value={formData.apartmentNumber}
-                    onChange={handleChange}
-                  />
-                </InputGroup>
+                <label>
+                  <div className="container_checkbox">
+                    <p className="p_check">¿is Apartment?</p>
+                    <input
+                      type="checkbox"
+                      name="isApartment"
+                      checked={formData.isApartment}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </label>
+              </div>
+
+              {formData.isApartment && (
+                <div>
+                  <div>
+                    <p className="input-title">Floor number</p>
+                    <InputGroup className="input mb-3">
+                      <Form.Control
+                        type="text"
+                        placeholder="Floor Number"
+                        aria-label="floorNumber"
+                        aria-describedby="basic-addon1"
+                        name="floorNumber"
+                        value={formData.floorNumber}
+                        onChange={handleChange}
+                      />
+                    </InputGroup>
+                  </div>
+                  <div>
+                    <p className="input-title">Apartment Number</p>
+                    <InputGroup className="input mb-3">
+                      <Form.Control
+                        type="text"
+                        placeholder="Apartment Number"
+                        aria-label="apartmentNumber"
+                        aria-describedby="basic-addon1"
+                        name="apartmentNumber"
+                        value={formData.apartmentNumber}
+                        onChange={handleChange}
+                      />
+                    </InputGroup>
+                  </div>
+                </div>
+              )}
+              <div>
+                <h3>Select a delivery date:</h3>
+                <DatePicker
+                  selected={
+                    formData.selectedDate
+                      ? new Date(formData.selectedDate)
+                      : null
+                  }
+                  onChange={handleDateChange}
+                  dateFormat="dd/MM/yyyy" // Puedes ajustar el formato según tus necesidades
+                  placeholderText="Click and choose a date"
+                  title="Click and choose a date that is older than today, but not older than a week."
+                  required
+                />
               </div>
             </div>
-          )}
-          <div>
-            <h3>Selecciona una fecha:</h3>
-            <DatePicker
-              selected={
-                formData.selectedDate ? new Date(formData.selectedDate) : null
-              }
-              onChange={handleDateChange}
-              dateFormat="dd/MM/yyyy" // Puedes ajustar el formato según tus necesidades
-              placeholderText="Haga clic y elija una fecha"
-              title="Haga clic y elija una fecha que sea mayor a la de hoy pero no superior a una semana."
+            <Button
+              className="button_submit"
+              type="submit"
+              disabled={!!preferenceId}
+            >
+              Request Payment
+            </Button>
+          </form>
+          {preferenceId && (
+            <Wallet
+              initialization={{
+                preferenceId,
+                redirectMode: "modal",
+              }}
             />
+          )}
+          <div className="container_cancel">
+            <div className="container_cancel_button">
+              <Button
+                className="button_cancel btn-primary"
+                onClick={handleCancelPay}
+              >
+                Cancel Payment
+              </Button>
+            </div>
+            <div className="container_cancel_p">
+              <p className="cancel_p">Cancel regretless</p>
+            </div>
           </div>
         </div>
-        <Button
-          className="button_submit"
-          type="submit"
-          disabled={!!preferenceId}
-        >
-          Solicitar Pago
-        </Button>
-      </form>
-      {preferenceId && (
-        <Wallet
-          initialization={{
-            preferenceId,
-            redirectMode: "modal",
-          }}
-        />
-      )}
-      <Button className="button_cancel" onClick={handleCancelPay}>
-        Cancelar Compra
-      </Button>
+      </div>
     </div>
   );
 };

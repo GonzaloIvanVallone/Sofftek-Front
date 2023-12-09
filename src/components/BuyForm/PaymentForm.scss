@@ -1,11 +1,51 @@
-.informationProduct {
-  display: flex;
-  justify-content: space-around;
+@font-face {
+  font-family: "proximaNova";
+  src: url("./path/to/proxima-nova.woff") format("woff");
+  /* Puedes agregar más formatos de fuente aquí si es necesario */
+  font-weight: normal;
+  font-style: normal;
+}
+@import "../../assets/variables.scss";
+
+// .informationProduct {
+//   display: flex;
+//   justify-content: space-around;
+// }
+
+.table {
+  border-collapse: collapse;
+
+  th,
+  td {
+    border: none;
+    padding: 8px; /* Añade un relleno para mejorar la legibilidad */
+  }
+}
+
+.button_cancel {
+  width: 285px;
+  height: 45px;
+  font-family: "proximaNova", sans-serif;
+  background-color: #e91c1c !important;
+  color: #ffffff !important;
+  margin-bottom: 20px;
+  margin: 0px;
+
+  &:hover {
+    background-color: #ce1818 !important; // Cambiar a blanco cuando el mouse está sobre el botón
+  }
 }
 
 .form-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.form-group {
+  padding: 0px 10px;
+  width: 300px;
+  margin: 2vh;
 }
 
 .form-row {
@@ -13,7 +53,13 @@
   justify-content: space-evenly;
 }
 
-.from-group {
+.container_checkbox {
+  display: flex;
+  flex-direction: row;
+}
+
+.p_check {
+  margin-bottom: 0;
 }
 
 .input-title {
@@ -22,11 +68,25 @@
 }
 
 .input {
-  width: 350px;
+  width: 100%;
 }
 
 .accordion {
-  width: 60%;
+  width: 80%;
+}
+
+.container-invoicing {
+  background-color: $color1;
+}
+
+.payment {
+  display: inline-block;
+  width: auto;
+  margin: 0; // Asegúrate de que no haya márgenes adicionales
+  padding: 0; // Asegúrate de que no haya relleno adicional
+  border: 3px black solid;
+  border-radius: 12px 12% 12px 12%;
+  background-color: #dddddd;
 }
 
 .container-payment {
@@ -40,16 +100,34 @@
 .button_submit {
   margin-top: 20px;
 
+  &:hover {
+    color: #ffffff !important;
+    background-color: #1d113b !important; // Cambiar a blanco cuando el mouse está sobre el botón
+  }
+
   &:disabled {
     margin: 0px;
+    color: #dddddd;
     /* Otros estilos para el estado deshabilitado... */
   }
 }
 
-.button_cancel {
-  width: 285px;
-  height: 45px;
+.container_cancel_p {
+  display: flex;
+  justify-content: center;
+  margin-top: 4px;
+  padding: 0 16px;
+}
 
-  background-color: #e91c1c !important;
-  margin-bottom: 20px;
+.cancel_p {
+  font-family: "proximaNova", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  word-break: break-word;
+  line-height: 15px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #737373;
 }
