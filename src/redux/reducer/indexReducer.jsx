@@ -96,6 +96,20 @@ const rootReducer = (state = initialState, action) => {
       ...state,
       allCategories: updatedCat,
     };
+    case "CREATE_PRODUCT":{
+      return {
+        ...state,
+        allProducts: [...state.allProducts, action.payload]
+      }
+    }
+    case "DELETE_PRODUCT":
+      const updatedProducts = state.allProducts.filter(
+        e => e.idProduct !== action.payload
+      );
+      return {
+        ...state,
+        allProducts: updatedProducts,
+      };
     default:
       return state;
   }

@@ -1,45 +1,62 @@
 import React from 'react';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Form } from 'react-bootstrap';
+import { useSelector, useDispatch } from "react-redux";
+import { getAllCategories, getAllProducts, createProduct } from '../../../redux/actions/indexActions';
 
-const ProductModal = ({ modal, setModal, product }) => {
-    const [categoryList, setCategoryList] = useState([]);
-    const [productList, setProductList] = useState([]);
+const ProductModal = ({ modal, setModal }) => {
+    const dispatch = useDispatch();
+    const allCategories = useSelector((state) => state.allCategories);
+    const [product, setProduct] = useState({
+        productName: '',
+        productStock: 0,
+        productImg: '',
+        description:'',
+        productPrice: 0,
+        typeCategory:{
+            idCategory:0,
+            categoryName:''
+        }
+    });
+
+    const handleSubmit = (e) => {
+        e.preventDefault(e);
+        dispatch(createProduct(product));
+        let inputs = document.querySelectorAll("input");
+        inputs.forEach((input) => (input.value = ""));
+        setModal(false);  
+    };
 
     useEffect(() => {
-        const getProducts =async()=>{
-            try{
-                const response = await axios.get('http://localhost:8080/api/v1/product/list');
-                setProductList(response.data);
-            }catch(error){
-                console.log('Error: ',error)
-            }
-        };
-        getProducts();
+        dispatch(getAllCategories()),
+        dispatch(getAllProducts())
     }, []);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setProduct((prevProduct) => ({
+          ...prevProduct,
+          [name]: value
+        }));
+    };
+    const handleCategoryChange = (e) => {
+        const selectedCategoryName = e.target.value;
+        const selectedCategory = allCategories.find(category => category.category === selectedCategoryName);
+        const selectedCategoryId = selectedCategory ? selectedCategory.idCategory : null;
+        setProduct((prevProduct) => ({
+          ...prevProduct,
+          typeCategory: {
+            idCategory: selectedCategoryId,
+            categoryName: selectedCategoryName
+          }
+        }));
+    };
     
-
-    useEffect(() => {
-        // Función para obtener las categorías desde el backend
-        const fetchCategories = async () => {
-            try {
-                // Realiza una solicitud GET al endpoint de categorías del backend
-                const response = await axios.get('http://localhost:8080/api/v1/category/list');
-                setCategoryList(response.data); // Actualiza el estado con las categorías obtenidas
-            } catch (error) {
-                console.error('Error fetching categories:', error);
-            }
-        };
-
-        fetchCategories();
-    }, []);
-
 
     return (
         <Modal show={modal}>
             <ModalHeader style={{ display: 'block' }}>
-                <h4>Create user</h4>
+                <h4>Create product</h4>
             </ModalHeader>
             <ModalBody>
                 <Form >
@@ -47,39 +64,51 @@ const ProductModal = ({ modal, setModal, product }) => {
                         <Form.Label>Name</Form.Label>
                         <Form.Control
                             type="text"
-                            name="name"
+                            name="productName"
+                            value={product.productName}
+                            onChange={handleChange}
+                        />
+                        <Form.Label>Image</Form.Label>
+                        <Form.Control
+                            type="text"
+                            name="productImg"
+                            value={product.productImg}
+                            onChange={handleChange}
                         />
                         <Form.Label>Description</Form.Label>
                         <Form.Control
                             as="textarea"
                             rows={3}
                             name="description"
+                            value={product.description}
+                            onChange={handleChange}
                         />
                         <Form.Label>Price</Form.Label>
                         <Form.Control
                             type="text"
-                            name="price"
+                            name="productPrice"
+                            value={product.productPrice}
+                            onChange={handleChange}
                         />
                         <Form.Label>Stock</Form.Label>
                         <Form.Control
                             type="text"
-                            name="stock"
+                            name="productStock"
+                            value={product.productStock}
+                            onChange={handleChange}
                         />
                         <Form.Label>Category</Form.Label>
-                        
-                            <Form.Select>
-                                {categoryList.map((category) => (
-                                    <option key={category.id} value={category.id}>
+                            <Form.Select onChange={handleCategoryChange}>
+                                {allCategories.filter(category => category.category !== 'all').map((category, index) => (
+                                    <option key={index} value={category.id}>
                                         {category.category}
                                     </option>))}
-                        </Form.Select>
-
+                            </Form.Select>
                     </Form.Group>
                 </Form>
             </ModalBody>
-
             <ModalFooter>
-                <Button className='btn'>Save</Button>
+                <Button className='btn' onClick={(e) => handleSubmit(e)}>Save</Button>
                 <Button className='btn' onClick={() => setModal(false)}> Cancel</Button>
             </ModalFooter>
         </Modal>
