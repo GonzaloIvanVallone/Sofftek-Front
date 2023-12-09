@@ -273,3 +273,8 @@ export const setPreferenceId = (newId) => ({
   type: "SET_PREFERENCE_ID",
   payload: newId,
 });
+
+export const setLoggedIn = () => ({
+  type: "SET_LOGGEDIN",
+  payload: true,
+});

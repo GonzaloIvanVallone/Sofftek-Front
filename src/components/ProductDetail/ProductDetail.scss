@@ -53,15 +53,15 @@
 }
 
 .footer-container {
-  position: fixed;
+  // position: fixed;
   bottom: 0;
   width: 98%;
 }
-.Product-Detail{
+.Product-Detail {
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  align-content:center;
+  align-content: center;
   min-height: 100vh;
 }

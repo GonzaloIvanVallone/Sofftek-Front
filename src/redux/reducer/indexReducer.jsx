@@ -54,7 +54,10 @@ const rootReducer = (state = initialState, action) => {
         userName: userName,
       };
     case "LOGOUT":
-      return { ...state, isLoggedIn: false };
+      return {
+        ...state,
+        isLoggedIn: false,
+      };
     case "GET_CART":
       return {
         ...state,
@@ -102,6 +105,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         idPreference: action.payload,
+      };
+    case "SET_LOGGEDIN":
+      return {
+        ...state,
+        isLoggedIn: action.payload,
       };
     default:
       return state;
