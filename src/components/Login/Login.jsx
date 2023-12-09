@@ -49,11 +49,9 @@ export const Login = () => {
 
   const handleLogin = async () => {
     try {
-      dispatch(login(JSON.stringify(credentials)))
+      await dispatch(login(JSON.stringify(credentials)))
       const storedToken = localStorage.getItem('token');
       if (storedToken) {
-        setShowSuccessAlert(true);
-        setAlertMessage('Successful login!');
         setTimeout(() => {
           navigate('/');
         }, 2000);

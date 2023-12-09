@@ -6,17 +6,22 @@ import { ProductDetail } from "./components/ProductDetail/ProductDetail";
 import { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
-import {getAllProducts} from "./redux/actions/indexActions";
-import { useDispatch } from 'react-redux';
-import { ForgotPassword} from "./components/ForgotPassword/ForgotPassword"
-import { NewPassword} from "./components/ForgotPassword/NewPassword"
+import { getAllProducts } from "./redux/actions/indexActions";
+import { useDispatch } from "react-redux";
+import { ForgotPassword } from "./components/ForgotPassword/ForgotPassword";
+import { NewPassword } from "./components/ForgotPassword/NewPassword";
 import { getCart } from "./redux/actions/indexActions";
 import { Cart } from "./components/Cart/Cart";
 import { Paymentform } from "./components/BuyForm/PaymentForm";
 import { NavBar } from "./components/NavBar/NavBar";
 import { Footer } from "./components/Footer/Footer";
 import { NotLoggin } from "./components/NotLoggin/NotLoggin";
-
+import { AdminNavbar } from "./components/AdminNavbar/AdminNavbar";
+import Homedash from "./components/AdminNavbar/Homedash/Homedash";
+import Userdash from "./components/AdminNavbar/Userdash/Userdash";
+import Productdash from "./components/AdminNavbar/Productsdash/Productdash";
+import Categorydash from "./components/AdminNavbar/Categorydash/Categorydash";
+import Sales from "./components/AdminNavbar/Sales/sales";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,7 +37,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App container-fluid">
-        <NavBar />
+        {/* <NavBar /> */}
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path={"/register"} element={<Register />} />
@@ -47,8 +52,15 @@ function App() {
           />
           <Route exact path={"/Buy"} element={<Paymentform />} />
           <Route exact path={"/NotLoggin"} element={<NotLoggin />} />
+          <Route path="/dashboard/*" element={<AdminNavbar />}>
+            <Route index path="homedash" element={<Homedash />} />
+            <Route path="userdash" element={<Userdash />} />
+            <Route path="productdash" element={<Productdash />} />
+            <Route path="categorydash" element={<Categorydash />} />
+            <Route path="sales" element={<Sales />} />
+          </Route>
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </BrowserRouter>
   );

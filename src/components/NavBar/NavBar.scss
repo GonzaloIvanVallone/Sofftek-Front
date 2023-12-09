@@ -25,6 +25,14 @@
     &:hover {
     }
   }
+  .btnLogo1 {
+    size: 90px;
+    max-width: 100%;
+    background-color: $color1;
+    font-size: 16px;
+    color: $color2;
+    border: none;
+  }
 
   .btn {
     margin: 4px;

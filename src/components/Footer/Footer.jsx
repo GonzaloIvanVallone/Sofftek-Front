@@ -5,7 +5,7 @@ export const Footer = () => {
   return (
     <footer className="footer">
       {/* Contenido del pie de página */}
-      <p>&copy; 2023 Tu Empresa</p>
+      <p>&copy; 2023 Hardtek</p>
     </footer>
   );
 };

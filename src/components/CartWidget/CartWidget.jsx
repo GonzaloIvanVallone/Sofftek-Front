@@ -10,6 +10,7 @@ export const CartWidget = ({itemCount}) => {
 
     const navigate = useNavigate();
     
+    
 
     function handleCart() {
         navigate('/cart')
@@ -25,5 +26,5 @@ export const CartWidget = ({itemCount}) => {
 }
 
 CartWidget.propTypes = {
-    itemCount: PropTypes.number, // Define la validación de tipo y que es requerido
+    itemCount: PropTypes.number, // Define la validación de tipo 
 };
