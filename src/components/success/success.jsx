@@ -16,17 +16,17 @@ export const Success = () => {
     // if(localStorage.getItem("formData").)
     localStorage.removeItem("formData");
     localStorage.removeItem("grouped");
-    navigate("/");u
+    navigate("/");
   };
 
   return (
     <div>
-      <div class="container mt-5">
-        <div class="card text-start">
-          <div class="card-header">
+      <div className="container mt-5">
+        <div className="card text-start">
+          <div className="card-header">
             <h1>Thanks for trust us!</h1>
           </div>
-          <div class="card-body">
+          <div className="card-body">
               <p>Province: {formData && formData.province}</p>
               <p>Locality: {formData && formData.locality}</p>
               <p>Street: {formData && formData.street}</p>
@@ -41,8 +41,8 @@ export const Success = () => {
                 ))}
               </ul>
           </div>
-          <div class="card-footer">
-            <button class="btn btn-primary" onClick={handleGoHome}>Go back Hardtekk!</button>
+          <div className="card-footer">
+            <button className="btn btn-primary" onClick={handleGoHome}>Go back Hardtekk!</button>
           </div>
         </div>
       </div>
