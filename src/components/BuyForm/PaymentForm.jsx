@@ -6,14 +6,20 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import "./PaymentForm.scss";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
-import { createPreference } from "../../redux/actions/indexActions";
+import {
+  createPreference,
+  setPreferenceId,
+} from "../../redux/actions/indexActions";
 import { useDispatch, useSelector } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 export const Paymentform = () => {
   const location = useLocation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const preferenceId = useSelector((state) => state.idPreference);
   const products = location.state?.cart;
 
@@ -34,6 +40,20 @@ export const Paymentform = () => {
     product: product,
     totalForProduct: product.productPrice * product.quantity, // Otras lógicas para calcular el total si es necesario
   }));
+
+  const [formData, setFormData] = useState({
+    province: "",
+    locality: "",
+    street: "",
+    streetNumber: "",
+    isApartment: false,
+    apartmentNumber: "",
+    floorNumber: "",
+    lstItem: items,
+    selectedDate: null,
+    amount: total,
+    token: localStorage.getItem("token"),
+  });
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -58,29 +78,36 @@ export const Paymentform = () => {
     lstItem: items,
   };
 
-  const [formData, setFormData] = useState({
-    province: "",
-    locality: "",
-    street: "",
-    streetNumber: "",
-    isApartment: false,
-    apartmentNumber: "",
-    floorNumber: "",
-    lstItem: items,
-    selectedDate: null,
-    amount: total,
-    token: localStorage.getItem("token"),
-  });
+  const handleRequestPreferenceId = () => {
+    console.log(formData);
+    // Validación de campos requeridos
+    const requiredFields = [
+      "province",
+      "locality",
+      "street",
+      "streetNumber",
+      "selectedDate",
+    ];
 
-  const handleRequestPreferenceId = (name, type, checked, value) => {
-    localStorage.setItem(
-      "formData",
-      JSON.stringify({
-        ...formData,
-        [name]: type === "checkbox" ? checked : value,
-      })
+    if (formData.isApartment) {
+      console.log("entre");
+      requiredFields.push("floorNumber", "apartmentNumber");
+    }
+
+    // Filtrar los campos que están en blanco
+    const emptyFields = requiredFields.filter(
+      (field) => !formData[field] || formData[field].trim() === ""
     );
-    console.log(localStorage.getItem("formData"));
+
+    if (emptyFields.length > 0) {
+      alert(
+        `Por favor, completa los siguientes campos: ${emptyFields.join(", ")}`
+      );
+      return;
+    }
+
+    // Resto de la lógica para manejar el envío del formulario
+    localStorage.setItem("formData", JSON.stringify(formData));
     dispatch(createPreference(paymentMPDTOFromFrontend));
   };
 
@@ -103,15 +130,12 @@ export const Paymentform = () => {
       ...prevData,
       selectedDate: date ? date.toISOString() : null,
     }));
+  };
 
-    // Almacena el formData actualizado en el localStorage
-    localStorage.setItem(
-      "formData",
-      JSON.stringify({
-        ...formData,
-        selectedDate: date ? date.toISOString() : null,
-      })
-    );
+  const handleCancelPay = () => {
+    dispatch(setPreferenceId(""));
+    localStorage.removeItem("formData");
+    navigate("/");
   };
 
   return (
@@ -138,7 +162,12 @@ export const Paymentform = () => {
       </Accordion>
       <h2>total : {total}</h2>
 
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleRequestPreferenceId();
+        }}
+      >
         <div className="form-container">
           <div className="form-row">
             <div className="form-group">
@@ -262,18 +291,14 @@ export const Paymentform = () => {
               title="Haga clic y elija una fecha que sea mayor a la de hoy pero no superior a una semana."
             />
           </div>
-          <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-              Dropdown Button
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              <Dropdown.Item onClick={handleRequestPreferenceId}>
-                Action
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
         </div>
+        <Button
+          className="button_submit"
+          type="submit"
+          disabled={!!preferenceId}
+        >
+          Solicitar Pago
+        </Button>
       </form>
       {preferenceId && (
         <Wallet
@@ -283,6 +308,9 @@ export const Paymentform = () => {
           }}
         />
       )}
+      <Button className="button_cancel" onClick={handleCancelPay}>
+        Cancelar Compra
+      </Button>
     </div>
   );
 };

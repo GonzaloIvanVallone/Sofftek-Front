@@ -98,6 +98,11 @@ const rootReducer = (state = initialState, action) => {
         allProducts: action.payload,
         backupProducts: action.payload,
       };
+    case "SET_PREFERENCE_ID":
+      return {
+        ...state,
+        idPreference: action.payload,
+      };
     default:
       return state;
   }

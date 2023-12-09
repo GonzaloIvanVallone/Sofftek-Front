@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { bibSave, getAllProducts } from "../../redux/actions/indexActions";
+import { bibSave } from "../../redux/actions/indexActions";
 import { useNavigate } from "react-router-dom";
 
 export const Success = () => {
@@ -10,6 +10,7 @@ export const Success = () => {
 
   useEffect(() => {
     setMensajeComprimido(localStorage.getItem("formData"));
+    console.log(mensajeComprimido);
   }, []);
 
   const handleGoHome = () => {
@@ -17,7 +18,6 @@ export const Success = () => {
     // if(localStorage.getItem("formData").)
     localStorage.removeItem("formData");
     localStorage.removeItem("grouped");
-    dispatch(getAllProducts());
     navigate("/");
   };
 

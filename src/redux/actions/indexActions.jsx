@@ -268,3 +268,8 @@ export const bibSave = (bill) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const setPreferenceId = (newId) => ({
+  type: "SET_PREFERENCE_ID",
+  payload: newId,
+});
