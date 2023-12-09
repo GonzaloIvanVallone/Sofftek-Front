@@ -7,6 +7,7 @@ const initialState = {
   cart: JSON.parse(localStorage.getItem("cart")) || [],
   isAdmin: false,
   userName: "",
+  allUsers: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -110,6 +111,10 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allProducts: updatedProducts,
       };
+    case "GET_ALL_USERS": return{
+        ...state,
+        allUsers: action.payload
+      }
     default:
       return state;
   }
