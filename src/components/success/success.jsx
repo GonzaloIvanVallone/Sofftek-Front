@@ -16,7 +16,7 @@ export const Success = () => {
     // if(localStorage.getItem("formData").)
     localStorage.removeItem("formData");
     localStorage.removeItem("grouped");
-    navigate("/");
+    navigate("/");u
   };
 
   return (
