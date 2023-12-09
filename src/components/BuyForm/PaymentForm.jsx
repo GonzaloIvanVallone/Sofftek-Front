@@ -85,7 +85,7 @@ export const Paymentform = () => {
     const requiredFields = [];
 
     if (formData.isApartment) {
-      requiredFields.push("Floor Number", "Apartment Number");
+      requiredFields.push("floorNumber", "apartmentNumber");
     }
 
     // Filtrar los campos que están en blanco
