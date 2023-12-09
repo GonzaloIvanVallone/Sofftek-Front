@@ -15,7 +15,7 @@ export const Paymentform = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const preferenceId = useSelector((state) => state.idPreference);
-  const products = location.state && location.state.cart;
+  const products = location.state?.cart;
 
   useEffect(() => {
     initMercadoPago("TEST-318bcc68-f6f3-4251-bcbd-b07aac21c30d", {
@@ -37,10 +37,21 @@ export const Paymentform = () => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+
+    if (type === "checkbox") {
+      setFormData({
+        ...formData,
+        [name]: checked,
+        // Si el checkbox pasa de true a false, resetea los valores de floorNumber y apartmentNumber
+        floorNumber: checked ? formData.floorNumber : "",
+        apartmentNumber: checked ? formData.apartmentNumber : "",
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   const paymentMPDTOFromFrontend = {
@@ -139,7 +150,7 @@ export const Paymentform = () => {
                   aria-label="province"
                   aria-describedby="basic-addon1"
                   name="province"
-                  maxLength={10}
+                  maxLength={18}
                   value={formData.province}
                   onChange={handleChange}
                 />
@@ -155,6 +166,7 @@ export const Paymentform = () => {
                   aria-label="locality"
                   aria-describedby="basic-addon1"
                   name="locality"
+                  maxLength={18}
                   value={formData.locality}
                   onChange={handleChange}
                 />
@@ -171,6 +183,7 @@ export const Paymentform = () => {
                   aria-label="street"
                   aria-describedby="basic-addon1"
                   name="street"
+                  maxLength={18}
                   value={formData.street}
                   onChange={handleChange}
                 />
@@ -186,6 +199,7 @@ export const Paymentform = () => {
                   aria-label="streetNumber"
                   aria-describedby="basic-addon1"
                   name="streetNumber"
+                  maxLength={4}
                   value={formData.streetNumber}
                   onChange={handleChange}
                 />
@@ -194,7 +208,7 @@ export const Paymentform = () => {
           </div>
           <div>
             <label>
-              ¿is Apartment?
+              <p>¿is Apartment?</p>
               <input
                 type="checkbox"
                 name="isApartment"

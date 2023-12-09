@@ -92,7 +92,12 @@ const rootReducer = (state = initialState, action) => {
     case "CALL_MERCADO_PAGO":
       return { ...state, idPreference: action.payload };
     case "SAVE_BID":
-      return { ...state };
+      return {
+        ...state,
+        filteredProducts: action.payload,
+        allProducts: action.payload,
+        backupProducts: action.payload,
+      };
     default:
       return state;
   }

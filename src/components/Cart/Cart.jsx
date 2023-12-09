@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCart } from "../../redux/actions/indexActions";
+import { getCart, removeFromCart } from "../../redux/actions/indexActions";
 import "./Cart.css";
-import { removeFromCart } from "../../redux/actions/indexActions";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 

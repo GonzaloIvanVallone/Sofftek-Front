@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { bibSave } from "../../redux/actions/indexActions";
+import { bibSave, getAllProducts } from "../../redux/actions/indexActions";
 import { useNavigate } from "react-router-dom";
 
 export const Success = () => {
@@ -14,8 +14,10 @@ export const Success = () => {
 
   const handleGoHome = () => {
     dispatch(bibSave(JSON.parse(localStorage.getItem("formData"))));
+    // if(localStorage.getItem("formData").)
     localStorage.removeItem("formData");
     localStorage.removeItem("grouped");
+    dispatch(getAllProducts());
     navigate("/");
   };
 

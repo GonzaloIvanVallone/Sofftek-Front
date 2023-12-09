@@ -55,14 +55,13 @@ export const getAllCategories = () => async (dispatch) => {
   }
 };
 
-
 export const newCategory = (payload) => async () => {
   try {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     let response = await axios.post(`${category_route}/new`, payload, {
-      headers: { Authorization: `Bearer ${token}`},
+      headers: { Authorization: `Bearer ${token}` },
     });
-  }catch(error){
+  } catch (error) {
     if (error.response) {
       Swal.fire({
         title: `${error.response.data}`,
@@ -72,7 +71,6 @@ export const newCategory = (payload) => async () => {
     }
   }
 };
-
 
 export const getProductsByName = (name) => async (dispatch) => {
   try {
@@ -183,8 +181,8 @@ export const login = (payload) => async (dispatch) => {
       type: "LOGIN",
       payload: {
         role: response.data.user.roles[0],
-        userName: response.data.user.userName
-      }
+        userName: response.data.user.userName,
+      },
     });
   } catch (error) {
     if (error.response) {
@@ -210,8 +208,8 @@ export const register = (payload) => async (dispatch) => {
       type: "LOGIN",
       payload: {
         role: response.data.user.roles[0],
-        userName: response.data.user.userName
-      }
+        userName: response.data.user.userName,
+      },
     });
   } catch (error) {
     if (error.response) {
@@ -262,10 +260,9 @@ export const bibSave = (bill) => async (dispatch) => {
         },
       }
     );
-    console.log(response.data);
     return dispatch({
       type: "SAVE_BID",
-      bid: response.data,
+      payload: response.data,
     });
   } catch (error) {
     console.log(error);
