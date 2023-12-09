@@ -30,6 +30,60 @@ export const getAllProducts = () => async (dispatch) => {
   }
 };
 
+export const createProduct = (payload) => async (dispatch) => {
+  try {
+    const token = localStorage.getItem('token');
+    let response = await axios.post(`${product_route}/new`, payload, {
+      headers: { Authorization: `Bearer ${token}`},
+    });
+    return dispatch({
+      type: "CREATE_PRODUCT",
+      payload: response.data,
+    });
+  } catch (error) {
+    if (error.response) {
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    } else {
+      Swal.fire({
+        title: "No response received from the server",
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    }
+  }
+};
+
+export const deleteProduct = (id) => async (dispatch) => {
+  try {
+    const token = localStorage.getItem('token');
+    let response = await axios.delete(`${product_route}/delete/${id}`, {
+      headers: { Authorization: `Bearer ${token}`},
+    });
+    return dispatch({
+      type: "DELETE_PRODUCT",
+      payload: id,
+    });
+  } catch (error) {
+    if (error.response) {
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    } else {
+      Swal.fire({
+        title: "No response received from the server",
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    }
+  }
+};
+
 export const filterByCategories = (payload) => {
   return {
     type: "FILTER_BY_CATEGORIES",
