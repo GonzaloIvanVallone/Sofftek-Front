@@ -72,6 +72,42 @@ export const newCategory = (payload) => async () => {
     }
   }
 };
+export const updateCategory = (id) => async () => {
+  try {
+    const token = localStorage.getItem('token');
+    let response = await axios.put(`${category_route}/update/${id}`, {
+      headers: { Authorization: `Bearer ${token}`},
+    });
+  }catch(error){
+    if (error.response) {
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    }
+  }
+};
+export const deleteCategory = (id,category) => async (dispatch) => {
+  try {
+    const token = localStorage.getItem('token');
+    let response = await axios.delete(`${category_route}/delete/${id}`, {
+      headers: { Authorization: `Bearer ${token}`},
+    });
+    return dispatch({
+      type: "DELETE_CATEGORY",
+      payload: category,
+    });
+  }catch(error){
+    if (error.response) {
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    }
+  }
+};
 
 
 export const getProductsByName = (name) => async (dispatch) => {

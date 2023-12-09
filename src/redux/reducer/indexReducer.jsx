@@ -88,7 +88,14 @@ const rootReducer = (state = initialState, action) => {
         "cart",
         JSON.stringify(updatedCart)
       ));
-
+    case "DELETE_CATEGORY":
+    const updatedCat = state.allCategories.filter(
+      e => e.category !== action.payload
+    );
+    return {
+      ...state,
+      allCategories: updatedCat,
+    };
     default:
       return state;
   }
