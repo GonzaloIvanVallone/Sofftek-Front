@@ -33,9 +33,9 @@ export const getAllProducts = () => async (dispatch) => {
 
 export const createProduct = (payload) => async (dispatch) => {
   try {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     let response = await axios.post(`${product_route}/new`, payload, {
-      headers: { Authorization: `Bearer ${token}`},
+      headers: { Authorization: `Bearer ${token}` },
     });
     return dispatch({
       type: "CREATE_PRODUCT",
@@ -60,9 +60,9 @@ export const createProduct = (payload) => async (dispatch) => {
 
 export const deleteProduct = (id) => async (dispatch) => {
   try {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     let response = await axios.delete(`${product_route}/delete/${id}`, {
-      headers: { Authorization: `Bearer ${token}`},
+      headers: { Authorization: `Bearer ${token}` },
     });
     return dispatch({
       type: "DELETE_PRODUCT",
@@ -110,14 +110,13 @@ export const getAllCategories = () => async (dispatch) => {
   }
 };
 
-
 export const newCategory = (payload) => async () => {
   try {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     let response = await axios.post(`${category_route}/new`, payload, {
-      headers: { Authorization: `Bearer ${token}`},
+      headers: { Authorization: `Bearer ${token}` },
     });
-  }catch(error){
+  } catch (error) {
     if (error.response) {
       Swal.fire({
         title: `${error.response.data}`,
@@ -129,11 +128,11 @@ export const newCategory = (payload) => async () => {
 };
 export const updateCategory = (id) => async () => {
   try {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     let response = await axios.put(`${category_route}/update/${id}`, {
-      headers: { Authorization: `Bearer ${token}`},
+      headers: { Authorization: `Bearer ${token}` },
     });
-  }catch(error){
+  } catch (error) {
     if (error.response) {
       Swal.fire({
         title: `${error.response.data}`,
@@ -143,17 +142,17 @@ export const updateCategory = (id) => async () => {
     }
   }
 };
-export const deleteCategory = (id,category) => async (dispatch) => {
+export const deleteCategory = (id, category) => async (dispatch) => {
   try {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     let response = await axios.delete(`${category_route}/delete/${id}`, {
-      headers: { Authorization: `Bearer ${token}`},
+      headers: { Authorization: `Bearer ${token}` },
     });
     return dispatch({
       type: "DELETE_CATEGORY",
       payload: category,
     });
-  }catch(error){
+  } catch (error) {
     if (error.response) {
       Swal.fire({
         title: `${error.response.data}`,
@@ -163,7 +162,6 @@ export const deleteCategory = (id,category) => async (dispatch) => {
     }
   }
 };
-
 
 export const getProductsByName = (name) => async (dispatch) => {
   try {
@@ -274,8 +272,8 @@ export const login = (payload) => async (dispatch) => {
       type: "LOGIN",
       payload: {
         role: response.data.user.roles[0],
-        userName: response.data.user.userName
-      }
+        userName: response.data.user.userName,
+      },
     });
   } catch (error) {
     if (error.response) {
@@ -301,8 +299,8 @@ export const register = (payload) => async (dispatch) => {
       type: "LOGIN",
       payload: {
         role: response.data.user.roles[0],
-        userName: response.data.user.userName
-      }
+        userName: response.data.user.userName,
+      },
     });
   } catch (error) {
     if (error.response) {
@@ -321,11 +319,62 @@ export const register = (payload) => async (dispatch) => {
   }
 };
 
+export const createPreference = (payload) => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:8080/api/v1/product/mercadoPago/compra",
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    console.log(response.data);
+    return dispatch({
+      type: "CALL_MERCADO_PAGO",
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const billSave = (bill) => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:8080/api/v1/product/mercadoPago/newBill",
+      bill,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    return dispatch({
+      type: "SAVE_BID",
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const setPreferenceId = (newId) => ({
+  type: "SET_PREFERENCE_ID",
+  payload: newId,
+});
+
+export const setLoggedIn = () => ({
+  type: "SET_LOGGEDIN",
+  payload: true,
+});
+
 export const getAllUsers = () => async (dispatch) => {
   try {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     let response = await axios.get(`${user_route}/list`, {
-      headers: { Authorization: `Bearer ${token}`},
+      headers: { Authorization: `Bearer ${token}` },
     });
     return dispatch({
       type: "GET_ALL_USERS",

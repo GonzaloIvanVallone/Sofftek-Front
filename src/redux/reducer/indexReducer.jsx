@@ -6,6 +6,7 @@ const initialState = {
   isLoggedIn: false,
   cart: JSON.parse(localStorage.getItem("cart")) || [],
   isAdmin: false,
+  idPreference: "",
   userName: "",
   allUsers: [],
   totalUsers:0,
@@ -53,10 +54,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         isLoggedIn: true,
         isAdmin,
-        userName: userName
-      }
+        userName: userName,
+      };
     case "LOGOUT":
-      return { ...state, isLoggedIn: false };
+      return {
+        ...state,
+        isLoggedIn: false,
+      };
     case "GET_CART":
       return {
         ...state,
@@ -91,29 +95,49 @@ const rootReducer = (state = initialState, action) => {
         "cart",
         JSON.stringify(updatedCart)
       ));
-    case "DELETE_CATEGORY":
-    const updatedCat = state.allCategories.filter(
-      e => e.category !== action.payload
-    );
-    return {
-      ...state,
-      allCategories: updatedCat,
-    };
-    case "CREATE_PRODUCT":{
+    case "CALL_MERCADO_PAGO":
+      return { ...state, idPreference: action.payload };
+    case "SAVE_BID":
       return {
         ...state,
-        allProducts: [...state.allProducts, action.payload]
-      }
+        filteredProducts: action.payload,
+        allProducts: action.payload,
+        backupProducts: action.payload,
+      };
+    case "SET_PREFERENCE_ID":
+      return {
+        ...state,
+        idPreference: action.payload,
+      };
+    case "SET_LOGGEDIN":
+      return {
+        ...state,
+        isLoggedIn: action.payload,
+      };
+    case "DELETE_CATEGORY":
+      const updatedCat = state.allCategories.filter(
+        (e) => e.category !== action.payload
+      );
+      return {
+        ...state,
+        allCategories: updatedCat,
+      };
+    case "CREATE_PRODUCT": {
+      return {
+        ...state,
+        allProducts: [...state.allProducts, action.payload],
+      };
     }
     case "DELETE_PRODUCT":
       const updatedProducts = state.allProducts.filter(
-        e => e.idProduct !== action.payload
+        (e) => e.idProduct !== action.payload
       );
       return {
         ...state,
         allProducts: updatedProducts,
       };
-    case "GET_ALL_USERS": return{
+    case "GET_ALL_USERS":
+      return {
         ...state,
         allUsers: action.payload
     }

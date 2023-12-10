@@ -1,19 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ProductDetail.scss";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { addToCart } from "../../redux/actions/indexActions";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { NavBar } from "../NavBar/NavBar";
+import { Footer } from "../Footer/Footer";
 
 export const ProductDetail = () => {
-  // const { id } = useParams();
-  // const allProducts = useSelector((state) => state.allProducts);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const location = useLocation();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const [productToSend, setproductToSend] = useState({});
   const product = location.state && location.state.product;
 
   const handleAddToCart = () => {
@@ -35,27 +36,42 @@ export const ProductDetail = () => {
     }
   };
 
+  useEffect(() => {
+    // Aquí puedes agregar lógica para modificar o agregar nuevos atributos a productToSend
+    // Por ejemplo, podrías añadir una nueva propiedad llamada 'totalPrice'
+
+    const updatedProductToSend = {
+      ...product,
+      totalPrice: product.productPrice,
+      quantity: 1,
+      // Agrega otros atributos según sea necesario
+    };
+
+    setproductToSend(updatedProductToSend);
+  }, [product]);
+
   const handleBuyClick = () => {
-    // Use useNavigate to navigate to the '/comprar' route
-    isLoggedIn
-      ? navigate("/Buy", { state: { product } })
-      : navigate("/NotLoggin", {
-        state: "You cannot purchase products without first logging into your account.",
+    if (isLoggedIn) {
+      navigate("/Buy", { state: { cart: [productToSend] } });
+    } else {
+      navigate("/NotLoggin", {
+        state: "no puede comprar productos sin antes ingresar a su cuenta",
       });
-    // navigate("/Buy", { state: { product } });
+    }
   };
 
   const handleAddCartClick = () => {
     isLoggedIn
       ? handleAddToCart()
       : navigate("/NotLoggin", {
-        state:
-          "You cannot add products to the cart without first logging into your account.",
-      });
+          state:
+            "You cannot add products to the cart without first logging into your account.",
+        });
   };
 
   return (
     <div className="container-product-deteil mt-1 mb-3">
+      <NavBar />
       <div className="Product-Detail">
         <div className="container-facher">
           <div className="container-information">
@@ -86,6 +102,9 @@ export const ProductDetail = () => {
             </button>
           </div>
         </div>
+      </div>
+      <div className="footer-container">
+        <Footer />
       </div>
     </div>
   );
