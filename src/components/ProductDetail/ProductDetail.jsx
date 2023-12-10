@@ -74,24 +74,27 @@ export const ProductDetail = () => {
 
   return (
     <div className="container-product-deteil mt-1 mb-3">      
-      <div className="Product-Detail">
+      <div className="Product-Detail">        
         <div className="container-facher">
           <div className="container-information">
-            <div className="container-img">
-              <img
-                className="img"
-                src={product.productImg}
-                alt="imagen del producto"
-              />
-              <div>
-              <ItemCount
-                initial={1} 
-                stock={product.productStock}
-                onAdd={(quantity) => handleAddToCart(quantity)}
-              />
-              </div>
+            <div>
+                <div className="container-img">              
+                  <img
+                    className="img"
+                    src={product.productImg}
+                    alt="imagen del producto"
+        
+
+                  /><ItemCount
+                  initial={1} 
+                  stock={product.productStock}
+                  onAdd={(quantity) => handleAddToCart(quantity)}
+                />              
+                <div>              
             </div>
-            <div className="container-card-info">
+          </div>
+        </div>        
+        <div className="container-card-info">
               <h3>{product.productName}</h3>
               <p>$ {product.productPrice}</p>
               <p>Stock: {product.productStock}</p>
@@ -100,15 +103,16 @@ export const ProductDetail = () => {
             </div>
           </div>
         </div>
-        <div className="container_buttons">
+        
+      </div>
+      <div className="container_buttons">
           <div className="buttons_actions">
             <button className="btn btn-success" onClick={handleBuyClick}>
               Buy
             </button>
           </div>
           
-        </div>
-      </div>      
+        </div>      
     </div>
   );
 };
