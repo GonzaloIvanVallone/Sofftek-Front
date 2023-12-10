@@ -48,6 +48,30 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allProducts: action.payload,
       };
+    case "CREATE_CATEGORY":
+      return {
+        ...state,
+        allCategories: [...state.allCategories, action.payload],
+      };
+    case "UPDATE_CATEGORY":
+      const updateCategory = action.payload; // El producto actualizado desde el backend
+      const updateCategories = state.allCategories.map((category) =>
+        category.idCategory === updateCategory.idCategory
+          ? updateCategory
+          : category
+      );
+      return {
+        ...state,
+        allCategories: updateCategories,
+      };
+    case "DELETE_CATEGORY":
+      const updatedCat = state.allCategories.filter(
+        (e) => e.category !== action.payload
+      );
+      return {
+        ...state,
+        allCategories: updatedCat,
+      };
     case "LOGIN":
       const { role, userName } = action.payload;
       const isAdmin = role === "ADMIN";
@@ -122,14 +146,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: action.payload,
-      };
-    case "DELETE_CATEGORY":
-      const updatedCat = state.allCategories.filter(
-        (e) => e.category !== action.payload
-      );
-      return {
-        ...state,
-        allCategories: updatedCat,
       };
     case "CREATE_PRODUCT": {
       return {

@@ -137,11 +137,15 @@ export const getAllCategories = () => async (dispatch) => {
   }
 };
 
-export const newCategory = (payload) => async () => {
+export const newCategory = (payload) => async (dispatch) => {
   try {
     const token = localStorage.getItem("token");
     let response = await axios.post(`${category_route}/new`, payload, {
       headers: { Authorization: `Bearer ${token}` },
+    });
+    return dispatch({
+      type: "CREATE_CATEGORY",
+      payload: response.data,
     });
   } catch (error) {
     if (error.response) {
@@ -153,11 +157,16 @@ export const newCategory = (payload) => async () => {
     }
   }
 };
-export const updateCategory = (id) => async () => {
+export const updateCategory = (payload) => async (dispatch) => {
   try {
+    // console.log(payload);
     const token = localStorage.getItem("token");
-    let response = await axios.put(`${category_route}/update/${id}`, {
+    let response = await axios.put(`${category_route}/update`, payload, {
       headers: { Authorization: `Bearer ${token}` },
+    });
+    return dispatch({
+      type: "UPDATE_CATEGORY",
+      payload: response.data,
     });
   } catch (error) {
     if (error.response) {
