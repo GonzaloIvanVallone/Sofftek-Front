@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Form, Button, Container, Row, Col, Image,Alert } from 'react-bootstrap';
-import '../Login/Login.scss'
+import { Form, Button, Container, Row, Col, Image, Alert } from 'react-bootstrap';
+import '../Register/Register.scss'
 import { register } from "../../redux/actions/indexActions";
 import Swal from "sweetalert2";
+import { Link } from 'react-router-dom';
+
 
 export const Register = () => {
   const dispatch = useDispatch();
@@ -32,11 +34,11 @@ export const Register = () => {
     }
 
     const data = {
-      id : null,
+      id: null,
       userName: username,
       email: email,
-      password: password, 
-      roles:[1]
+      password: password,
+      roles: [1]
     };
 
     dispatch(register(data))
@@ -45,26 +47,16 @@ export const Register = () => {
     setUseremail('')
     setPassword('');
     setConfirmPassword('');
-    
+
     setTimeout(() => {
       navigate('/');
     }, 2000);
   };
-  
+
 
   return (
     <div>
       <div className="card p-5 mt-1 mb-3">
-        {showSuccessAlert && (
-          <Alert variant="success" onClose={() => setShowSuccessAlert(false)} dismissible>
-            <Alert.Heading>{alertMessage}</Alert.Heading>
-          </Alert>
-        )}
-        {showErrorAlert && (
-          <Alert variant="danger" onClose={() => setShowErrorAlert(false)} dismissible>
-            <Alert.Heading>{alertMessage}</Alert.Heading>
-          </Alert>
-        )}
         <div className="card-title">
           <h3>Register</h3>
         </div>
@@ -117,9 +109,12 @@ export const Register = () => {
                     maxLength={20}
                   />
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                  Register
-                </Button>
+                <div className="submits">
+                  <Button className="btn-register" type="submit">
+                    Register
+                  </Button>
+                  <Link to="/login" className="link-redirect">Do you already have an account?</Link>
+                </div>
               </Form>
             </Col>
           </Row>

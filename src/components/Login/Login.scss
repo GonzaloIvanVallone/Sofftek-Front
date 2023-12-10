@@ -17,7 +17,7 @@
       box-shadow: 0 16px 24px 0 rgba(0, 0, 0, 0.7);
       transition: 0.9s;
 
-      .no-flex{
+      .no-flex {
         display: block;
         padding: 2vh;
       }
@@ -33,8 +33,9 @@
         align-items: center;
         justify-content: space-evenly;
         text-align: center;
+
         Form {
-            color: azure;
+          color: azure;
           margin: 8px;
           padding: 8px;
           width: 100%;
@@ -45,19 +46,35 @@
         margin-top: 4px;
         font-size: 20px;
         border: none;
-        &:hover{
-          @include hoverButton;
-        }
-      }
-      
-      .nav-link{
-        font-size: 14px;
-        &:hover{
+
+        &:hover {
           @include hoverButton;
         }
       }
 
-      
+      .nav-link {
+        font-size: 14px;
+
+        &:hover {
+          @include hoverButton;
+        }
+      }
+
+      .btn-login {
+        color: black !important;
+        max-width: 50%;
+        background-color: #6EA8FE !important;
+      }
+      .link-redirect{
+        color: white;
+        font-size: small;
+    }
+
+      .submit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
     }
   }
