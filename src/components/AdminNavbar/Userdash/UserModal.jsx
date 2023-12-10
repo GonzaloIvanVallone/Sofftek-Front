@@ -59,7 +59,7 @@ const UserModal = ({ modal, setModal }) => {
                         />
                         <Form.Label>Password</Form.Label>
                         <Form.Control
-                            type="text"
+                            type="password"
                             name="password"
                             value={user.password}
                             onChange={handleChange}

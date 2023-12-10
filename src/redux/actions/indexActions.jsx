@@ -3,6 +3,7 @@ const category_route = "http://localhost:8080/api/v1/category";
 const product_route = "http://localhost:8080/api/v1/product";
 const auth_route = "http://localhost:8080/api/v1/auth";
 const user_route = "http://localhost:8080/api/v1/admin/user";
+const bill_route = "http://localhost:8080/api/v1/bid"
 
 import Swal from "sweetalert2";
 
@@ -357,6 +358,59 @@ export const newUser = (payload) => async (dispatch) => {
     });
     return dispatch({
       type: "NEW_USER",
+      payload: response.data,
+    });
+  } catch (error) {
+    if (error.response) {
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    } else {
+      Swal.fire({
+        title: "No response received from the server",
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    }
+  }
+};
+export const countUsers = () => async (dispatch) => {
+  try {
+    const token = localStorage.getItem('token');
+    let response = await axios.get(`${user_route}/count`, {
+      headers: { Authorization: `Bearer ${token}`},
+    });
+    return dispatch({
+      type: "COUNT_USERS",
+      payload: response.data,
+    });
+  } catch (error) {
+    if (error.response) {
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    } else {
+      Swal.fire({
+        title: "No response received from the server",
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    }
+  }
+};
+
+export const countSales = () => async (dispatch) => {
+  try {
+    const token = localStorage.getItem('token');
+    let response = await axios.get(`${bill_routes}/count`, {
+      headers: { Authorization: `Bearer ${token}`},
+    });
+    return dispatch({
+      type: "COUNT_SALES",
       payload: response.data,
     });
   } catch (error) {
