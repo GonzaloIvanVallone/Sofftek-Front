@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Form } from 'react-bootstrap';
 import './Userdash.scss';
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { useEffect, useState } from 'react';
 import { getAllUsers, newUser  } from '../../../redux/actions/indexActions';
 

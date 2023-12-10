@@ -23,5 +23,5 @@ export const CartWidget = ({ itemCount }) => {
 };
 
 CartWidget.propTypes = {
-  itemCount: PropTypes.number, // Define la validación de tipo
+  itemCount: PropTypes.number, 
 };

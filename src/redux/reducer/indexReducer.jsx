@@ -61,6 +61,8 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: false,
+        userName: "",
+        isAdmin: false,
       };
     case "GET_CART":
       return {
@@ -133,6 +135,17 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allProducts: [...state.allProducts, action.payload],
+      };
+    }
+    case "UPDATE_PRODUCT": {
+      const updateProduct = action.payload; // El producto actualizado desde el backend
+      const updateProducts = state.allProducts.map((product) =>
+        product.idProduct === updateProduct.idProduct ? updateProduct : product
+      );
+
+      return {
+        ...state,
+        allProducts: updateProducts,
       };
     }
     case "DELETE_PRODUCT":

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Image, Container, Row, Col, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux';
+import {  useDispatch } from 'react-redux';
 import './Login.scss';
 import { login } from "../../redux/actions/indexActions";
 import ButttonGoHome from '../ButtonGoHome/ButttonGoHome';
@@ -14,35 +14,6 @@ export const Login = () => {
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
 
-
-  /*const [userName, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const handleLogin = async (e) => {
- 
-
-    e.preventDefault();
-
-    try {
-      const response = await fetch(`http://localhost:8080/api/v1/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userName, password }),
-      });
-
-      if (response.ok) {
-        console.log('OK');
-        navigate('/');
-      } else {
-        // Manejar errores si el inicio de sesión falla
-        alert('Login invalid');
-        console.log(userName, password)
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };*/
 
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
@@ -120,7 +91,7 @@ export const Login = () => {
                 
                 <div className='submit'>
                 <Button className='btn-login' type="submit">
-                  SignIn
+                  Sign In
                 </Button>
                 <Link to="/password" className='link-redirect'><p></p>Forgot password?</Link>
                 <Link to="/register" className='link-redirect'>Do you need an account?</Link>

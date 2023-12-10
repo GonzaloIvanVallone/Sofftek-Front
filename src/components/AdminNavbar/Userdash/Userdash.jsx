@@ -1,12 +1,13 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Table } from 'react-bootstrap';
 import UserModal from './UserModal';
 import './Userdash.scss';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+
 
 const Userdash = () => {
-  const dispatch = useDispatch();
+
   const allUsers = useSelector((state) => state.allUsers);
   const [modal, setModal] = useState(false);
 
