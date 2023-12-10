@@ -282,6 +282,11 @@ export const login = (payload) => async (dispatch) => {
       headers: { "Content-Type": "application/json" },
     });
     localStorage.setItem("token", response.data.token);
+    Swal.fire({
+      title: "User Logged successfully!",
+      icon: "success",
+      confirmButtonText: "Continue",
+    });
     return dispatch({
       type: "LOGIN",
       payload: {
