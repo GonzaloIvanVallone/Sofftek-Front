@@ -14,12 +14,20 @@ export const ProductDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const cart = useSelector((state) => state.cart) || [];
   const [productToSend, setproductToSend] = useState({});
   const product = location.state && location.state.product;
 
   const handleAddToCart = () => {
-    if (product.productStock > 0) {
-      dispatch(addToCart(product));
+    const totalQuantityInCart = cart.reduce(
+      (total, cartProduct) =>
+        cartProduct.idProduct === product.idProduct
+          ? total + cartProduct.quantity
+          : total,
+      0
+    );
+    if (totalQuantityInCart < product.productStock) {
+      dispatch(addToCart({ ...product, quantity: 1 }));
       Swal.fire({
         title: "¡Product added to cart!",
         icon: "success",
