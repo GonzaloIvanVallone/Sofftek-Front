@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { SideBar } from "./SideBar/SideBar";
+import { SideBar } from "./Sidebar/Sidebar";
 import { Footer } from "../Footer/Footer";
 import './Admindash.scss';
 
