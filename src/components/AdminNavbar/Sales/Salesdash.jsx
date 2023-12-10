@@ -13,7 +13,7 @@ const SalesDash = () => {
 
 
   useEffect(() => {
-    dispatch(getAllSales())
+    //dispatch(getAllSales())
 }, []);
 
 
