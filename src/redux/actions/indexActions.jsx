@@ -200,22 +200,40 @@ export const sendEmail = (email) => async (dispatch) => {
   }
 };
 
-export const addToCart = (product) => (dispatch, getState) => {
+
+
+export const updateProductStock = (productId, newStock) => ({
+  type: 'UPDATE_PRODUCT_STOCK',
+  payload: { productId, newStock },
+});
+
+export const addToCart = (product) => async (dispatch, getState) => {
   // Agregar el producto al estado
   dispatch({
-    type: "ADD_TO_CART",
+    type: 'ADD_TO_CART',
     payload: product,
   });
-  const cart = getState().cart;
-  localStorage.setItem("cart", JSON.stringify(cart));
+
+  // Actualizar el carrito en el localStorage
+  const updatedCart = getState().cart;
+  localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+  // Actualizar el stock del producto en el servidor
+  /*try {
+    await axios.post('http://localhost:8080/api/v1/product/update', {
+      productId: product.idProduct,
+      newStock: product.productStock - 1, 
+    });
+  } catch (error) {
+    console.error('Error updating product stock:', error);
+  }*/
 };
 
 export const getCart = () => (dispatch) => {
-  // Obtener el carrito desde localStorage
+  
   const storedCart = localStorage.getItem("cart");
   const cart = storedCart ? JSON.parse(storedCart) : [];
-
-  // Actualizar el estado del carrito
+  
   dispatch({
     type: "GET_CART",
     payload: cart,

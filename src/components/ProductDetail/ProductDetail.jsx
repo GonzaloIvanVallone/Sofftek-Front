@@ -5,20 +5,33 @@ import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { addToCart } from "../../redux/actions/indexActions";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { NavBar } from "../NavBar/NavBar";
 
 export const ProductDetail = () => {
   // const { id } = useParams();
   // const allProducts = useSelector((state) => state.allProducts);
   const dispatch = useDispatch();
-
+  const cart = useSelector((state) => state.cart) || [];
   const navigate = useNavigate();
   const location = useLocation();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const product = location.state && location.state.product;
 
   const handleAddToCart = () => {
-    if (product.productStock > 0) {
-      dispatch(addToCart(product));
+    const totalQuantityInCart = cart.reduce(
+      (total, cartProduct) =>
+        cartProduct.idProduct === product.idProduct
+          ? total + cartProduct.quantity
+          : total,
+      0
+    );
+
+    
+
+    if (totalQuantityInCart  < product.productStock) {
+      
+      dispatch(addToCart({ ...product, quantity: 1  }));
+
       Swal.fire({
         title: "¡Product added to cart!",
         icon: "success",
@@ -33,7 +46,9 @@ export const ProductDetail = () => {
         timer: 1500,
       });
     }
+    
   };
+
 
   const handleBuyClick = () => {
     // Use useNavigate to navigate to the '/comprar' route
@@ -56,6 +71,7 @@ export const ProductDetail = () => {
 
   return (
     <div className="container-product-deteil mt-1 mb-3">
+    <NavBar/>
       <div className="Product-Detail">
         <div className="container-facher">
           <div className="container-information">

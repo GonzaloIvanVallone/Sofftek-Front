@@ -60,34 +60,44 @@ const rootReducer = (state = initialState, action) => {
         cart: action.payload,
       };
     case "ADD_TO_CART":
-      // Agregar lógica para agregar un producto al carrito
       const addedProduct = action.payload;
       const updatedCartAdd = [...state.cart, addedProduct];
       return {
         ...state,
         cart: updatedCartAdd,
-        itemCount: updatedCartAdd.length, // Contar la cantidad de productos en el carrito
+        itemCount: updatedCartAdd.length, 
       };
     case "REMOVE_FROM_CART":
-      // Agregar lógica para eliminar un producto del carrito
+      
       const productIdToRemove = action.payload;
       const updatedCartRemove = state.cart.filter(
         (product) => product.idProduct !== productIdToRemove
       );
 
+      localStorage.setItem("cart", JSON.stringify(updatedCartRemove));
+
       return {
         ...state,
         cart: updatedCartRemove,
         itemCount: updatedCartRemove.length,
-        // Actualizar la cantidad de productos en el carrito
+        
       };
 
-      // Actualizar localStorage con el nuevo estado del carrito
+      case 'UPDATE_PRODUCT_STOCK':
+        const { productId, newStock } = action.payload;
+        const updatedProducts = state.allProducts.map(product => {
+          if (product.idProduct === productId) {
+            return { ...product, productStock: newStock };
+          }
+          return product;
+        });
 
-      return (updatedState = localStorage.setItem(
-        "cart",
-        JSON.stringify(updatedCart)
-      ));
+        return {
+          ...state,
+          allProducts: updatedProducts,
+        };
+
+  
     case "DELETE_CATEGORY":
     const updatedCat = state.allCategories.filter(
       e => e.category !== action.payload
@@ -103,12 +113,12 @@ const rootReducer = (state = initialState, action) => {
       }
     }
     case "DELETE_PRODUCT":
-      const updatedProducts = state.allProducts.filter(
+      const updatedProduct = state.allProducts.filter(
         e => e.idProduct !== action.payload
       );
       return {
         ...state,
-        allProducts: updatedProducts,
+        allProducts: updatedProduct,
       };
     default:
       return state;
