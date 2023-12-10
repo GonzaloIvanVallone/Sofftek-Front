@@ -24,11 +24,19 @@ export const Paymentform = () => {
   const preferenceId = useSelector((state) => state.idPreference);
   const products = location.state?.cart;
 
+  initMercadoPago("TEST-318bcc68-f6f3-4251-bcbd-b07aac21c30d", {
+    locale: "es-AR",
+  });
   useEffect(() => {
-    initMercadoPago("TEST-318bcc68-f6f3-4251-bcbd-b07aac21c30d", {
-      locale: "es-AR",
-    });
-  }, []);
+    const handleSetPreferenceIfGoBack = () => {
+      if (preferenceId) {
+        dispatch(setPreferenceId(""));
+      }
+    };
+    window.addEventListener("popstate", handleSetPreferenceIfGoBack);
+
+    return () => {};
+  }, [preferenceId, dispatch, setPreferenceId]);
 
   const total = Object.values(products).reduce(
     (sum, product) => sum + product.totalPrice,

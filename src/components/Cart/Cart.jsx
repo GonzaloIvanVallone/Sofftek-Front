@@ -9,10 +9,13 @@ import "sweetalert2/dist/sweetalert2.min.css";
 export const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const preferenceId = useSelector((state) => state.idPreference);
   const [groupedCart, setGroupedCart] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const navigate = useNavigate();
+
+  console.log("preferenceId:" + preferenceId);
 
   const goHome = () => {
     navigate("/");
