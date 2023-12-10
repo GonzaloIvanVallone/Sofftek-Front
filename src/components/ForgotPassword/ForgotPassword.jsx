@@ -8,12 +8,12 @@ import "../ForgotPassword/ForgotPassword.scss"
 import Swal from "sweetalert2";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 
 
 export const ForgotPassword = () => {
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
@@ -38,6 +38,7 @@ export const ForgotPassword = () => {
                 icon: "success",
                 confirmButtonText: "Continue",
             });
+            navigate('/login');
         } else {
             Swal.fire({
                 title: "INVALID EMAIL",
@@ -77,8 +78,8 @@ export const ForgotPassword = () => {
                             </button>
                             </div>
                         </form>
-                        <div class="card-footer">
-                        <Link to="/" className='link-redirect'>@HardTek</Link>
+                        <div className="card-footer">
+                        <Link to="/" className='link-redirect-hardtek'>@HardTek</Link>
                         </div>
                     </div>
                 </div>

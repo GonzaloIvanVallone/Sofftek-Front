@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { resetPassword } from '../../redux/actions/indexActions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKey, faEnvelope } from '@fortawesome/free-solid-svg-icons';
@@ -7,9 +8,11 @@ import Swal from "sweetalert2";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import { Link } from 'react-router-dom'
+import "../ForgotPassword/NewPassword.scss"
 
 export const NewPassword = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [resetData, setResetData] = useState({
     resetToken: '',
     password: ''
@@ -43,10 +46,12 @@ export const NewPassword = () => {
         icon: "success",
         confirmButtonText: "Continue",
       });
+      navigate('/login');
     }
     dispatch(resetPassword(resetData));
     let inputs = document.querySelectorAll("input");
     inputs.forEach((input) => (input.value = ""));
+    
   };
   
 
@@ -77,8 +82,8 @@ export const NewPassword = () => {
             </button>
             </div>
           </form>
-          <div class="card-footer text-muted">
-          <Link to="/" className='link-redirect'>@HardTek</Link>
+          <div className="card-footer">
+          <Link to="/" className='link-redirect-hardtek'>@HardTek</Link>
         </div>
         </div>
       </div>
