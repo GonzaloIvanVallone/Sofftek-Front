@@ -10,12 +10,12 @@ import { getAllProducts, getAllUsers } from "./redux/actions/indexActions";
 import { useDispatch } from "react-redux";
 import { ForgotPassword } from "./components/ForgotPassword/ForgotPassword";
 import { NewPassword } from "./components/ForgotPassword/NewPassword";
-import { getCart } from "./redux/actions/indexActions";
+import { getCart, setLoggedIn } from "./redux/actions/indexActions";
 import { Cart } from "./components/Cart/Cart";
 import { Paymentform } from "./components/BuyForm/PaymentForm";
-import { NavBar } from "./components/NavBar/NavBar";
-import { Footer } from "./components/Footer/Footer";
 import { NotLoggin } from "./components/NotLoggin/NotLoggin";
+import { Success } from "./components/success/success";
+import { Failure } from "./components/Failure/Failure";
 import { AdminNavbar } from "./components/AdminNavbar/AdminNavbar";
 import Homedash from "./components/AdminNavbar/Homedash/Homedash";
 import Userdash from "./components/AdminNavbar/Userdash/Userdash";
@@ -35,6 +35,15 @@ function App() {
     dispatch(getCart());
   }, []);
 
+  useEffect(() => {
+    // Al cargar el componente, verifica si hay un token en el localStorage
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      // Si hay un token, actualiza el estado isLoggedIn a true
+      dispatch(setLoggedIn());
+    }
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <div className="App container-fluid">
@@ -53,6 +62,8 @@ function App() {
           />
           <Route exact path={"/Buy"} element={<Paymentform />} />
           <Route exact path={"/NotLoggin"} element={<NotLoggin />} />
+          <Route exact path={"/Success"} element={<Success />} />
+          <Route exact path={"/Failure"} element={<Failure />} />
           <Route path="/dashboard/*" element={<AdminNavbar />}>
             <Route index path="homedash" element={<Homedash />} />
             <Route path="userdash" element={<Userdash />} />

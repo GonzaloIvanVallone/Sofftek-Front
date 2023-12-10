@@ -1,7 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  justify-content: center;
+}
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    justify-content: center;
+h2 {
+  background-color: #4dd81600;
+  color: #000000;
+  border-bottom: 4px #b6027a00 solid;
 }
