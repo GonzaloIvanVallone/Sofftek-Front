@@ -319,3 +319,59 @@ export const register = (payload) => async (dispatch) => {
     }
   }
 };
+
+export const getAllUsers = () => async (dispatch) => {
+  try {
+    const token = localStorage.getItem('token');
+    let response = await axios.get(`${user_route}/list`, {
+      headers: { Authorization: `Bearer ${token}`},
+    });
+    return dispatch({
+      type: "GET_ALL_USERS",
+      payload: response.data,
+    });
+  } catch (error) {
+    if (error.response) {
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    } else {
+      Swal.fire({
+        title: "No response received from the server",
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    }
+  }
+};
+
+export const newUser = (payload) => async (dispatch) => {
+  try {
+    let response = await axios.post(`${auth_route}/register`, payload);
+    Swal.fire({
+      title: "User registered",
+      icon: "success",
+      confirmButtonText: "Continue",
+    });
+    return dispatch({
+      type: "NEW_USER",
+      payload: response.data,
+    });
+  } catch (error) {
+    if (error.response) {
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    } else {
+      Swal.fire({
+        title: "No response received from the server",
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    }
+  }
+};

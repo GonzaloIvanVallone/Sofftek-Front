@@ -6,7 +6,7 @@ import { ProductDetail } from "./components/ProductDetail/ProductDetail";
 import { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
-import { getAllProducts } from "./redux/actions/indexActions";
+import { getAllProducts, getAllUsers } from "./redux/actions/indexActions";
 import { useDispatch } from "react-redux";
 import { ForgotPassword } from "./components/ForgotPassword/ForgotPassword";
 import { NewPassword } from "./components/ForgotPassword/NewPassword";
@@ -27,6 +27,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getAllUsers());
     dispatch(getAllProducts());
   }, []);
 
