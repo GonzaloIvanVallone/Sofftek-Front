@@ -3,8 +3,13 @@ import { Col, Row, Button } from 'react-bootstrap';
 import { Link, Outlet } from 'react-router-dom';
 import logo from "../../../assets/hardtv2.png";
 import './Sidebar.scss';
+import { useNavigate } from "react-router-dom";
 
 export const SideBar = () => {
+    const navigate = useNavigate();
+    const goHome = () => {
+        navigate("/");
+      };
     return (
         <Row className="h-100 mb-1">
             <Col xs={3} className="bg-dark p-3 d-flex flex-column">
@@ -18,6 +23,7 @@ export const SideBar = () => {
                 </div>
                 <div>
                     <img
+                        onClick={goHome}
                         src={logo}
                         width="250"
                         height="300"
