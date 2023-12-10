@@ -6,7 +6,7 @@ const Homedash = () => {
   const dispatch = useDispatch();
   const totalUsers = useSelector((state) => state.totalUsers);
   const totalSales = useSelector((state) => state.totalSales);
-  const totalProducts = useSelector((state) => state.allProducts)
+  const totalProducts = useSelector((state) => state.backupProducts)
   const TotalCategories = useSelector((state) => state.allCategories)
 
   useEffect(() => {

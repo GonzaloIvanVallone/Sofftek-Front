@@ -37,7 +37,6 @@ const ProductModal = ({ modal, setModal, productGive }) => {
     if (isUpdateMode) {
       setProduct(productGive);
     } else {
-      // Si es el modo de agregar, restablecer el estado a valores iniciales
       setProduct({
         productName: "",
         productStock: 0,

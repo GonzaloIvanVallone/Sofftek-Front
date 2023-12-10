@@ -30,9 +30,7 @@ export const Register = () => {
       });
       return;
     }
-    
-    /*console.log(`Registrando: Usuario - ${username}, 
-    Email - ${email}, Contraseña - ${password}rol:${roles}`)*/
+
     const data = {
       id : null,
       userName: username,

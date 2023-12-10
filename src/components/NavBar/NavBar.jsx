@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./NavBar.scss";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { CartWidget } from "../CartWidget/CartWidget";
 import logo from "../../assets/hardtv2.png";
-import logoadmin from "../../assets/pngwing.com.png";
+import logoadmin from "../../assets/klipartz.com.png";
 import { logout } from "../../redux/actions/indexActions";
 
 export const NavBar = () => {
@@ -41,8 +41,8 @@ export const NavBar = () => {
           <button className="btnLogo" onClick={goAdmin}>
             <img
               src={logoadmin}
-              width="100"
-              height="100"
+              width="70"
+              height="70"
               className="d-inline-block align-top"
               alt="Logo"
             />
