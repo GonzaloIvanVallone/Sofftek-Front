@@ -7,13 +7,12 @@ import { getAllSales } from '../../../redux/actions/indexActions';
 const SalesDash = () => {
   const dispatch = useDispatch();
   const allSales = useSelector((state) => state.allSales);
-  console.log(allSales)
 
   const handleUpdate = () => {console.log("update")}
 
 
   useEffect(() => {
-    //dispatch(getAllSales())
+    dispatch(getAllSales())
 }, []);
 
 
@@ -27,22 +26,24 @@ const SalesDash = () => {
           <tr>
             <th>ID</th>
             <th>User</th>
+            <th>Email</th>
             <th>Adress</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {/*{allSales.map((sale, idx) => {
+          {allSales.map((sale, idx) => {
             return (
               <tr key={idx}>
-                <td>{sale.idBid}</td>
-                <td>{sale.user}</td>
-                <td>{sale.dir}</td>
+                <td>{sale.idBill}</td>
+                <td>{sale.user.userName}</td>
+                <td>{sale.user.email}</td>
+                <td>{sale.dir.street}{sale.dir.streetNumber}</td>
                 <td>
                   <button onClick={handleUpdate} ><i className="fa fa-trash" aria-hidden="true"></i>Update</button>
                 </td>
               </tr>)
-          })}*/}
+          })}
         </tbody>
       </Table>
     </div>
