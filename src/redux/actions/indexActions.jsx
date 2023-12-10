@@ -3,7 +3,7 @@ const category_route = "http://localhost:8080/api/v1/category";
 const product_route = "http://localhost:8080/api/v1/product";
 const auth_route = "http://localhost:8080/api/v1/auth";
 const user_route = "http://localhost:8080/api/v1/admin/user";
-const bill_route = "http://localhost:8080/api/v1/bid"
+const bill_route = "http://localhost:8080/api/v1/bid";
 
 import Swal from "sweetalert2";
 
@@ -199,7 +199,12 @@ export const sendEmail = (email) => async (dispatch) => {
   }
 };
 
-export const addToCart = (product) => (dispatch, getState) => {
+export const updateProductStock = (productId, newStock) => ({
+  type: "UPDATE_PRODUCT_STOCK",
+  payload: { productId, newStock },
+});
+
+export const addToCart = (product) => async (dispatch, getState) => {
   // Agregar el producto al estado
   dispatch({
     type: "ADD_TO_CART",
@@ -207,6 +212,10 @@ export const addToCart = (product) => (dispatch, getState) => {
   });
   const cart = getState().cart;
   localStorage.setItem("cart", JSON.stringify(cart));
+
+  // Actualizar el carrito en el localStorage
+  const updatedCart = getState().cart;
+  localStorage.setItem("cart", JSON.stringify(updatedCart));
 };
 
 export const getCart = () => (dispatch) => {
@@ -224,6 +233,11 @@ export const getCart = () => (dispatch) => {
 export const removeFromCart = (productId) => ({
   type: "REMOVE_FROM_CART",
   payload: productId,
+});
+
+export const removeAllCart = () => ({
+  type: "REMOVE_ALL_CART",
+  payload: [],
 });
 
 export const resetPassword = (payload) => async (dispatch) => {
@@ -427,9 +441,9 @@ export const newUser = (payload) => async (dispatch) => {
 };
 export const countUsers = () => async (dispatch) => {
   try {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     let response = await axios.get(`${user_route}/count`, {
-      headers: { Authorization: `Bearer ${token}`},
+      headers: { Authorization: `Bearer ${token}` },
     });
     return dispatch({
       type: "COUNT_USERS",
@@ -454,9 +468,9 @@ export const countUsers = () => async (dispatch) => {
 
 export const countSales = () => async (dispatch) => {
   try {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     let response = await axios.get(`${bill_routes}/count`, {
-      headers: { Authorization: `Bearer ${token}`},
+      headers: { Authorization: `Bearer ${token}` },
     });
     return dispatch({
       type: "COUNT_SALES",
