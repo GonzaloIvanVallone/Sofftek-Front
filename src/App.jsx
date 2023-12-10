@@ -6,7 +6,7 @@ import { ProductDetail } from "./components/ProductDetail/ProductDetail";
 import { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
-import { getAllProducts } from "./redux/actions/indexActions";
+import { getAllProducts, getAllUsers } from "./redux/actions/indexActions";
 import { useDispatch } from "react-redux";
 import { ForgotPassword } from "./components/ForgotPassword/ForgotPassword";
 import { NewPassword } from "./components/ForgotPassword/NewPassword";
@@ -21,12 +21,13 @@ import Homedash from "./components/AdminNavbar/Homedash/Homedash";
 import Userdash from "./components/AdminNavbar/Userdash/Userdash";
 import Productdash from "./components/AdminNavbar/Productsdash/Productdash";
 import Categorydash from "./components/AdminNavbar/Categorydash/Categorydash";
-import Sales from "./components/AdminNavbar/Sales/sales";
+import Sales from "./components/AdminNavbar/Sales/Sales";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getAllUsers());
     dispatch(getAllProducts());
   }, []);
 

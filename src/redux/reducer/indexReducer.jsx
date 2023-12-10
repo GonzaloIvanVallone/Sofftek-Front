@@ -8,6 +8,7 @@ const initialState = {
   isAdmin: false,
   idPreference: "",
   userName: "",
+  allUsers: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -110,6 +111,33 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: action.payload,
+      };
+    case "DELETE_CATEGORY":
+      const updatedCat = state.allCategories.filter(
+        (e) => e.category !== action.payload
+      );
+      return {
+        ...state,
+        allCategories: updatedCat,
+      };
+    case "CREATE_PRODUCT": {
+      return {
+        ...state,
+        allProducts: [...state.allProducts, action.payload],
+      };
+    }
+    case "DELETE_PRODUCT":
+      const updatedProducts = state.allProducts.filter(
+        (e) => e.idProduct !== action.payload
+      );
+      return {
+        ...state,
+        allProducts: updatedProducts,
+      };
+    case "GET_ALL_USERS":
+      return {
+        ...state,
+        allUsers: action.payload,
       };
     default:
       return state;

@@ -30,6 +30,60 @@ export const getAllProducts = () => async (dispatch) => {
   }
 };
 
+export const createProduct = (payload) => async (dispatch) => {
+  try {
+    const token = localStorage.getItem("token");
+    let response = await axios.post(`${product_route}/new`, payload, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return dispatch({
+      type: "CREATE_PRODUCT",
+      payload: response.data,
+    });
+  } catch (error) {
+    if (error.response) {
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    } else {
+      Swal.fire({
+        title: "No response received from the server",
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    }
+  }
+};
+
+export const deleteProduct = (id) => async (dispatch) => {
+  try {
+    const token = localStorage.getItem("token");
+    let response = await axios.delete(`${product_route}/delete/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return dispatch({
+      type: "DELETE_PRODUCT",
+      payload: id,
+    });
+  } catch (error) {
+    if (error.response) {
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    } else {
+      Swal.fire({
+        title: "No response received from the server",
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    }
+  }
+};
+
 export const filterByCategories = (payload) => {
   return {
     type: "FILTER_BY_CATEGORIES",
@@ -60,6 +114,42 @@ export const newCategory = (payload) => async () => {
     const token = localStorage.getItem("token");
     let response = await axios.post(`${category_route}/new`, payload, {
       headers: { Authorization: `Bearer ${token}` },
+    });
+  } catch (error) {
+    if (error.response) {
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    }
+  }
+};
+export const updateCategory = (id) => async () => {
+  try {
+    const token = localStorage.getItem("token");
+    let response = await axios.put(`${category_route}/update/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  } catch (error) {
+    if (error.response) {
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    }
+  }
+};
+export const deleteCategory = (id, category) => async (dispatch) => {
+  try {
+    const token = localStorage.getItem("token");
+    let response = await axios.delete(`${category_route}/delete/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return dispatch({
+      type: "DELETE_CATEGORY",
+      payload: category,
     });
   } catch (error) {
     if (error.response) {
@@ -278,3 +368,59 @@ export const setLoggedIn = () => ({
   type: "SET_LOGGEDIN",
   payload: true,
 });
+
+export const getAllUsers = () => async (dispatch) => {
+  try {
+    const token = localStorage.getItem("token");
+    let response = await axios.get(`${user_route}/list`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return dispatch({
+      type: "GET_ALL_USERS",
+      payload: response.data,
+    });
+  } catch (error) {
+    if (error.response) {
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    } else {
+      Swal.fire({
+        title: "No response received from the server",
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    }
+  }
+};
+
+export const newUser = (payload) => async (dispatch) => {
+  try {
+    let response = await axios.post(`${auth_route}/register`, payload);
+    Swal.fire({
+      title: "User registered",
+      icon: "success",
+      confirmButtonText: "Continue",
+    });
+    return dispatch({
+      type: "NEW_USER",
+      payload: response.data,
+    });
+  } catch (error) {
+    if (error.response) {
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    } else {
+      Swal.fire({
+        title: "No response received from the server",
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    }
+  }
+};

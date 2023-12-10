@@ -3,15 +3,14 @@ import { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import UserModal from './UserModal';
 import './Userdash.scss';
+import { useSelector, useDispatch } from "react-redux";
 
 const Userdash = () => {
-  const [user, setUser] = useState([]);
-  const [userList, setUserList] = useState([]);
+  const dispatch = useDispatch();
+  const allUsers = useSelector((state) => state.allUsers);
   const [modal, setModal] = useState(false);
 
-  const handleDelete = () => {console.log("delete")}
-
-  const handleBlock=()=>{console.log("block")}
+  const handleUpdate = () => {console.log("update")}
 
   const [userId, setUserId] = useState();
 
@@ -28,7 +27,7 @@ const Userdash = () => {
         <h1>Users List</h1>
       </div>
       <div className='text-end'>
-        <button className='btn btn-primary m-1 text-start ' onClick={handleClick}>Add New Users</button>
+        <button className='btn btn-primary m-1 text-start ' onClick={handleClick}>Add New Admin</button>
       </div>
       <Table striped bordered hover variant="dark">
         <thead>
@@ -40,23 +39,20 @@ const Userdash = () => {
           </tr>
         </thead>
         <tbody>
-          {userList.map((user, idx) => {
+          {allUsers.map((user, idx) => {
             return (
               <tr key={idx}>
-                <td>{user.user_name}</td>
+                <td>{user.userName}</td>
                 <td>{user.email}</td>
-                <td>{user.role}</td>
-                <td><button onClick={handleDelete} ><i className="fa fa-trash" aria-hidden="true"></i></button>
-                  <button onClick={handleBlock}><i className="fa fa-lock" aria-hidden="true"></i></button>
+                <td>{user.roles[0].name}</td>
+                <td>
+                  <button onClick={handleUpdate} ><i className="fa fa-trash" aria-hidden="true"></i>Update</button>
                 </td>
               </tr>)
           })}
         </tbody>
-
-
       </Table>
       <UserModal modal={modal} setModal={setModal} user={userId} />
-
     </div>
   );
 }
