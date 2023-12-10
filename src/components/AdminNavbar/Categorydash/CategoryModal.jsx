@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Modal,
   ModalHeader,
@@ -7,29 +7,51 @@ import {
   Button,
   Form,
 } from "react-bootstrap";
-import { newCategory } from "../../../redux/actions/indexActions";
+import {
+  newCategory,
+  updateCategory,
+} from "../../../redux/actions/indexActions";
 import { useDispatch } from "react-redux";
 
-const CategoryModal = ({ modal, setModal }) => {
+const CategoryModal = ({ modal, setModal, categoryGive }) => {
   const dispatch = useDispatch();
+  const [category, setcategory] = useState({
+    category: "",
+  });
 
-  const [category, setcategory] = useState("");
+  const isUpdateMode = !!categoryGive;
+
+  useEffect(() => {
+    if (isUpdateMode) {
+      setcategory(categoryGive);
+    } else {
+      setcategory({
+        category: "",
+      });
+    }
+  }, [isUpdateMode, categoryGive]);
 
   const handleSubmit = (e) => {
     e.preventDefault(e);
     if (category) {
-      dispatch(newCategory({ category }));
+      isUpdateMode
+        ? dispatch(updateCategory(category))
+        : dispatch(newCategory(category));
       let inputs = document.querySelectorAll("input");
       inputs.forEach((input) => (input.value = ""));
-      setcategory("");
+      // setcategory("");
       setModal(false);
     }
   };
 
   const handleChange = (e) => {
-    e.preventDefault();
-    setcategory(e.target.value);
+    const { name, value } = e.target;
+    setcategory((prevCategory) => ({
+      ...prevCategory,
+      [name]: value,
+    }));
   };
+
   return (
     <Modal show={modal}>
       <ModalHeader style={{ display: "block" }}>
@@ -41,7 +63,8 @@ const CategoryModal = ({ modal, setModal }) => {
             <Form.Label>Name</Form.Label>
             <Form.Control
               type="text"
-              name="name"
+              name="category"
+              value={category.category}
               onChange={(e) => handleChange(e)}
             />
           </Form.Group>
