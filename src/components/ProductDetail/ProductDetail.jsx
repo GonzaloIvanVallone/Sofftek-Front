@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { addToCart } from "../../redux/actions/indexActions";
 import { useNavigate, useLocation } from "react-router-dom";
-
+import { ItemCount } from "../ItemCount/ItemCount";
 
 export const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ export const ProductDetail = () => {
   const [productToSend, setproductToSend] = useState({});
   const product = location.state && location.state.product;
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (quantity) => {
     const totalQuantityInCart = cart.reduce(
       (total, cartProduct) =>
         cartProduct.idProduct === product.idProduct
@@ -25,8 +25,8 @@ export const ProductDetail = () => {
           : total,
       0
     );
-    if (totalQuantityInCart < product.productStock) {
-      dispatch(addToCart({ ...product, quantity: 1 }));
+    if (totalQuantityInCart + quantity <= product.productStock) {
+      dispatch(addToCart({ ...product, quantity }));
       Swal.fire({
         title: "¡Product added to cart!",
         icon: "success",
@@ -83,12 +83,20 @@ export const ProductDetail = () => {
                 src={product.productImg}
                 alt="imagen del producto"
               />
+              <div>
+              <ItemCount
+                initial={1} 
+                stock={product.productStock}
+                onAdd={(quantity) => handleAddToCart(quantity)}
+              />
+              </div>
             </div>
             <div className="container-card-info">
               <h3>{product.productName}</h3>
               <p>$ {product.productPrice}</p>
               <p>Stock: {product.productStock}</p>
               <p className="text-start">{product.description}</p>
+             
             </div>
           </div>
         </div>
@@ -98,11 +106,7 @@ export const ProductDetail = () => {
               Buy
             </button>
           </div>
-          <div className="buttons_actions">
-            <button className="btn btn-success" onClick={handleAddCartClick}>
-              Add to Cart
-            </button>
-          </div>
+          
         </div>
       </div>      
     </div>
