@@ -9,7 +9,6 @@ import { SearchBar } from "../SearchBar/SearchBar";
 import { Pagination } from "../Pagination/Pagination";
 import "./Home.scss";
 import CategoryFilter from "../CategoryFilter/CategoryFilter";
-import { AdminNavbar } from "../AdminNavbar/AdminNavbar";
 
 export const Home = () => {
   const allProducts = useSelector((state) => state.allProducts);
@@ -17,7 +16,6 @@ export const Home = () => {
   const cart = useSelector((state) => state.cart);
 
   const handleBuyClick = (id, product) => {
-    // Utiliza navigate para navegar a la ruta '/product/:id' y pasar el producto como estado de ubicación
     navigate("/product/" + id, { state: { product } });
   };
 

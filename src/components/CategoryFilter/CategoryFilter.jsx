@@ -1,7 +1,6 @@
 import {React,  useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterByCategories, getAllCategories } from "../../redux/actions/indexActions";
-
 import './CategoryFilter.scss';
 
 const CategoryFilter = ({ onFilter }) => {

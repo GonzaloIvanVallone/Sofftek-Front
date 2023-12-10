@@ -45,14 +45,10 @@ export const ProductDetail = () => {
   };
 
   useEffect(() => {
-    // Aquí puedes agregar lógica para modificar o agregar nuevos atributos a productToSend
-    // Por ejemplo, podrías añadir una nueva propiedad llamada 'totalPrice'
-
     const updatedProductToSend = {
       ...product,
       totalPrice: product.productPrice,
       quantity: 1,
-      // Agrega otros atributos según sea necesario
     };
 
     setproductToSend(updatedProductToSend);
