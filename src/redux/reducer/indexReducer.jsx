@@ -135,6 +135,17 @@ const rootReducer = (state = initialState, action) => {
         allProducts: [...state.allProducts, action.payload],
       };
     }
+    case "UPDATE_PRODUCT": {
+      const updateProduct = action.payload; // El producto actualizado desde el backend
+      const updateProducts = state.allProducts.map((product) =>
+        product.idProduct === updateProduct.idProduct ? updateProduct : product
+      );
+
+      return {
+        ...state,
+        allProducts: updateProducts,
+      };
+    }
     case "DELETE_PRODUCT":
       const updatedProduct = state.allProducts.filter(
         (e) => e.idProduct !== action.payload

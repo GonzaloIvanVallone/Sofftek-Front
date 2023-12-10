@@ -1,37 +1,42 @@
-import React from 'react'
-import { useState } from 'react';
-import { Table } from 'react-bootstrap';
-import ProductModal from './ProductModal';
+import React from "react";
+import { useState } from "react";
+import { Table } from "react-bootstrap";
+import ProductModal from "./ProductModal";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteProduct } from '../../../redux/actions/indexActions';
-
+import { deleteProduct } from "../../../redux/actions/indexActions";
 
 const Productdash = () => {
   const dispatch = useDispatch();
   const allProducts = useSelector((state) => state.allProducts);
   const [modal, setModal] = useState(false);
+  const [product, setProduct] = useState();
 
+  const handleDelete = (idProduct) => {
+    dispatch(deleteProduct(idProduct));
+  };
 
-  const handleDelete = (idProduct) => {dispatch(deleteProduct(idProduct))}
-
-  const handleUpdate=()=>{console.log("Coming soon")}
-
-
-  const [productId, setProductId] = useState();
-
-  const handleClick = (id) => {
+  const handleUpdate = (product) => {
     setModal(true);
-    setProductId(id);
-  }
+    setProduct(product);
+  };
 
+  const handleClick = (product) => {
+    setModal(true);
+    setProduct();
+  };
 
   return (
     <div>
       <div>
         <h1>Products List</h1>
       </div>
-      <div className='text-end'>
-        <button className='btn btn-primary m-1 text-start ' onClick={handleClick}>Add New Product</button>
+      <div className="text-end">
+        <button
+          className="btn btn-primary m-1 text-start "
+          onClick={() => handleClick({})}
+        >
+          Add New Product
+        </button>
       </div>
       <Table striped bordered hover variant="dark">
         <thead>
@@ -54,16 +59,21 @@ const Productdash = () => {
                 <td>{p.productStock}</td>
                 <td>{p.typeCategory.category}</td>
                 <td>
-                  <button onClick={() => handleDelete(p.idProduct)}><i className="fa fa-trash" aria-hidden="true"></i>Delete</button>
-                  <button onClick={handleUpdate}><i className="fa fa-lock" aria-hidden="true"></i>Update</button>
+                  <button onClick={() => handleDelete(p.idProduct)}>
+                    <i className="fa fa-trash" aria-hidden="true"></i>Delete
+                  </button>
+                  <button onClick={() => handleUpdate(p)}>
+                    <i className="fa fa-lock" aria-hidden="true"></i>Update
+                  </button>
                 </td>
-              </tr>)
+              </tr>
+            );
           })}
         </tbody>
       </Table>
-      <ProductModal modal={modal} setModal={setModal} user={productId} />
+      <ProductModal modal={modal} setModal={setModal} productGive={product} />
     </div>
-  )
-}
+  );
+};
 
-export default Productdash
+export default Productdash;

@@ -58,6 +58,33 @@ export const createProduct = (payload) => async (dispatch) => {
   }
 };
 
+export const updateProduct = (payload) => async (dispatch) => {
+  try {
+    const token = localStorage.getItem("token");
+    let response = await axios.post(`${product_route}/update`, payload, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return dispatch({
+      type: "UPDATE_PRODUCT",
+      payload: response.data,
+    });
+  } catch (error) {
+    if (error.response) {
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    } else {
+      Swal.fire({
+        title: "No response received from the server",
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    }
+  }
+};
+
 export const deleteProduct = (id) => async (dispatch) => {
   try {
     const token = localStorage.getItem("token");
