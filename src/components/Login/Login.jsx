@@ -83,7 +83,6 @@ export const Login = () => {
 
   return (
     <div>
-
       <div className="card p-5 mt-1 mb-3">
         <Container className="card-title d-flex">
           <Row>
@@ -118,10 +117,15 @@ export const Login = () => {
                     onChange={handleChange}
                     required />
                 </Form.Group>
-                <Link to="/password" className='nav-link'><p></p>Forgot password</Link>
-                <Button variant="primary" type="submit">
+                
+                <div className='submit'>
+                <Button className='btn-login' type="submit">
                   SignIn
                 </Button>
+                <Link to="/password" className='link-redirect'><p></p>Forgot password?</Link>
+                <Link to="/register" className='link-redirect'>Do you need an account?</Link>
+                </div>
+                
               </Form>
             </Col>
           </Row>
