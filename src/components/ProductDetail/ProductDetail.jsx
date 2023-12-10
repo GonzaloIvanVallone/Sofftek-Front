@@ -5,8 +5,7 @@ import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { addToCart } from "../../redux/actions/indexActions";
 import { useNavigate, useLocation } from "react-router-dom";
-import { NavBar } from "../NavBar/NavBar";
-import { Footer } from "../Footer/Footer";
+
 
 export const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -74,8 +73,7 @@ export const ProductDetail = () => {
   };
 
   return (
-    <div className="container-product-deteil mt-1 mb-3">
-      <NavBar />
+    <div className="container-product-deteil mt-1 mb-3">      
       <div className="Product-Detail">
         <div className="container-facher">
           <div className="container-information">
@@ -106,10 +104,7 @@ export const ProductDetail = () => {
             </button>
           </div>
         </div>
-      </div>
-      <div className="footer-container">
-        <Footer />
-      </div>
+      </div>      
     </div>
   );
 };

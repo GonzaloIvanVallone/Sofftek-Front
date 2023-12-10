@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-import { NavBar } from "../NavBar/NavBar";
-import { Footer } from "../Footer/Footer";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ProductCard } from "../ProductCard/ProductCard";
@@ -38,8 +36,7 @@ export const Home = () => {
   };
 
   return (
-    <div className="container-fluid mb-2">
-      <NavBar />
+    <div className="container-fluid mb-2">      
       <SearchBar />
       <CategoryFilter onFilter={handleFilter} />
       <div className="content">
@@ -70,7 +67,6 @@ export const Home = () => {
           })}
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
