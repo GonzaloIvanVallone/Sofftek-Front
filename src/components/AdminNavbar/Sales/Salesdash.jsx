@@ -4,7 +4,7 @@ import { Table } from 'react-bootstrap';
 import { useSelector, useDispatch } from "react-redux";
 import { getAllSales } from '../../../redux/actions/indexActions';
 
-const Userdash = () => {
+const SalesDash = () => {
   const dispatch = useDispatch();
   const allSales = useSelector((state) => state.allSales);
   console.log(allSales)
@@ -49,4 +49,4 @@ const Userdash = () => {
   );
 }
 
-export default Userdash
+export default SalesDash

@@ -21,7 +21,7 @@ import Homedash from "./components/AdminNavbar/Homedash/Homedash";
 import Userdash from "./components/AdminNavbar/Userdash/Userdash";
 import Productdash from "./components/AdminNavbar/Productsdash/Productdash";
 import Categorydash from "./components/AdminNavbar/Categorydash/Categorydash";
-import Sales from "./components/AdminNavbar/Sales/Sales";
+import Sales from "./components/AdminNavbar/Sales/Salesdash";
 
 function App() {
   const dispatch = useDispatch();
