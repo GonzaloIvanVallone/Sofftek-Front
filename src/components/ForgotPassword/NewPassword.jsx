@@ -40,7 +40,7 @@ export const NewPassword = () => {
       Swal.fire({
         title: "SUCCESS",
         text: `Password updated successfully`,
-        icon: "error",
+        icon: "success",
         confirmButtonText: "Continue",
       });
     }
