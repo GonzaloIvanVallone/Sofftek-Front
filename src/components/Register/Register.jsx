@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Form, Button, Container, Row, Col, Image,Alert } from 'react-bootstrap';
 import '../Login/Login.scss'
 import { register } from "../../redux/actions/indexActions";
+import Swal from "sweetalert2";
 
 export const Register = () => {
   const dispatch = useDispatch();
@@ -22,9 +23,11 @@ export const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      alert("Las contraseñas no coinciden");
-        setShowErrorAlert(true);
-        setAlertMessage('Las contraseñas no coinciden');
+      Swal.fire({
+        title: "Passwords doesnt match",
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
       return;
     }
     

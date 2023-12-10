@@ -85,17 +85,6 @@ export const Login = () => {
     <div>
 
       <div className="card p-5 mt-1 mb-3">
-        {showSuccessAlert && (
-          <Alert variant="success" onClose={() => setShowSuccessAlert(false)} dismissible>
-            <Alert.Heading>{alertMessage}</Alert.Heading>
-          </Alert>
-        )}
-
-        {showErrorAlert && (
-          <Alert variant="danger" onClose={() => setShowErrorAlert(false)} dismissible>
-            <Alert.Heading>{alertMessage}</Alert.Heading>
-          </Alert>
-        )}
         <Container className="card-title d-flex">
           <Row>
             <h3>Login</h3>
