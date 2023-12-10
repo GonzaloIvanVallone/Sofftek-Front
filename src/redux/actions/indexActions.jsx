@@ -492,3 +492,29 @@ export const countSales = () => async (dispatch) => {
     }
   }
 };
+export const getAllSales = () => async (dispatch) => {
+  try {
+    const token = localStorage.getItem("token");
+    let response = await axios.get(`${bill_route}/list`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return dispatch({
+      type: "GET_ALL_SALES",
+      payload: response.data,
+    });
+  } catch (error) {
+    if (error.response) {
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    } else {
+      Swal.fire({
+        title: "No response received from the server",
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    }
+  }
+};

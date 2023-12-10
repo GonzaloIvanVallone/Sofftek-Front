@@ -11,6 +11,7 @@ const initialState = {
   allUsers: [],
   totalUsers: 0,
   totalSales: 0,
+  allSales: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -156,6 +157,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         totalSales: action.payload,
+      };
+    case "GET_ALL_SALES":
+      return {
+        ...state,
+        allSales: action.payload,
       };
     default:
       return state;
