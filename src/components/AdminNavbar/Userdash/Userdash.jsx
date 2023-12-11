@@ -17,7 +17,6 @@ const Userdash = () => {
   };
 
   const handleUpdateUser = (user) => {
-    console.log(user);
     setModal(true);
     setUserId(user);
   };
