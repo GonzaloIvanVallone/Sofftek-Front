@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCart, removeFromCart } from "../../redux/actions/indexActions";
-import "./Cart.css";
+import "../Cart/Cart.css";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-
 
 export const Cart = () => {
   const dispatch = useDispatch();
@@ -73,9 +72,11 @@ export const Cart = () => {
   }, [cart]);
 
   return (
+    
     <div>      
         {Object.keys(groupedCart).length === 0 ? (
         <div className="empty-cart">
+          
           <h1>THE CART IS EMPTY</h1>
           <Link to="/">
             <button className="btn btn-primary">START BUYING</button>

@@ -87,6 +87,7 @@ const rootReducer = (state = initialState, action) => {
         isLoggedIn: false,
         userName: "",
         isAdmin: false,
+        cart:[]
       };
     case "GET_CART":
       return {

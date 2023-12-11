@@ -48,7 +48,6 @@ function App() {
 
   return (
     <BrowserRouter>
-    { <NavBar /> }
       <div className="App container-fluid">
         
         <Routes>
@@ -77,7 +76,6 @@ function App() {
         </Routes>
         
       </div>
-      { <Footer /> }
     </BrowserRouter>
   );
 }
