@@ -1,9 +1,9 @@
 import axios from "axios";
-const category_route = "https://34.16.112.71/api/v1/category";
-const product_route = "https://34.16.112.71/api/v1/product";
-const auth_route = "https://34.16.112.71/api/v1/auth";
-const user_route = "https://34.16.112.71/api/v1/admin/user";
-const bill_route = "https://34.16.112.71/api/v1/bid";
+const category_route = "https://hardtek-back.duckdns.org/api/v1/category";
+const product_route = "https://hardtek-back.duckdns.org/api/v1/product";
+const auth_route = "https://hardtek-back.duckdns.org/api/v1/auth";
+const user_route = "https://hardtek-back.duckdns.org/api/v1/admin/user";
+const bill_route = "https://hardtek-back.duckdns.org/api/v1/bid";
 
 import Swal from "sweetalert2";
 
