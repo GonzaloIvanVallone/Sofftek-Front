@@ -2,6 +2,8 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./ProductCard.scss";
+import { NavItem } from "react-bootstrap";
+
 
 export const ProductCard = ({
   idProduct,
@@ -13,6 +15,7 @@ export const ProductCard = ({
   return (
     <div>
       <div>
+        
         <Card
           className="center"
           style={{

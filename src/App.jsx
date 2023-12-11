@@ -22,6 +22,8 @@ import Userdash from "./components/AdminNavbar/Userdash/Userdash";
 import Productdash from "./components/AdminNavbar/Productsdash/Productdash";
 import Categorydash from "./components/AdminNavbar/Categorydash/Categorydash";
 import Sales from "./components/AdminNavbar/Sales/Salesdash";
+import { NavBar } from "./components/NavBar/NavBar";
+import { Footer } from "./components/Footer/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,7 +49,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App container-fluid">
-        {/* <NavBar /> */}
+        
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path={"/register"} element={<Register />} />
@@ -72,7 +74,7 @@ function App() {
             <Route path="sales" element={<Sales />} />
           </Route>
         </Routes>
-        {/* <Footer /> */}
+        
       </div>
     </BrowserRouter>
   );

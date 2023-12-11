@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCart, removeFromCart } from "../../redux/actions/indexActions";
-import "./Cart.css";
+import "../Cart/Cart.css";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
@@ -14,6 +14,7 @@ export const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const navigate = useNavigate();
+
 
   console.log("preferenceId:" + preferenceId);
 
@@ -71,50 +72,53 @@ export const Cart = () => {
   }, [cart]);
 
   return (
-    <div>
-      <h1>Cart</h1>
-      {Object.keys(groupedCart).length === 0 ? (
-        <div>
-          <p>The cart is empty</p>
+    
+    <div>      
+        {Object.keys(groupedCart).length === 0 ? (
+        <div className="empty-cart">
+          
+          <h1>THE CART IS EMPTY</h1>
           <Link to="/">
-            <button>Start buying</button>
+            <button className="btn btn-primary">START BUYING</button>
           </Link>
         </div>
       ) : (
         <div>
-          <div className="row">
+          <div>
+              <h1>PURCHASE SUMMARY</h1>
+          </div>      
+          <div className="cart-item-conteiner">
             {Object.values(groupedCart).map((groupedProduct) => (
               <div key={groupedProduct.idProduct} className="cart-item">
-                <img
-                  src={groupedProduct.productImg}
-                  alt={groupedProduct.productName}
-                />
-                <h5>{groupedProduct.productName}</h5>
-                <p>
-                  Quantity: {groupedProduct.quantity} - $
-                  {groupedProduct.totalPrice.toFixed(2)}
-                </p>
-                <div className="cart-item-info">
-                  <button
-                    onClick={() =>
-                      handleRemoveFromCart(groupedProduct.idProduct)
-                    }
-                  >
-                    Remove for cart
-                  </button>
-                </div>
+              <div className='cart-item-img'>
+                <img src={groupedProduct.productImg} alt={groupedProduct.productName} />
               </div>
+              <div className='cart-item-name'>
+                <h3>{groupedProduct.productName}</h3>
+              </div>
+              <div className='cart-item-price'>
+                <h4>
+                Cantidad: {groupedProduct.quantity} - ${groupedProduct.totalPrice.toFixed(2)}
+                </h4>
+              </div>      
+              <div className="cart-item-info">
+                <button onClick={() => handleRemoveFromCart(groupedProduct.idProduct)} className="btn btn-danger">
+                  Remove
+                </button>
+              </div>
+            </div>
             ))}
-            <div>
-              <p>Total: ${totalPrice.toFixed(2)}</p>
+            <div className='total'>
+                <h3>TOTAL: ${totalPrice.toFixed(2)}</h3>
             </div>
             <div className="buttons_actions">
               <button className="btn btn-success" onClick={handleBuyClick}>
-                Buy
+                BUY
               </button>
+              <button onClick={goHome} className="btn btn-primary">GO BACK</button>
             </div>
             <div>
-              <button onClick={goHome}>Go Back</button>
+              
             </div>
           </div>
         </div>

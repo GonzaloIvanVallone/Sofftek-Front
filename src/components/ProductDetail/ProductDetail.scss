@@ -17,7 +17,7 @@
   width: 350px;
   height: 350px;
   margin: 0%;
-  border: 1px solid #000;
+  //border: 1px solid #000;
 }
 
 .img {
@@ -27,7 +27,6 @@
 
 .container-card-info {
   display: block;
-  margin: 16px;
   font-size: medium;
   width: 350px;
   height: 350px;
@@ -49,7 +48,8 @@
 }
 
 .buttons_actions {
-  margin: 0px 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .footer-container {
@@ -63,5 +63,5 @@
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  min-height: 100vh;
+  min-height: 70vh;
 }
