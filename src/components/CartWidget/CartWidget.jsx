@@ -18,7 +18,7 @@ export const CartWidget = ({ itemCount }) => {
   }
 
   return (
-    <Button className="button" onClick={handleCart}>
+    <Button className="button justify-content-center" onClick={handleCart}>
       <FontAwesomeIcon icon={faShoppingCart} />
       &nbsp;
       {itemCount > 0 && <span className="badge bg-secondary">{itemCount}</span>}

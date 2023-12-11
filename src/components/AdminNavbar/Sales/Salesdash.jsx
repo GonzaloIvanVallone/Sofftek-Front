@@ -40,7 +40,7 @@ const SalesDash = () => {
                 <td>{sale.user.email}</td>
                 <td>{sale.dir.street}{sale.dir.streetNumber}</td>
                 <td>
-                  <button onClick={handleUpdate} ><i className="fa fa-trash" aria-hidden="true"></i>Update</button>
+                  <button className="btn btn-primary m-1" onClick={handleUpdate} ><i className="fa fa-trash" aria-hidden="true"></i>Update</button>
                 </td>
               </tr>)
           })}

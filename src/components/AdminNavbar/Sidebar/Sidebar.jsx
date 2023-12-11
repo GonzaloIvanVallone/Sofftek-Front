@@ -25,8 +25,8 @@ export const SideBar = () => {
                     <img
                         onClick={goHome}
                         src={logo}
-                        width="250"
-                        height="300"
+                        width="200"
+                        height="250"
                         className="d-inline-block pb-5"
                         alt="Logo"
                     />

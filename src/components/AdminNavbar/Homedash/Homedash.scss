@@ -1,0 +1,15 @@
+.micontainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+    .box {
+      height: 200px; /* Ajusta la altura según tus necesidades */
+      box-sizing: border-box;
+      border: 1px solid #000;
+    }
+    p{
+      font-weight: 600;
+    }
+  }
+  
+  

@@ -157,7 +157,7 @@ export const Paymentform = () => {
 
   return (
     <div className="container-invoicing">
-      <div className="payment">
+      <div className="payment m-3 p-2">
         <div className="container-payment">
           <h1>Welcome to Invoicing</h1>
           <Accordion>
@@ -187,7 +187,7 @@ export const Paymentform = () => {
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>
-          <h2>Total : ${total}</h2>
+          <h2 className="p-2 rounded">Total : ${total}</h2>
 
           <form
             onSubmit={(e) => {
@@ -198,7 +198,7 @@ export const Paymentform = () => {
             <div className="form-container">
               <div className="form-row">
                 <div className="form-group">
-                  <p className="input-title">Province:</p>
+                  <p className="input-title mb-1">Province:</p>
                   <InputGroup className="input mb-3">
                     <Form.Control
                       type="text"
@@ -215,7 +215,7 @@ export const Paymentform = () => {
                 </div>
 
                 <div className="form-group">
-                  <p className="input-title">Locality:</p>
+                  <p className="input-title mb-1">Locality:</p>
                   <InputGroup className="input mb-3">
                     <Form.Control
                       type="text"
@@ -233,7 +233,7 @@ export const Paymentform = () => {
               </div>
               <div className="form-row">
                 <div className="form-group">
-                  <p className="input-title">Street:</p>
+                  <p className="input-title mb-1">Street:</p>
                   <InputGroup className="input mb-3">
                     <Form.Control
                       type="text"
@@ -250,7 +250,7 @@ export const Paymentform = () => {
                 </div>
 
                 <div className="form-group">
-                  <p className="input-title">Street Number:</p>
+                  <p className="input-title mb-1">Street Number:</p>
                   <InputGroup className="input mb-3">
                     <Form.Control
                       type="text"
@@ -268,7 +268,7 @@ export const Paymentform = () => {
               </div>
               <div>
                 <label>
-                  <div className="container_checkbox">
+                  <div className="container_checkbox mb-1">
                     <p className="p_check">¿is Apartment?</p>
                     <input
                       type="checkbox"
@@ -283,7 +283,7 @@ export const Paymentform = () => {
               {formData.isApartment && (
                 <div>
                   <div>
-                    <p className="input-title">Floor number</p>
+                    <p className="input-title mb-1">Floor number</p>
                     <InputGroup className="input mb-3">
                       <Form.Control
                         type="text"
@@ -297,7 +297,7 @@ export const Paymentform = () => {
                     </InputGroup>
                   </div>
                   <div>
-                    <p className="input-title">Apartment Number</p>
+                    <p className="input-title mb-1">Apartment Number</p>
                     <InputGroup className="input mb-3">
                       <Form.Control
                         type="text"
@@ -313,7 +313,7 @@ export const Paymentform = () => {
                 </div>
               )}
               <div>
-                <h3>Select a delivery date:</h3>
+                <h3 className="m-2">Select a delivery date:</h3>
                 <DatePicker
                   selected={
                     formData.selectedDate

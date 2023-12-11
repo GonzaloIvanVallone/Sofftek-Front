@@ -32,7 +32,7 @@ const Userdash = () => {
       </div>
       <div className="text-end">
         <button
-          className="btn btn-primary m-1 text-start "
+          className="btn btn-primary m-1 text-start"
           onClick={handleClick}
         >
           Add New Admin
@@ -55,10 +55,10 @@ const Userdash = () => {
                 <td>{user.email}</td>
                 <td>{user.roles[0].name}</td>
                 <td>
-                  <button onClick={() => handleUpdateUser(user)}>
+                  <button className="btn btn-primary m-1" onClick={() => handleUpdateUser(user)}>
                     <i className="fa fa-trash" aria-hidden="true"></i>Update
                   </button>
-                  <button onClick={() => handleUpDownUser(user)}>
+                  <button className="btn btn-primary m-1" onClick={() => handleUpDownUser(user)}>
                     <i className="fa fa-trash" aria-hidden="true"></i>
                     Upgrade/DownGrade
                   </button>

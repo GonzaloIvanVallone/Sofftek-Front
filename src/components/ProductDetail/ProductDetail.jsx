@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { addToCart } from "../../redux/actions/indexActions";
-import { useNavigate, useLocation,Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { ItemCount } from "../ItemCount/ItemCount";
-import {NavBar} from "../NavBar/NavBar"
-import {Footer} from "../Footer/Footer"
+import { NavBar } from "../NavBar/NavBar"
+import { Footer } from "../Footer/Footer"
+import { Container, Row, Col, Image, Button } from 'react-bootstrap';
+import './ProductDetail.scss';
 
 export const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -69,54 +71,47 @@ export const ProductDetail = () => {
     isLoggedIn
       ? handleAddToCart()
       : navigate("/NotLoggin", {
-          state:
-            "You cannot add products to the cart without first logging into your account.",
-        });
+        state:
+          "You cannot add products to the cart without first logging into your account.",
+      });
   };
 
   return (
-    <div className="container-product-deteil mt-1 mb-3"> 
-    <NavBar/>     
-      <div className="Product-Detail">        
-        <div className="container-facher">
-          <div className="container-information">
-            <div>
-                <div className="container-img">              
-                  <img
-                    className="img"
-                    src={product.productImg}
-                    alt="imagen del producto"
-        
+    <>
+      <NavBar />
+      <Container className="text-center">
+        <Row>
+          <Col>
+            <Image
+              className="img p-3"
+              src={product.productImg}
+              alt="imagen del producto"
+            />
+            <ItemCount
+              initial={1}
+              stock={product.productStock}
+              onAdd={(quantity) => handleAddToCart(quantity)}
 
-                  /><ItemCount
-                  initial={1} 
-                  stock={product.productStock}
-                  onAdd={(quantity) => handleAddToCart(quantity)}
-                />              
-                <div>              
-            </div>
-          </div>
-        </div>        
-        <div className="container-card-info">
-              <h3>{product.productName}</h3>
-              <p>$ {product.productPrice}</p>
-              <p>Stock: {product.productStock}</p>
-              <p className="text-start">{product.description}</p>
-             
-            </div>
-          </div>
-        </div>
-        <div className="container_buttons">
-          <div className="buttons_actions">
-            <button className="btn btn-success" onClick={handleBuyClick}>
+            />
+
+          </Col>
+          <Col className="border-left">
+            <h3>{product.productName}</h3>
+            <p>$ {product.productPrice}</p>
+            <p>Stock: {product.productStock}</p>
+            <p className="text-start">{product.description}</p>
+
+            <Button variant="" onClick={handleBuyClick}>
               Buy
-            </button>
-            <Link to="/" className='link-redirect-cart'>Volver Atras</Link>
-          </div>
-        </div> 
-      </div>
-           
-        <Footer/>
-    </div>
+            </Button>
+          </Col>
+        </Row>
+
+        <Link to="/" className="link-redirect-cart">
+          Volver Atras
+        </Link>
+      </Container>
+      <Footer />
+    </>
   );
 };
