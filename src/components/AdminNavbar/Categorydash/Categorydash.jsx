@@ -66,7 +66,7 @@ const Categorydash = () => {
                     className="btn btn-primary m-1"
                     onClick={() => handleEdit(c)}
                   >
-                    Edit
+                    Update
                   </button>
                 </td>
               </tr>

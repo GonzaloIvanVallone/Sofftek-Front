@@ -54,15 +54,15 @@ const Productdash = () => {
             return (
               <tr key={idx}>
                 <td>{p.productName}</td>
-                <td>{p.description}</td>
+                <td>{p.description.slice(0.10)}</td>
                 <td>{p.productPrice}</td>
                 <td>{p.productStock}</td>
                 <td>{p.typeCategory.category}</td>
                 <td>
-                  <button onClick={() => handleDelete(p.idProduct)}>
+                  <button className="btn btn-primary m-1" onClick={() => handleDelete(p.idProduct)}>
                     <i className="fa fa-trash" aria-hidden="true"></i>Delete
                   </button>
-                  <button onClick={() => handleUpdate(p)}>
+                  <button className="btn btn-primary m-1" onClick={() => handleUpdate(p)}>
                     <i className="fa fa-lock" aria-hidden="true"></i>Update
                   </button>
                 </td>
