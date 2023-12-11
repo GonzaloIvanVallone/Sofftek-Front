@@ -460,8 +460,37 @@ export const newUser = (payload) => async (dispatch) => {
       icon: "success",
       confirmButtonText: "Continue",
     });
+  } catch (error) {
+    if (error.response) {
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    } else {
+      Swal.fire({
+        title: "No response received from the server",
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    }
+  }
+};
+
+export const updateUser = (payload) => async (dispatch) => {
+  try {
+    console.log(payload);
+    const token = localStorage.getItem("token");
+    let response = await axios.put(`${user_route}/update`, payload, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    Swal.fire({
+      title: "User Updated",
+      icon: "success",
+      confirmButtonText: "Continue",
+    });
     return dispatch({
-      type: "NEW_USER",
+      type: "UPDATE_USER",
       payload: response.data,
     });
   } catch (error) {
@@ -480,6 +509,40 @@ export const newUser = (payload) => async (dispatch) => {
     }
   }
 };
+
+export const upDownUser = (payload) => async (dispatch) => {
+  try {
+    console.log(payload);
+    const token = localStorage.getItem("token");
+    let response = await axios.put(`${user_route}/changeRole`, payload, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    Swal.fire({
+      title: "User Updated",
+      icon: "success",
+      confirmButtonText: "Continue",
+    });
+    return dispatch({
+      type: "UPDATE_USER",
+      payload: response.data,
+    });
+  } catch (error) {
+    if (error.response) {
+      Swal.fire({
+        title: `${error.response.data}`,
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    } else {
+      Swal.fire({
+        title: "No response received from the server",
+        icon: "error",
+        confirmButtonText: "Continue",
+      });
+    }
+  }
+};
+
 export const countUsers = () => async (dispatch) => {
   try {
     const token = localStorage.getItem("token");

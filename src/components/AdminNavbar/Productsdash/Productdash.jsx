@@ -20,7 +20,7 @@ const Productdash = () => {
     setProduct(product);
   };
 
-  const handleClick = (product) => {
+  const handleClick = () => {
     setModal(true);
     setProduct();
   };
@@ -33,7 +33,7 @@ const Productdash = () => {
       <div className="text-end">
         <button
           className="btn btn-primary m-1 text-start "
-          onClick={() => handleClick({})}
+          onClick={() => handleClick()}
         >
           Add New Product
         </button>
