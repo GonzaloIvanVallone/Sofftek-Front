@@ -15,9 +15,6 @@ export const Cart = () => {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const navigate = useNavigate();
 
-
-  console.log("preferenceId:" + preferenceId);
-
   const goHome = () => {
     navigate("/");
   };
@@ -61,7 +58,7 @@ export const Cart = () => {
 
   const handleBuyClick = () => {
     isLoggedIn
-      ? navigate("/Buy", { state: { cart: groupedCart } })
+      ? navigate("/Buy", { state: { cart: groupedCart, comeFrom: "cart" } })
       : navigate("/NotLoggin", {
           state: "no puede comprar productos sin antes ingresar a su cuenta",
         });
@@ -72,11 +69,9 @@ export const Cart = () => {
   }, [cart]);
 
   return (
-    
-    <div>      
-        {Object.keys(groupedCart).length === 0 ? (
+    <div>
+      {Object.keys(groupedCart).length === 0 ? (
         <div className="empty-cart">
-          
           <h1>THE CART IS EMPTY</h1>
           <Link to="/">
             <button className="btn btn-primary">START BUYING</button>
@@ -85,41 +80,50 @@ export const Cart = () => {
       ) : (
         <div>
           <div>
-              <h1>PURCHASE SUMMARY</h1>
-          </div>      
+            <h1>PURCHASE SUMMARY</h1>
+          </div>
           <div className="cart-item-conteiner">
             {Object.values(groupedCart).map((groupedProduct) => (
               <div key={groupedProduct.idProduct} className="cart-item">
-              <div className='cart-item-img'>
-                <img src={groupedProduct.productImg} alt={groupedProduct.productName} />
+                <div className="cart-item-img">
+                  <img
+                    src={groupedProduct.productImg}
+                    alt={groupedProduct.productName}
+                  />
+                </div>
+                <div className="cart-item-name">
+                  <h3>{groupedProduct.productName}</h3>
+                </div>
+                <div className="cart-item-price">
+                  <h4>
+                    Cantidad: {groupedProduct.quantity} - $
+                    {groupedProduct.totalPrice.toFixed(2)}
+                  </h4>
+                </div>
+                <div className="cart-item-info">
+                  <button
+                    onClick={() =>
+                      handleRemoveFromCart(groupedProduct.idProduct)
+                    }
+                    className="btn btn-danger"
+                  >
+                    Remove
+                  </button>
+                </div>
               </div>
-              <div className='cart-item-name'>
-                <h3>{groupedProduct.productName}</h3>
-              </div>
-              <div className='cart-item-price'>
-                <h4>
-                Cantidad: {groupedProduct.quantity} - ${groupedProduct.totalPrice.toFixed(2)}
-                </h4>
-              </div>      
-              <div className="cart-item-info">
-                <button onClick={() => handleRemoveFromCart(groupedProduct.idProduct)} className="btn btn-danger">
-                  Remove
-                </button>
-              </div>
-            </div>
             ))}
-            <div className='total'>
-                <h3>TOTAL: ${totalPrice.toFixed(2)}</h3>
+            <div className="total">
+              <h3>TOTAL: ${totalPrice.toFixed(2)}</h3>
             </div>
             <div className="buttons_actions">
               <button className="btn btn-success" onClick={handleBuyClick}>
                 BUY
               </button>
-              <button onClick={goHome} className="btn btn-primary">GO BACK</button>
+              <button onClick={goHome} className="btn btn-primary">
+                GO BACK
+              </button>
             </div>
-            <div>
-              
-            </div>
+            <div></div>
           </div>
         </div>
       )}

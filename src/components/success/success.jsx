@@ -12,9 +12,12 @@ export const Success = () => {
   console.log(formData);
 
   const handleGoHome = () => {
-    dispatch(billSave(JSON.parse(localStorage.getItem("formData"))));
-    dispatch(removeAllCart());
-    localStorage.removeItem("cart");
+    dispatch(billSave(formData));
+
+    if (formData.comeFrom == "cart") {
+      dispatch(removeAllCart());
+      localStorage.removeItem("cart");
+    }
     localStorage.removeItem("formData");
     localStorage.removeItem("grouped");
     navigate("/");
