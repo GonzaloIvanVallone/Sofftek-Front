@@ -89,6 +89,15 @@ const rootReducer = (state = initialState, action) => {
         isAdmin: false,
         cart:[]
       };
+    case "UPDATE_USER":
+      const updateUser = action.payload; // El producto actualizado desde el backend
+      const updatedUsers = state.allUsers.map((user) =>
+        user.id === updateUser.id ? updateUser : user
+      );
+      return {
+        ...state,
+        allUsers: updatedUsers,
+      };
     case "GET_CART":
       return {
         ...state,
