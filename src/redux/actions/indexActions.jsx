@@ -298,6 +298,7 @@ export const logout = () => async (dispatch) => {
   try {
     let response = await axios.post(`${auth_route}/logout`);
     localStorage.removeItem("token");
+    localStorage.removeItem("cart");
     return dispatch({
       type: "LOGOUT",
     });

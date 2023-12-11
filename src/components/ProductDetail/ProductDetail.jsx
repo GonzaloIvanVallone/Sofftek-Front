@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { addToCart } from "../../redux/actions/indexActions";
-import { useNavigate, useLocation } from "react-router-dom";
-import { NavBar } from "../NavBar/NavBar";
-import { Footer } from "../Footer/Footer";
+import { useNavigate, useLocation,Link } from "react-router-dom";
+import { ItemCount } from "../ItemCount/ItemCount";
+import {NavBar} from "../NavBar/NavBar"
+import {Footer} from "../Footer/Footer"
 
 export const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ export const ProductDetail = () => {
   const [productToSend, setproductToSend] = useState({});
   const product = location.state && location.state.product;
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (quantity) => {
     const totalQuantityInCart = cart.reduce(
       (total, cartProduct) =>
         cartProduct.idProduct === product.idProduct
@@ -26,8 +27,8 @@ export const ProductDetail = () => {
           : total,
       0
     );
-    if (totalQuantityInCart < product.productStock) {
-      dispatch(addToCart({ ...product, quantity: 1 }));
+    if (totalQuantityInCart + quantity <= product.productStock) {
+      dispatch(addToCart({ ...product, quantity }));
       Swal.fire({
         title: "¡Product added to cart!",
         icon: "success",
@@ -74,23 +75,34 @@ export const ProductDetail = () => {
   };
 
   return (
-    <div className="container-product-deteil mt-1 mb-3">
-      <NavBar />
-      <div className="Product-Detail">
+    <div className="container-product-deteil mt-1 mb-3"> 
+    <NavBar/>     
+      <div className="Product-Detail">        
         <div className="container-facher">
           <div className="container-information">
-            <div className="container-img">
-              <img
-                className="img"
-                src={product.productImg}
-                alt="imagen del producto"
-              />
+            <div>
+                <div className="container-img">              
+                  <img
+                    className="img"
+                    src={product.productImg}
+                    alt="imagen del producto"
+        
+
+                  /><ItemCount
+                  initial={1} 
+                  stock={product.productStock}
+                  onAdd={(quantity) => handleAddToCart(quantity)}
+                />              
+                <div>              
             </div>
-            <div className="container-card-info">
+          </div>
+        </div>        
+        <div className="container-card-info">
               <h3>{product.productName}</h3>
               <p>$ {product.productPrice}</p>
               <p>Stock: {product.productStock}</p>
               <p className="text-start">{product.description}</p>
+             
             </div>
           </div>
         </div>
@@ -99,17 +111,12 @@ export const ProductDetail = () => {
             <button className="btn btn-success" onClick={handleBuyClick}>
               Buy
             </button>
+            <Link to="/" className='link-redirect-cart'>Volver Atras</Link>
           </div>
-          <div className="buttons_actions">
-            <button className="btn btn-success" onClick={handleAddCartClick}>
-              Add to Cart
-            </button>
-          </div>
-        </div>
+        </div> 
       </div>
-      <div className="footer-container">
-        <Footer />
-      </div>
+           
+        <Footer/>
     </div>
   );
 };

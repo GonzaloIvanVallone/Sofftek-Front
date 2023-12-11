@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-import { NavBar } from "../NavBar/NavBar";
-import { Footer } from "../Footer/Footer";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ProductCard } from "../ProductCard/ProductCard";
@@ -9,6 +7,8 @@ import { SearchBar } from "../SearchBar/SearchBar";
 import { Pagination } from "../Pagination/Pagination";
 import "./Home.scss";
 import CategoryFilter from "../CategoryFilter/CategoryFilter";
+import {NavBar} from "../NavBar/NavBar"
+import {Footer} from "../Footer/Footer"
 
 export const Home = () => {
   const allProducts = useSelector((state) => state.allProducts);
@@ -38,8 +38,8 @@ export const Home = () => {
   };
 
   return (
-    <div className="container-fluid mb-2">
-      <NavBar />
+    <div className="container-fluid mb-2">      
+      <NavBar/>
       <SearchBar />
       <CategoryFilter onFilter={handleFilter} />
       <div className="content">
@@ -70,7 +70,7 @@ export const Home = () => {
           })}
         </div>
       </div>
-      <Footer />
+      <Footer/>
     </div>
   );
 };

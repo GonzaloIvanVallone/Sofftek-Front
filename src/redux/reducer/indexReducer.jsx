@@ -87,6 +87,7 @@ const rootReducer = (state = initialState, action) => {
         isLoggedIn: false,
         userName: "",
         isAdmin: false,
+        cart:[]
       };
     case "UPDATE_USER":
       const updateUser = action.payload; // El producto actualizado desde el backend
