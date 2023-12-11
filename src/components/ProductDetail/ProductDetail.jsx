@@ -6,10 +6,10 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import { addToCart } from "../../redux/actions/indexActions";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { ItemCount } from "../ItemCount/ItemCount";
-import { NavBar } from "../NavBar/NavBar"
-import { Footer } from "../Footer/Footer"
-import { Container, Row, Col, Image, Button } from 'react-bootstrap';
-import './ProductDetail.scss';
+import { NavBar } from "../NavBar/NavBar";
+import { Footer } from "../Footer/Footer";
+import { Container, Row, Col, Image, Button } from "react-bootstrap";
+import "./ProductDetail.scss";
 
 export const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -59,7 +59,9 @@ export const ProductDetail = () => {
 
   const handleBuyClick = () => {
     if (isLoggedIn) {
-      navigate("/Buy", { state: { cart: [productToSend] } });
+      navigate("/Buy", {
+        state: { cart: [productToSend], comeFrom: "ProductDetail" },
+      });
     } else {
       navigate("/NotLoggin", {
         state: "no puede comprar productos sin antes ingresar a su cuenta",
@@ -71,9 +73,9 @@ export const ProductDetail = () => {
     isLoggedIn
       ? handleAddToCart()
       : navigate("/NotLoggin", {
-        state:
-          "You cannot add products to the cart without first logging into your account.",
-      });
+          state:
+            "You cannot add products to the cart without first logging into your account.",
+        });
   };
 
   return (
@@ -91,9 +93,7 @@ export const ProductDetail = () => {
               initial={1}
               stock={product.productStock}
               onAdd={(quantity) => handleAddToCart(quantity)}
-
             />
-
           </Col>
           <Col className="border-left">
             <h3>{product.productName}</h3>

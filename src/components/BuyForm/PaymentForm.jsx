@@ -23,6 +23,7 @@ export const Paymentform = () => {
   const navigate = useNavigate();
   const preferenceId = useSelector((state) => state.idPreference);
   const products = location.state?.cart;
+  const comeFrom = location.state?.comeFrom;
 
   initMercadoPago("TEST-318bcc68-f6f3-4251-bcbd-b07aac21c30d", {
     locale: "es-AR",
@@ -62,6 +63,7 @@ export const Paymentform = () => {
     selectedDate: null,
     amount: total,
     token: localStorage.getItem("token"),
+    comeFrom: comeFrom,
   });
 
   const handleChange = (e) => {
