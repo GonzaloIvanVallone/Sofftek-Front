@@ -1,3 +1,5 @@
+@import '../../../assets/variables.scss';
+
 .h-100 {
   height: 100%;
   margin-left: 0;
@@ -11,6 +13,14 @@
   /* Asegurar que los botones ocupen el ancho completo del sidebar */
   .d-flex.flex-column .btn {
     width: 100%;
+    padding: 1vh;
+  }
+
+  .btn{
+    box-shadow: 1px 3px 0px rgba(255, 255, 255, 0.5);
+    margin: 1vh;
+    border-bottom: 1px $color3 solid;
+    border-right: 1px $color3 solid;
   }
   
 }

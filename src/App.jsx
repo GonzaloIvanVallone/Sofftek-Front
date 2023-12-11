@@ -67,6 +67,7 @@ function App() {
           <Route exact path={"/Success"} element={<Success />} />
           <Route exact path={"/Failure"} element={<Failure />} />
           <Route path="/dashboard/*" element={<AdminNavbar />}>
+            <Route index element={<Homedash />} />
             <Route index path="homedash" element={<Homedash />} />
             <Route path="userdash" element={<Userdash />} />
             <Route path="productdash" element={<Productdash />} />
