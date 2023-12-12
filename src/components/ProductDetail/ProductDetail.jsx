@@ -22,29 +22,36 @@ export const ProductDetail = () => {
   const product = location.state?.product;
 
   const handleAddToCart = (quantity) => {
-    const totalQuantityInCart = cart.reduce(
-      (total, cartProduct) =>
-        cartProduct.idProduct === product.idProduct
-          ? total + cartProduct.quantity
-          : total,
-      0
-    );
-    if (totalQuantityInCart + quantity <= product.productStock) {
-      for (let i = 0; i < quantity; i++) {
-        dispatch(addToCart({ ...product, quantity: 1 }));
+    if (isLoggedIn) {
+      const totalQuantityInCart = cart.reduce(
+        (total, cartProduct) =>
+          cartProduct.idProduct === product.idProduct
+            ? total + cartProduct.quantity
+            : total,
+        0
+      );
+      if (totalQuantityInCart + quantity <= product.productStock) {
+        for (let i = 0; i < quantity; i++) {
+          dispatch(addToCart({ ...product, quantity: 1 }));
+        }
+        Swal.fire({
+          title: "¡Product added to cart!",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        Swal.fire({
+          title: "¡Out of stock!",
+          icon: "warning",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
-      Swal.fire({
-        title: "¡Product added to cart!",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1500,
-      });
     } else {
-      Swal.fire({
-        title: "¡Out of stock!",
-        icon: "warning",
-        showConfirmButton: false,
-        timer: 1500,
+      navigate("/NotLoggin", {
+        state:
+          "no puede añadir productos al carrito sin antes ingresar a su cuenta",
       });
     }
   };
