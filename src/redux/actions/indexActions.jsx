@@ -1,15 +1,22 @@
 import axios from "axios";
-const category_route = "http://localhost:8080/api/v1/category";
-const product_route = "http://localhost:8080/api/v1/product";
-const auth_route = "http://localhost:8080/api/v1/auth";
-const user_route = "http://localhost:8080/api/v1/admin/user";
-const bill_route = "http://localhost:8080/api/v1/bid";
+const category_route =
+  "https://softtekecommerce-production.up.railway.app/api/v1/category";
+const product_route =
+  "https://softtekecommerce-production.up.railway.app/api/v1/product";
+const auth_route =
+  "https://softtekecommerce-production.up.railway.app/api/v1/auth";
+const user_route =
+  "https://softtekecommerce-production.up.railway.app/api/v1/admin/user";
+const bill_route =
+  "https://softtekecommerce-production.up.railway.app/api/v1/bid";
 
 import Swal from "sweetalert2";
 
 export const getAllProducts = () => async (dispatch) => {
   try {
-    let response = await axios.get("http://localhost:8080/api/v1/product/list");
+    let response = await axios.get(
+      "https://softtekecommerce-production.up.railway.app/api/v1/product/list"
+    );
     return dispatch({
       type: "GET_ALL_PRODUCTS",
       payload: response.data,
@@ -386,7 +393,6 @@ export const createPreference = (payload) => async (dispatch) => {
         },
       }
     );
-    console.log(response.data);
     return dispatch({
       type: "CALL_MERCADO_PAGO",
       payload: response.data,

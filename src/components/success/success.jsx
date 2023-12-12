@@ -6,10 +6,8 @@ import "./success.scss";
 
 export const Success = () => {
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
   const formData = JSON.parse(localStorage.getItem("formData"));
-  console.log(formData);
 
   const handleGoHome = () => {
     dispatch(billSave(formData));
@@ -31,11 +29,11 @@ export const Success = () => {
             <h1>Thanks for trust us!</h1>
           </div>
           <div className="card-body">
-            <p>Province: {formData && formData.province}</p>
-            <p>Locality: {formData && formData.locality}</p>
-            <p>Street: {formData && formData.street}</p>
-            <p>Street Number: {formData && formData.streetNumber}</p>
-            <p>Total Amount: {formData && formData.amount}</p>
+            <p>Province: {formData.province}</p>
+            <p>Locality: {formData.locality}</p>
+            <p>Street: {formData.street}</p>
+            <p>Street Number: {formData.streetNumber}</p>
+            <p>Total Amount: {formData.amount}</p>
             <p>Product:</p>
             <ul>
               {formData.lstItem.map((item, index) => (
