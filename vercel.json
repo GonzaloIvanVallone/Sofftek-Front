@@ -14,7 +14,7 @@
       { "src": "/dashboard/userdash", "dest": "/index.html" },
       { "src": "/dashboard/productdash", "dest": "/index.html" },
       { "src": "/dashboard/categorydash", "dest": "/index.html" },
-      { "src": "/dashboard/sales", "dest": "/index.html" }
+      { "src": "/dashboard/sales", "dest": "/index.html" },
       { "src": "/product/([^/]+)", "dest": "/index.html" },
       { "src": "/password/new/([^/]+)", "dest": "/index.html" }
     ]
