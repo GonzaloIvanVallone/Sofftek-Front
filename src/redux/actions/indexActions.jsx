@@ -1,9 +1,14 @@
 import axios from "axios";
-const category_route = "https://hardtek-back.duckdns.org/api/v1/category";
-const product_route = "https://hardtek-back.duckdns.org/api/v1/product";
-const auth_route = "https://hardtek-back.duckdns.org/api/v1/auth";
-const user_route = "https://hardtek-back.duckdns.org/api/v1/admin/user";
-const bill_route = "https://hardtek-back.duckdns.org/api/v1/bid";
+const category_route =
+  "https://softtekecommerce-production.up.railway.app/api/v1/category";
+const product_route =
+  "https://softtekecommerce-production.up.railway.app/api/v1/product";
+const auth_route =
+  "https://softtekecommerce-production.up.railway.app/api/v1/auth";
+const user_route =
+  "https://softtekecommerce-production.up.railway.app/api/v1/admin/user";
+const bill_route =
+  "https://softtekecommerce-production.up.railway.app/api/v1/bid";
 
 import Swal from "sweetalert2";
 
@@ -386,7 +391,6 @@ export const createPreference = (payload) => async (dispatch) => {
         },
       }
     );
-    console.log(response.data);
     return dispatch({
       type: "CALL_MERCADO_PAGO",
       payload: response.data,

@@ -19,7 +19,7 @@ export const ProductDetail = () => {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const cart = useSelector((state) => state.cart) || [];
   const [productToSend, setproductToSend] = useState({});
-  const product = location.state && location.state.product;
+  const product = location.state?.product;
 
   const handleAddToCart = (quantity) => {
     const totalQuantityInCart = cart.reduce(
@@ -30,7 +30,9 @@ export const ProductDetail = () => {
       0
     );
     if (totalQuantityInCart + quantity <= product.productStock) {
-      dispatch(addToCart({ ...product, quantity }));
+      for (let i = 0; i < quantity; i++) {
+        dispatch(addToCart({ ...product, quantity: 1 }));
+      }
       Swal.fire({
         title: "¡Product added to cart!",
         icon: "success",

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Modal,
   ModalHeader,
@@ -9,7 +9,6 @@ import {
 } from "react-bootstrap";
 import "./Userdash.scss";
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
 import {
   getAllUsers,
   newUser,
