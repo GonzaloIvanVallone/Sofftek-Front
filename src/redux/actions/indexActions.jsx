@@ -1,4 +1,5 @@
 import axios from "axios";
+
 const category_route = "http://localhost:8080/api/v1/category";
 const product_route = "http://localhost:8080/api/v1/product";
 const auth_route = "http://localhost:8080/api/v1/auth";
@@ -9,7 +10,7 @@ import Swal from "sweetalert2";
 
 export const getAllProducts = () => async (dispatch) => {
   try {
-    let response = await axios.get("http://localhost:8080/api/v1/product/list");
+    let response = await axios.get(`${product_route}/list`);
     return dispatch({
       type: "GET_ALL_PRODUCTS",
       payload: response.data,
@@ -159,7 +160,6 @@ export const newCategory = (payload) => async (dispatch) => {
 };
 export const updateCategory = (payload) => async (dispatch) => {
   try {
-    // console.log(payload);
     const token = localStorage.getItem("token");
     let response = await axios.put(`${category_route}/update`, payload, {
       headers: { Authorization: `Bearer ${token}` },
@@ -378,7 +378,7 @@ export const register = (payload) => async (dispatch) => {
 export const createPreference = (payload) => async (dispatch) => {
   try {
     const response = await axios.post(
-      "http://localhost:8080/api/v1/product/mercadoPago/compra",
+      `${product_route}/mercadoPago/compra`,
       payload,
       {
         headers: {
@@ -386,7 +386,6 @@ export const createPreference = (payload) => async (dispatch) => {
         },
       }
     );
-    console.log(response.data);
     return dispatch({
       type: "CALL_MERCADO_PAGO",
       payload: response.data,
@@ -399,7 +398,7 @@ export const createPreference = (payload) => async (dispatch) => {
 export const billSave = (bill) => async (dispatch) => {
   try {
     const response = await axios.post(
-      "http://localhost:8080/api/v1/product/mercadoPago/newBill",
+      `${product_route}/mercadoPago/newBill`,
       bill,
       {
         headers: {
@@ -574,7 +573,7 @@ export const countUsers = () => async (dispatch) => {
 export const countSales = () => async (dispatch) => {
   try {
     const token = localStorage.getItem("token");
-    let response = await axios.get(`${bill_routes}/count`, {
+    let response = await axios.get(`${bill_route}/count`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return dispatch({
