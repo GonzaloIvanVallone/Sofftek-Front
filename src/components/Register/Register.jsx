@@ -35,7 +35,7 @@ export const Register = () => {
       Swal.fire({
         title: "Passwords doesnt match",
         icon: "error",
-        confirmButtonText: "Continue",
+        showConfirmButton: false,
       });
       return;
     }
@@ -55,25 +55,28 @@ export const Register = () => {
     setPassword("");
     setConfirmPassword("");
 
-    setTimeout(() => {
-      navigate("/");
-    }, 2000);
+    navigate("/");
   };
 
   return (
     <div>
       <div className="card p-5 mt-1 mb-3">
-        <div className="card-title">
+        <div className="w-100 text-start">
+          <Link to="/" className="btn btn-primary">
+            back to home
+          </Link>
+        </div>
+        <div className="card-title text-center">
           <h3>Register</h3>
         </div>
         <Container className="no-flex">
           <Row>
-            <Col className="">
+            <Col className="text-center">
               <Image
                 src={logo}
                 alt="Descripción de la imagen"
                 fluid
-                width={400}
+                width={500}
               />
             </Col>
             <Col className="column col-12 col-xl-6">
@@ -121,7 +124,7 @@ export const Register = () => {
                   />
                 </Form.Group>
                 <div className="submits">
-                  <Button className="btn-register" type="submit">
+                  <Button className="btn-register mt-3" type="submit">
                     Register
                   </Button>
                   <Link to="/login" className="link-redirect">

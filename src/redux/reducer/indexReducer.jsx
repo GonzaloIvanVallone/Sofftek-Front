@@ -25,6 +25,7 @@ const rootReducer = (state = initialState, action) => {
       };
     case "FILTER_BY_CATEGORIES":
       if (action.payload == "all") {
+        // window.location.reload();
         return { ...state, allProducts: state.backupProducts };
       } else {
         const filteredByCategory = state.backupProducts.filter(
@@ -87,7 +88,7 @@ const rootReducer = (state = initialState, action) => {
         isLoggedIn: false,
         userName: "",
         isAdmin: false,
-        cart:[]
+        cart: [],
       };
     case "UPDATE_USER":
       const updateUser = action.payload; // El producto actualizado desde el backend
@@ -160,6 +161,7 @@ const rootReducer = (state = initialState, action) => {
     case "CREATE_PRODUCT": {
       return {
         ...state,
+        backupProducts: [...state.backupProducts, action.payload],
         allProducts: [...state.allProducts, action.payload],
       };
     }
