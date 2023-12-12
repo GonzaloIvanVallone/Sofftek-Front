@@ -25,22 +25,9 @@ export const SearchBar = () => {
 
   return (
     <div className="searchBar">
-      {/* <input
-        type="search"
-        placeholder=" Product to search..."
-        onChange={(e) => handleChange(e)}
-      ></input>
-      <button
-        className="btn"
-        type="submit"
-        value={name}
-        onClick={(e) => handleSubmit(e)}
-      >
-        Search
-      </button> */}
       <Form inline>
         <Row>
-          <Col xs="auto">
+          <Col xs="input-text auto">
             <Form.Control
               type="text"
               placeholder="Search"
