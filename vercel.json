@@ -17,5 +17,6 @@
       { "src": "/dashboard/productdash", "dest": "/index.html" },
       { "src": "/dashboard/categorydash", "dest": "/index.html" },
       { "src": "/dashboard/sales", "dest": "/index.html" }
-    ]
+    ],
+    "buildCommand": "next build"
   }
