@@ -75,7 +75,6 @@ function App() {
             <Route path="sales" element={<Sales />} />
           </Route>
         </Routes>
-        
       </div>
     </BrowserRouter>
   );
