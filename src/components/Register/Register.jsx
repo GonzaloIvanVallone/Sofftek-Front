@@ -1,26 +1,33 @@
 import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { Form, Button, Container, Row, Col, Image, Alert } from 'react-bootstrap';
-import '../Register/Register.scss'
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  Form,
+  Button,
+  Container,
+  Row,
+  Col,
+  Image,
+  Alert,
+} from "react-bootstrap";
+import "../Register/Register.scss";
+import logo from "../../assets/hardtv2.png";
 import { register } from "../../redux/actions/indexActions";
 import Swal from "sweetalert2";
-import { Link } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 
 export const Register = () => {
   const dispatch = useDispatch();
-  const [username, setUsername] = useState('');
-  const [email, setUseremail] = useState('')
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setUseremail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const roles = 1;
   const navigate = useNavigate();
-  const endpoint = 'http://localhost:8080/api/v1/auth/register';
+  const endpoint = "http://localhost:8080/api/v1/auth/register";
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
-
+  const [alertMessage, setAlertMessage] = useState("");
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -38,21 +45,20 @@ export const Register = () => {
       userName: username,
       email: email,
       password: password,
-      roles: [1]
+      roles: [1],
     };
 
-    dispatch(register(data))
+    dispatch(register(data));
 
-    setUsername('');
-    setUseremail('')
-    setPassword('');
-    setConfirmPassword('');
+    setUsername("");
+    setUseremail("");
+    setPassword("");
+    setConfirmPassword("");
 
     setTimeout(() => {
-      navigate('/');
+      navigate("/");
     }, 2000);
   };
-
 
   return (
     <div>
@@ -60,12 +66,17 @@ export const Register = () => {
         <div className="card-title">
           <h3>Register</h3>
         </div>
-        <Container className='no-flex'>
-          <Row >
+        <Container className="no-flex">
+          <Row>
             <Col className="">
-              <Image src="hardtv2.png" alt="Descripción de la imagen" fluid width={400} />
+              <Image
+                src={logo}
+                alt="Descripción de la imagen"
+                fluid
+                width={400}
+              />
             </Col>
-            <Col className='column col-12 col-xl-6'>
+            <Col className="column col-12 col-xl-6">
               <Form onSubmit={handleRegister}>
                 <Form.Group controlId="formUsername">
                   <Form.Label>User</Form.Label>
@@ -113,7 +124,9 @@ export const Register = () => {
                   <Button className="btn-register" type="submit">
                     Register
                   </Button>
-                  <Link to="/login" className="link-redirect">Do you already have an account?</Link>
+                  <Link to="/login" className="link-redirect">
+                    Do you already have an account?
+                  </Link>
                 </div>
               </Form>
             </Col>
@@ -121,5 +134,5 @@ export const Register = () => {
         </Container>
       </div>
     </div>
-  )
-}
+  );
+};
