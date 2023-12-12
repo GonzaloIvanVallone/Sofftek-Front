@@ -86,16 +86,31 @@ export const ProductDetail = () => {
       <Container className="text-center">
         <Row>
           <Col>
-            <Image
-              className="img p-3"
-              src={product.productImg}
-              alt="imagen del producto"
-            />
-            <ItemCount
-              initial={1}
-              stock={product.productStock}
-              onAdd={(quantity) => handleAddToCart(quantity)}
-            />
+            <Row>
+              <div className="rounded">
+                <Image
+                  className="img p-3"
+                  src={product.productImg}
+                  alt="imagen del producto"
+                />
+              </div>
+              <div>
+                <ItemCount
+                  initial={1}
+                  stock={product.productStock}
+                  onAdd={(quantity) => handleAddToCart(quantity)}
+                  className="item-count"
+                />
+              <Button variant="success" onClick={handleBuyClick}>
+                Buy
+              </Button>
+              </div>
+
+
+            </Row>
+
+
+
           </Col>
           <Col className="border-left">
             <h3>{product.productName}</h3>
@@ -103,17 +118,16 @@ export const ProductDetail = () => {
             <p>Stock: {product.productStock}</p>
             <p className="text-start">{product.description}</p>
 
-            <Button variant="" onClick={handleBuyClick}>
-              Buy
-            </Button>
+
           </Col>
         </Row>
 
-        <Link to="/" className="link-redirect-cart">
-          Volver Atras
+        <Link to="/" className="btn link-redirect-cart">
+          return
         </Link>
       </Container>
       <Footer />
+
     </>
   );
 };
