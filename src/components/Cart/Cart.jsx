@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Container, Row, Col } from 'react-bootstrap';
+
 import { useDispatch, useSelector } from "react-redux";
 import { getCart, removeFromCart } from "../../redux/actions/indexActions";
 import "../Cart/Cart.css";
@@ -60,8 +62,8 @@ export const Cart = () => {
     isLoggedIn
       ? navigate("/Buy", { state: { cart: groupedCart, comeFrom: "cart" } })
       : navigate("/NotLoggin", {
-          state: "no puede comprar productos sin antes ingresar a su cuenta",
-        });
+        state: "no puede comprar productos sin antes ingresar a su cuenta",
+      });
   };
 
   useEffect(() => {
@@ -78,53 +80,54 @@ export const Cart = () => {
           </Link>
         </div>
       ) : (
-        <div>
-          <div>
-            <h1>PURCHASE SUMMARY</h1>
-          </div>
-          <div className="cart-item-conteiner">
-            {Object.values(groupedCart).map((groupedProduct) => (
-              <div key={groupedProduct.idProduct} className="cart-item">
-                <div className="cart-item-img">
-                  <img
-                    src={groupedProduct.productImg}
-                    alt={groupedProduct.productName}
-                  />
-                </div>
-                <div className="cart-item-name">
-                  <h3>{groupedProduct.productName}</h3>
-                </div>
-                <div className="cart-item-price">
-                  <h4>
-                    Cantidad: {groupedProduct.quantity} - $
-                    {groupedProduct.totalPrice.toFixed(2)}
-                  </h4>
-                </div>
-                <div className="cart-item-info">
-                  <button
-                    onClick={() =>
-                      handleRemoveFromCart(groupedProduct.idProduct)
-                    }
-                    className="btn btn-danger"
-                  >
-                    Remove
-                  </button>
-                </div>
-              </div>
-            ))}
-            <div className="total">
+        <div className="cart-item-conteiner p-1">
+          <Row>
+            <Col>
+              <h1 className="dash">PURCHASE SUMMARY</h1>
+            </Col>
+          </Row>
+          {Object.values(groupedCart).map((groupedProduct) => (
+            <Row key={groupedProduct.idProduct} className="cart-item">
+              <Col md={2} className="">
+                <img
+                  src={groupedProduct.productImg}
+                  alt={groupedProduct.productName}
+                />
+              </Col>
+              <Col md={2}>
+                <h3 className="cart-item-name">{groupedProduct.productName}</h3>
+              </Col>
+              <Col md={4} className="cart-item-price">
+                <h4 className="cart-item-name">
+                  Cantidad: {groupedProduct.quantity} - ${groupedProduct.totalPrice.toFixed(2)}
+                </h4>
+              </Col>
+              <Col md={2} className="cart-item-info">
+                <button
+                  onClick={() => handleRemoveFromCart(groupedProduct.idProduct)}
+                  className="btn btn-danger"
+                >
+                  Remove
+                </button>
+              </Col>
+            </Row>
+          ))}
+          <Row className="total">
+            <Col>
               <h3>TOTAL: ${totalPrice.toFixed(2)}</h3>
-            </div>
-            <div className="buttons_actions">
-              <button className="btn btn-success" onClick={handleBuyClick}>
-                BUY
-              </button>
-              <button onClick={goHome} className="btn btn-primary">
-                GO BACK
-              </button>
-            </div>
-            <div></div>
-          </div>
+            </Col>
+          </Row>
+          <Row className="buttons_actions">
+            <button className="btn btn-success btn-buy" onClick={handleBuyClick}>
+              BUY
+            </button>
+          </Row>
+          <Row>
+            <button onClick={goHome} className="btn btn-primary btn-back">
+              GO BACK
+            </button>
+          </Row>
+
         </div>
       )}
     </div>

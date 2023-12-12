@@ -1,6 +1,7 @@
 @import "../../../assets/variables.scss";
 
 .btn-primary {
+  size-adjust: inherit;
   color: $color2;
   background-color: $color1;
   &:hover {

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Image, Container, Row, Col, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
-import {  useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import logo from '../../assets/hardtv2.png'
 import './Login.scss';
 import { login } from "../../redux/actions/indexActions";
@@ -27,11 +27,11 @@ export const Login = () => {
         setTimeout(() => {
           navigate('/');
         }, 2000);
-      }else{
+      } else {
         setShowErrorAlert(true);
         setAlertMessage('Failed to login. Please try again.');
       }
-    }catch(error){
+    } catch (error) {
       setShowErrorAlert(true);
       setAlertMessage('Failed to login. Please try again.');
     }
@@ -56,15 +56,18 @@ export const Login = () => {
   return (
     <div>
       <div className="card p-5 mt-1 mb-3">
-        <Container className="card-title d-flex">
+        <div className="w-100 text-start">
+          <Link to='/' className="btn btn primary">back to home</Link>
+        </div>
+        <Container className="card-title d-flex text-center">
           <Row>
             <h3>Login</h3>
           </Row>
         </Container>
         <Container className='no-flex'>
           <Row >
-            <Col >
-              <Image src={logo} alt="Descripción de la imagen" fluid width={400} />
+            <Col className='text-center'>
+              <Image src={logo} alt="Descripción de la imagen" fluid width={500} />
             </Col>
             <Col className='column col-12 col-xl-6 m-3'>
               {error && <Alert variant="danger">{error}</Alert>}
@@ -89,15 +92,15 @@ export const Login = () => {
                     onChange={handleChange}
                     required />
                 </Form.Group>
-                
+
                 <div className='submit'>
-                <Button className='btn-login' type="submit">
-                  Sign In
-                </Button>
-                <Link to="/password" className='link-redirect'><p></p>Forgot password?</Link>
-                <Link to="/register" className='link-redirect'>Do you need an account?</Link>
+                  <Button className='btn-login' type="submit">
+                    Sign In
+                  </Button>
+                  <Link to="/password" className='link-redirect'><p></p>Forgot password?</Link>
+                  <Link to="/register" className='link-redirect'>Do you need an account?</Link>
                 </div>
-                
+
               </Form>
             </Col>
           </Row>
