@@ -1,0 +1,21 @@
+{
+    "routes": [
+      { "handle": "filesystem" },
+      { "src": "/register", "dest": "/index.html" },
+      { "src": "/login", "dest": "/index.html" },
+      { "src": "/product/:id", "dest": "/index.html" },
+      { "src": "/cart", "dest": "/index.html" },
+      { "src": "/password", "dest": "/index.html" },
+      { "src": "/password/new/:token", "dest": "/index.html" },
+      { "src": "/Buy", "dest": "/index.html" },
+      { "src": "/NotLoggin", "dest": "/index.html" },
+      { "src": "/Success", "dest": "/index.html" },
+      { "src": "/Failure", "dest": "/index.html" },
+      { "src": "/dashboard/.*", "dest": "/index.html" },
+      { "src": "/dashboard/homedash", "dest": "/index.html" },
+      { "src": "/dashboard/userdash", "dest": "/index.html" },
+      { "src": "/dashboard/productdash", "dest": "/index.html" },
+      { "src": "/dashboard/categorydash", "dest": "/index.html" },
+      { "src": "/dashboard/sales", "dest": "/index.html" }
+    ]
+  }
