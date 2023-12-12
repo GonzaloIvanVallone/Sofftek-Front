@@ -14,9 +14,7 @@ import Swal from "sweetalert2";
 
 export const getAllProducts = () => async (dispatch) => {
   try {
-    let response = await axios.get(
-      "https://softtekecommerce-production.up.railway.app/api/v1/product/list"
-    );
+    let response = await axios.get(`${product_route}/list`);
     return dispatch({
       type: "GET_ALL_PRODUCTS",
       payload: response.data,
