@@ -110,7 +110,8 @@ export const Paymentform = () => {
           ", "
         )}`,
         icon: "error",
-        confirmButtonText: "Continue",
+        showConfirmButton: false,
+        timer: 1500,
       });
       return;
     }
@@ -127,7 +128,8 @@ export const Paymentform = () => {
         title: "FECHA INVALIDA",
         text: `Por favor, selecciona una fecha futura.`,
         icon: "error",
-        confirmButtonText: "Continue",
+        showConfirmButton: false,
+        timer: 1500,
       });
       return;
     }
@@ -139,7 +141,8 @@ export const Paymentform = () => {
         title: "FECHA INVALIDA",
         text: `Por favor, selecciona una fecha más cercana.`,
         icon: "error",
-        confirmButtonText: "Continue",
+        showConfirmButton: false,
+        timer: 1500,
       });
       return;
     }

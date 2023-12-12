@@ -49,7 +49,6 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App container-fluid">
-        
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path={"/register"} element={<Register />} />
@@ -75,7 +74,6 @@ function App() {
             <Route path="sales" element={<Sales />} />
           </Route>
         </Routes>
-        
       </div>
     </BrowserRouter>
   );

@@ -322,7 +322,8 @@ export const login = (payload) => async (dispatch) => {
     Swal.fire({
       title: "User Logged successfully!",
       icon: "success",
-      confirmButtonText: "Continue",
+      showConfirmButton: false,
+      timer: 1500,
     });
     return dispatch({
       type: "LOGIN",
@@ -349,7 +350,8 @@ export const register = (payload) => async (dispatch) => {
     Swal.fire({
       title: "User registered",
       icon: "success",
-      confirmButtonText: "Continue",
+      showConfirmButton: false,
+      timer: 1500,
     });
     return dispatch({
       type: "LOGIN",
