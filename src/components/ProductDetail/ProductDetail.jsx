@@ -108,33 +108,25 @@ export const ProductDetail = () => {
                   onAdd={(quantity) => handleAddToCart(quantity)}
                   className="item-count"
                 />
-              <Button variant="success" onClick={handleBuyClick}>
-                Buy
-              </Button>
+                <Button variant="success" onClick={handleBuyClick}>
+                  Buy
+                </Button>
               </div>
-
-
             </Row>
-
-
-
           </Col>
           <Col className="border-left">
             <h3>{product.productName}</h3>
             <p>$ {product.productPrice}</p>
             <p>Stock: {product.productStock}</p>
             <p className="text-start">{product.description}</p>
-
-
           </Col>
         </Row>
 
-        <Link to="/" className="btn link-redirect-cart">
-          return
+        <Link to="/" className="btn btn-primary link-redirect-cart">
+           return
         </Link>
       </Container>
       <Footer />
-
     </>
   );
 };

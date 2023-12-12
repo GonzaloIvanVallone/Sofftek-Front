@@ -15,6 +15,7 @@ import logo from "../../assets/hardtv2.png";
 import "./Login.scss";
 import { login } from "../../redux/actions/indexActions";
 import ButttonGoHome from "../ButtonGoHome/ButttonGoHome";
+import Swal from "sweetalert2";
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -33,14 +34,23 @@ export const Login = () => {
       if (storedToken) {
         setTimeout(() => {
           navigate("/");
+          Swal.close();
         }, 2000);
       } else {
-        setShowErrorAlert(true);
-        setAlertMessage("Failed to login. Please try again.");
+        Swal.fire({
+          title: "Failed to login. Please try again.",
+          icon: "error",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     } catch (error) {
-      setShowErrorAlert(true);
-      setAlertMessage("Failed to login. Please try again.");
+      Swal.fire({
+        title: "Failed to login. Please try again.",
+        icon: "error",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
   };
 
@@ -62,19 +72,24 @@ export const Login = () => {
   return (
     <div>
       <div className="card p-5 mt-1 mb-3">
-        <Container className="card-title d-flex">
+        <div className="w-100 text-start">
+          <Link to="/" className="btn btn-primary">
+            back to home
+          </Link>
+        </div>
+        <Container className="card-title d-flex text-center">
           <Row>
             <h3>Login</h3>
           </Row>
         </Container>
         <Container className="no-flex">
           <Row>
-            <Col>
+            <Col className="text-center">
               <Image
                 src={logo}
                 alt="Descripción de la imagen"
                 fluid
-                width={400}
+                width={500}
               />
             </Col>
             <Col className="column col-12 col-xl-6 m-3">

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { CartWidget } from "../CartWidget/CartWidget";
 import logo from "../../assets/hardtv2.png";
 import logoadmin from "../../assets/klipartz.com.png";
-import { logout } from "../../redux/actions/indexActions";
+import { getAllProducts, logout } from "../../redux/actions/indexActions";
 
 export const NavBar = () => {
   const dispatch = useDispatch();
@@ -19,10 +19,11 @@ export const NavBar = () => {
 
   const goHome = () => {
     navigate("/");
+    window.location.reload();
   };
 
   const goAdmin = () => {
-    navigate("/dashboard/*");
+    navigate("/dashboard/homedash");
   };
 
   return (

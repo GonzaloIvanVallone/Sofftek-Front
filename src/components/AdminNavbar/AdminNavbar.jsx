@@ -15,8 +15,8 @@ export const AdminNavbar = () => {
 
     }, [isLoggedIn]);
     return(
-        <div className="margin">
-            <h2>Dashboard Hardtek</h2>
+        <div>
+            <h3 className="dash">Dashboard Hardtek</h3>
             <SideBar/>
             <Footer/>
         </div>
