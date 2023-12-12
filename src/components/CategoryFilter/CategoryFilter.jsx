@@ -25,9 +25,8 @@ const CategoryFilter = ({ onFilter }) => {
         <li className="nav-item dropdown">
           Categories
           <select
-            // onInput={(e) => handleFilterType(e)}
-            // onBlur={(e) => handleFilterType(e)}
-            onClick={(e) => handleFilterType(e)}
+            onInput={(e) => handleFilterType(e)}
+            onBlur={(e) => handleFilterType(e)}
           >
             {allCategories?.map((f, index) => (
               <option key={index} value={f.category}>
