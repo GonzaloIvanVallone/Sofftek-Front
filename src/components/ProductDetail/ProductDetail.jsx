@@ -122,8 +122,8 @@ export const ProductDetail = () => {
           </Col>
         </Row>
 
-        <Link to="/" className="btn link-redirect-cart">
-          return
+        <Link to="/" className="btn btn-primary link-redirect-cart">
+           return
         </Link>
       </Container>
       <Footer />
