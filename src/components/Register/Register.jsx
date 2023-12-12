@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Form, Button, Container, Row, Col, Image, Alert } from 'react-bootstrap';
 import '../Register/Register.scss'
+import logo from '../../assets/hardtv2.png'
 import { register } from "../../redux/actions/indexActions";
 import Swal from "sweetalert2";
 import { Link } from 'react-router-dom';
@@ -57,13 +58,16 @@ export const Register = () => {
   return (
     <div>
       <div className="card p-5 mt-1 mb-3">
-        <div className="card-title">
+        <div className="w-100 text-start">
+        <Link to='/' className="btn btn primary">back to home</Link>
+        </div>
+        <div className="card-title text-center">
           <h3>Register</h3>
         </div>
         <Container className='no-flex'>
           <Row >
-            <Col className="">
-              <Image src="hardtv2.png" alt="Descripción de la imagen" fluid width={400} />
+            <Col className="text-center">
+              <Image src={logo}  alt="Descripción de la imagen" fluid width={500} />
             </Col>
             <Col className='column col-12 col-xl-6'>
               <Form onSubmit={handleRegister}>
@@ -110,7 +114,7 @@ export const Register = () => {
                   />
                 </Form.Group>
                 <div className="submits">
-                  <Button className="btn-register" type="submit">
+                  <Button className="btn-register mt-3" type="submit">
                     Register
                   </Button>
                   <Link to="/login" className="link-redirect">Do you already have an account?</Link>

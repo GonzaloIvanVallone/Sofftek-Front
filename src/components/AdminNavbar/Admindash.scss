@@ -1,13 +1,11 @@
-@import '../../assets/variables.scss';
+@import "../../assets/variables.scss";
 
-div{
-
-    h2{display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 10vh;
-        background-color: $color1;
-        color: $color2;
-        border-bottom: 4px $color3 solid;
-    }
+.dash {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  background-color: $color1;
+  color: $color2;
+  border-bottom: 4px $color3 solid;
 }
