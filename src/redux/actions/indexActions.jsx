@@ -9,14 +9,14 @@ const user_route =
   "https://softtekecommerce-production.up.railway.app/api/v1/admin/user";
 const bill_route =
   "https://softtekecommerce-production.up.railway.app/api/v1/bid";
+// const mercado_route =
+//   "https://softtekecommerce-production.up.railway.app/api/v1/product/mercadoPago";
 
 import Swal from "sweetalert2";
 
 export const getAllProducts = () => async (dispatch) => {
   try {
-    let response = await axios.get(
-      "https://softtekecommerce-production.up.railway.app/api/v1/product/list"
-    );
+    let response = await axios.get(`${product_route}/list`);
     return dispatch({
       type: "GET_ALL_PRODUCTS",
       payload: response.data,
@@ -385,7 +385,7 @@ export const register = (payload) => async (dispatch) => {
 export const createPreference = (payload) => async (dispatch) => {
   try {
     const response = await axios.post(
-      "http://localhost:8080/api/v1/product/mercadoPago/compra",
+      `${product_route}/mercadoPago/compra`,
       payload,
       {
         headers: {
@@ -405,7 +405,7 @@ export const createPreference = (payload) => async (dispatch) => {
 export const billSave = (bill) => async (dispatch) => {
   try {
     const response = await axios.post(
-      "http://localhost:8080/api/v1/product/mercadoPago/newBill",
+      `${product_route}/mercadoPago/newBill`,
       bill,
       {
         headers: {
@@ -580,7 +580,7 @@ export const countUsers = () => async (dispatch) => {
 export const countSales = () => async (dispatch) => {
   try {
     const token = localStorage.getItem("token");
-    let response = await axios.get(`${bill_routes}/count`, {
+    let response = await axios.get(`${bill_route}/count`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     return dispatch({
