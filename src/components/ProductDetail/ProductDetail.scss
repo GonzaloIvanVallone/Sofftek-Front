@@ -5,20 +5,25 @@
   display: flex;
   padding: 1vh;
 
-  Button {
+  
+
+  .btn-secondary{
+    margin: 2vh;
+    background-color:transparent;
+    color: black;
+    border: 1px $color1 solid;
+    box-shadow: 2px 2px black;
+  }
+
+  .btn-success{
+    margin: 2vh;
+    width: 250px;
     background-color: $color1;
     color: $color2;
-    margin: 2vh;
-    border: none;
-
-    .item-count{
-
-
-    }
-
-    &:hover {
+    &:hover{
+      opacity: 0.7;
       background-color: $color2;
-      color: $color1;
+      color:$color1;
     }
   }
   #miContenedor .item-count{

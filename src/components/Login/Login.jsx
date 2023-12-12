@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Form, Button, Image, Container, Row, Col, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 import {  useDispatch } from 'react-redux';
+import logo from '../../assets/hardtv2.png'
 import './Login.scss';
 import { login } from "../../redux/actions/indexActions";
 import ButttonGoHome from '../ButtonGoHome/ButttonGoHome';
@@ -63,7 +64,7 @@ export const Login = () => {
         <Container className='no-flex'>
           <Row >
             <Col >
-              <Image src="hardtv2.png" alt="Descripción de la imagen" fluid width={400} />
+              <Image src={logo} alt="Descripción de la imagen" fluid width={400} />
             </Col>
             <Col className='column col-12 col-xl-6 m-3'>
               {error && <Alert variant="danger">{error}</Alert>}
