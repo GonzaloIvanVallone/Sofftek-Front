@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Form, Row, Col, Button } from "react-bootstrap";
 import { getProductsByName } from "../../redux/actions/indexActions";
 import "./SearchBar.scss";
 
 export const SearchBar = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
-
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -15,7 +15,7 @@ export const SearchBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault(e);
-    if(name){
+    if (name) {
       dispatch(getProductsByName(name));
       let inputs = document.querySelectorAll("input");
       inputs.forEach((input) => (input.value = ""));
@@ -25,7 +25,7 @@ export const SearchBar = () => {
 
   return (
     <div className="searchBar">
-      <input
+      {/* <input
         type="search"
         placeholder=" Product to search..."
         onChange={(e) => handleChange(e)}
@@ -37,7 +37,23 @@ export const SearchBar = () => {
         onClick={(e) => handleSubmit(e)}
       >
         Search
-      </button>
+      </button> */}
+      <Form inline>
+        <Row>
+          <Col xs="auto">
+            <Form.Control
+              type="text"
+              placeholder="Search"
+              onChange={(e) => handleChange(e)}
+            />
+          </Col>
+          <Col xs="auto">
+            <Button type="submit" onClick={(e) => handleSubmit(e)}>
+              Search
+            </Button>
+          </Col>
+        </Row>
+      </Form>
       <br />
     </div>
   );
