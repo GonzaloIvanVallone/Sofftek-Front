@@ -11,8 +11,8 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import "./Login.scss";
 import logo from "../../assets/hardtv2.png";
+import "./Login.scss";
 import { login } from "../../redux/actions/indexActions";
 import ButttonGoHome from "../ButtonGoHome/ButttonGoHome";
 
