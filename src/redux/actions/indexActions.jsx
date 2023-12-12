@@ -9,8 +9,6 @@ const user_route =
   "https://softtekecommerce-production.up.railway.app/api/v1/admin/user";
 const bill_route =
   "https://softtekecommerce-production.up.railway.app/api/v1/bid";
-// const mercado_route =
-//   "https://softtekecommerce-production.up.railway.app/api/v1/product/mercadoPago";
 
 import Swal from "sweetalert2";
 
@@ -166,7 +164,6 @@ export const newCategory = (payload) => async (dispatch) => {
 };
 export const updateCategory = (payload) => async (dispatch) => {
   try {
-    // console.log(payload);
     const token = localStorage.getItem("token");
     let response = await axios.put(`${category_route}/update`, payload, {
       headers: { Authorization: `Bearer ${token}` },
